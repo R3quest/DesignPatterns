@@ -119,7 +119,7 @@ namespace lljubici1_zadaca_2.Builder
                         emisija.ImaPočetak = true;
                         emisija.Pocetak = početakSlobodnogVremena;
 
-                        emisija.DaniUTjednu.AddRange(Enumerable.Range(1, 7));
+                        //emisija.DaniUTjednu.AddRange(Enumerable.Range(1, 7));
 
                         emisijeZaDodati.Add(emisija);
                         emisijeZaDodati.Sort((e1, e2) => e1.Pocetak.CompareTo(e2.Pocetak));
@@ -139,7 +139,7 @@ namespace lljubici1_zadaca_2.Builder
                         emisija.ImaPočetak = true;
                         emisija.Pocetak = početakSlobodnogVremena;
 
-                        emisija.DaniUTjednu.AddRange(Enumerable.Range(1, 7));
+                        //emisija.DaniUTjednu.AddRange(Enumerable.Range(1, 7));
 
                         emisijeZaDodati.Add(emisija);
                         emisijeZaDodati.Sort((e1, e2) => e1.Pocetak.CompareTo(e2.Pocetak));

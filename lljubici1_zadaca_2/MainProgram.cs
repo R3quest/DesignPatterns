@@ -58,6 +58,8 @@ namespace lljubici1_zadaca_2
                     var emisijePrograma = ((Program)program).EmisijePrograma;
                     foreach (var emisijaPrograma in emisijePrograma)
                     {
+                        
+
                         if (emisijaPrograma.DaniUTjednu.Contains(i))
                         {
                             dan.DodajElementRasporeda(emisijaPrograma);
@@ -65,7 +67,6 @@ namespace lljubici1_zadaca_2
                     }
                     program.DodajElementRasporeda(dan);
                 }
-
             }
         }
 
