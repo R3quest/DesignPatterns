@@ -28,7 +28,11 @@ namespace lljubici1_zadaca_2.KorisnikovaInterakcija
                     Console.Write("Dan u tjednu: od 1 do 7\nUnesi dan u tjednu> ");
                     dan = OdabirProvjera(dan, 1, 7);
                     Program p = SingletonTvKuca.Instanca.Programi[program - 1];
-                    IspisiEmisijaPrograma(p, dan, osobe, uloge);
+                    //IspisiEmisijaPrograma(p, dan, osobe, uloge); TODO:vrati
+
+
+
+
                 }
                 else if (izbor == 2)
                 {
@@ -36,15 +40,29 @@ namespace lljubici1_zadaca_2.KorisnikovaInterakcija
                     izbor = OdabirProvjera(izbor, 1, 2);
                     if (izbor == 1)
                     {
-                        IspisBrojEmisijaUPojedinomProgramuPoPojedinomDanu();
+                        //IspisBrojEmisijaUPojedinomProgramuPoPojedinomDanu(); TODO:vrati
                     }
                     else if (izbor == 2)
                     {
-                        IspisiStatistikuSvakogPrograma();
+                        //IspisiStatistikuSvakogPrograma(); TODO:vrati
                     }
                 }
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private static void IspisiStatistikuSvakogPrograma()
         {

@@ -60,7 +60,7 @@
     <Compile Include="MainProgram.cs" />
     <Compile Include="Podaci\Osoba.cs" />
     <Compile Include="Podaci\OsobaUloga.cs" />
-    <Compile Include="Podaci\Program.cs" />
+    <Compile Include="Composite\Program.cs" />
     <Compile Include="Podaci\EmisijePrograma.cs" />
     <Compile Include="FactoryMethod\EmisijeProgramaConcreateCreator.cs" />
     <Compile Include="FactoryMethod\ProgramiConcreateCreator.cs" />

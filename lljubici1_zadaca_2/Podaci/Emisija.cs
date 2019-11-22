@@ -1,11 +1,11 @@
 ﻿using lljubici1_zadaca_2.FactoryMethod;
-using lljubici1_zadaca_2.Pomagala;
 using System.Collections.Generic;
 
 namespace lljubici1_zadaca_2.Podaci
 {
     public class Emisija : Entitet
     {
+
         public int Id { get; set; }
         public string NazivEmisije { get; set; }
         public int VrstaEmisije { get; set; }
@@ -28,7 +28,8 @@ namespace lljubici1_zadaca_2.Podaci
 
         public override string ToString()
         {
-            return $"{nameof(Id)}: {Id}, {nameof(NazivEmisije)}: {NazivEmisije}, {nameof(Trajanje)}: {Konverzija.PretvoriSekundeUVrijeme(Trajanje)}";
+            //return $"{nameof(Id)}: {Id}, {nameof(NazivEmisije)}: {NazivEmisije}, {nameof(Trajanje)}: {Konverzija.PretvoriSekundeUVrijeme(Trajanje)}";
+            return $"{NazivEmisije}";
         }
 
     }

@@ -1,11 +1,15 @@
 ﻿using lljubici1_zadaca_2.FactoryMethod;
+using lljubici1_zadaca_2.Podaci;
 using lljubici1_zadaca_2.Pomagala;
+using System;
 using System.Collections.Generic;
 
-namespace lljubici1_zadaca_2.Podaci
+namespace lljubici1_zadaca_2.Composite
 {
-    public class Program : Entitet
+    public class Program : Entitet, IRasporedProgramaComponent
     {
+        public List<IRasporedProgramaComponent> RasporedDani { get; set; } = new List<IRasporedProgramaComponent>();
+
         public List<EmisijePrograma> EmisijePrograma { get; set; } = new List<EmisijePrograma>();
         public int Id { get; set; }
         public string NazivPrograma { get; set; }
@@ -26,6 +30,20 @@ namespace lljubici1_zadaca_2.Podaci
         {
             return
                 $"{nameof(NazivPrograma)}: {NazivPrograma}, {nameof(Pocetak)}: {Konverzija.PretvoriSekundeUVrijeme(Pocetak)}, {nameof(NazivDatoteke)}: {NazivDatoteke}";
+        }
+
+        public void DodajElementRasporeda(IRasporedProgramaComponent elementComposite)
+        {
+            RasporedDani.Add(elementComposite);
+        }
+
+        public void IspisiRaspored() //za sve dane
+        {
+            foreach (var dan in RasporedDani)
+            {
+                Console.WriteLine(((Dan)dan).NazivDana);
+                dan.IspisiRaspored();
+            }
         }
     }
 }

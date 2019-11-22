@@ -1,4 +1,5 @@
 ﻿using lljubici1_zadaca_2.Builder;
+using lljubici1_zadaca_2.Composite;
 using lljubici1_zadaca_2.FactoryMethod;
 using lljubici1_zadaca_2.KorisnikovaInterakcija;
 using lljubici1_zadaca_2.Podaci;
@@ -36,10 +37,46 @@ namespace lljubici1_zadaca_2
 
             var listaEmisija = emisije.entiteti.Cast<Emisija>().ToList();
             var listaPrograma = program.entiteti.Cast<Program>().ToList();
-            RasporedEmisija.DodajProgrameSDodanimRasporedomEmisija(listaPrograma, programEmisija, listaEmisija, programBuilder); //todo: ova linija ne ide tu..
-
+            RasporedEmisija.DodajProgrameSDodanimRasporedomEmisija(listaPrograma, programEmisija, listaEmisija, programBuilder);
+            SingletonTvKuca.Instanca.RasporedPrograma = SingletonTvKuca.Instanca.Programi.Cast<IRasporedProgramaComponent>().ToList();
+            KreirajRaspored();
+            IspisiRaspored();
             Konzola.KorisnikovOdabir(osobe, uloge);
+
+
             Console.ReadLine();
         }
+
+
+        private static void KreirajRaspored()
+        {
+            foreach (var program in SingletonTvKuca.Instanca.RasporedPrograma)
+            {
+                for (int i = 1; i <= 7; i++)
+                {
+                    Dan dan = new Dan(Enum.GetName(typeof(Dani), i));
+                    var emisijePrograma = ((Program)program).EmisijePrograma;
+                    foreach (var emisijaPrograma in emisijePrograma)
+                    {
+                        if (emisijaPrograma.DaniUTjednu.Contains(i))
+                        {
+                            dan.DodajElementRasporeda(emisijaPrograma);
+                        }
+                    }
+                    program.DodajElementRasporeda(dan);
+                }
+
+            }
+        }
+
+        private static void IspisiRaspored()
+        {
+            foreach (var program in SingletonTvKuca.Instanca.RasporedPrograma)
+            {
+                program.IspisiRaspored();
+                Console.WriteLine();
+            }
+        }
+
     }
 }

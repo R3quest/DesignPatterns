@@ -1,17 +1,28 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace lljubici1_zadaca_2.Composite
 {
     public class Dan : IRasporedProgramaComponent
     {
+        public string NazivDana { get; set; }
+        public List<IRasporedProgramaComponent> Raspored { get; set; } = new List<IRasporedProgramaComponent>();
+
+        public Dan(string nazivDana)
+        {
+            NazivDana = nazivDana;
+        }
+
         public void DodajElementRasporeda(IRasporedProgramaComponent elementComposite)
         {
-            throw new NotImplementedException();
+            Raspored.Add(elementComposite);
         }
 
         public void IspisiRaspored()
         {
-            throw new NotImplementedException();
+            foreach (var r in Raspored)
+            {
+                r.IspisiRaspored();
+            }
         }
     }
 }

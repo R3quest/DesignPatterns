@@ -1,4 +1,5 @@
-﻿using lljubici1_zadaca_2.Podaci;
+﻿using lljubici1_zadaca_2.Composite;
+using lljubici1_zadaca_2.Podaci;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,14 @@ namespace lljubici1_zadaca_2.Builder
                             preklapanje = true;
                             break;
                         }
+
+                        //if (pocetakOneZaDodat > pocetakDodane && pocetakOneZaDodat < krajDodane ||
+                        //    krajOneZaDodat > pocetakDodane && krajOneZaDodat < krajDodane)
+                        //{
+                        //    Console.WriteLine("Pogreška, preklapanje>> " + emisijaPrograma);
+                        //    preklapanje = true;
+                        //    break;
+                        //}
                     }
                     if (!preklapanje)
                     {
@@ -110,6 +119,8 @@ namespace lljubici1_zadaca_2.Builder
                         emisija.ImaPočetak = true;
                         emisija.Pocetak = početakSlobodnogVremena;
 
+                        emisija.DaniUTjednu.AddRange(Enumerable.Range(1, 7));
+
                         emisijeZaDodati.Add(emisija);
                         emisijeZaDodati.Sort((e1, e2) => e1.Pocetak.CompareTo(e2.Pocetak));
                         dodano = true;
@@ -127,6 +138,8 @@ namespace lljubici1_zadaca_2.Builder
                     {
                         emisija.ImaPočetak = true;
                         emisija.Pocetak = početakSlobodnogVremena;
+
+                        emisija.DaniUTjednu.AddRange(Enumerable.Range(1, 7));
 
                         emisijeZaDodati.Add(emisija);
                         emisijeZaDodati.Sort((e1, e2) => e1.Pocetak.CompareTo(e2.Pocetak));

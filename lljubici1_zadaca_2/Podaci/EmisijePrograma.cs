@@ -1,10 +1,12 @@
-﻿using lljubici1_zadaca_2.FactoryMethod;
+﻿using lljubici1_zadaca_2.Composite;
+using lljubici1_zadaca_2.FactoryMethod;
 using lljubici1_zadaca_2.Pomagala;
+using System;
 using System.Collections.Generic;
 
 namespace lljubici1_zadaca_2.Podaci
 {
-    public class EmisijePrograma : Entitet
+    public class EmisijePrograma : Entitet, IRasporedProgramaComponent
     {
         public Emisija Emisija { get; set; } = new Emisija();
         public List<OsobaUloga> OsobeUloge { get; set; } = new List<OsobaUloga>();
@@ -28,18 +30,21 @@ namespace lljubici1_zadaca_2.Podaci
 
         public override string ToString()
         {
-            return $"{Emisija} {nameof(Pocetak)}EmisijePrograma: {Konverzija.PretvoriSekundeUVrijeme(Pocetak)}";
+
+            return $"{Konverzija.PretvoriSekundeUVrijeme(Pocetak)} - {Konverzija.PretvoriSekundeUVrijeme(Pocetak + Emisija.Trajanje)} {Emisija} ";
+        }
+        public void DodajElementRasporeda(IRasporedProgramaComponent elementComposite)
+        {
+            Emisija = ((EmisijePrograma)elementComposite).Emisija;
+            OsobeUloge = ((EmisijePrograma)elementComposite).OsobeUloge;
+            DaniUTjednu = ((EmisijePrograma)elementComposite).DaniUTjednu;
+            Pocetak = ((EmisijePrograma)elementComposite).Pocetak;
+            ImaPočetak = ((EmisijePrograma)elementComposite).ImaPočetak;
         }
 
-        //public override bool Equals(object obj)
-        //{
-        //    if (obj == null)
-        //        return false;
-        //    if (obj.GetType() != typeof(EmisijePrograma))
-        //        return false;
-
-        //    EmisijePrograma drugi = (EmisijePrograma) obj;
-        //    return this.Emisija.Id == drugi.Emisija.Id;
-        //}
+        public void IspisiRaspored()
+        {
+            Console.WriteLine(ToString()); //TODO!: ispis
+        }
     }
 }

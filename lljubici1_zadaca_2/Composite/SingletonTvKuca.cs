@@ -1,5 +1,4 @@
-﻿using lljubici1_zadaca_2.Podaci;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace lljubici1_zadaca_2.Composite
 {
@@ -8,6 +7,9 @@ namespace lljubici1_zadaca_2.Composite
         private static SingletonTvKuca _instanca = new SingletonTvKuca();
         public static SingletonTvKuca Instanca => _instanca;
         public List<Program> Programi { get; set; } = new List<Program>();
+
+        public List<IRasporedProgramaComponent> RasporedPrograma { get; set; } = new List<IRasporedProgramaComponent>();
+
         private SingletonTvKuca()
         {
 
@@ -16,19 +18,18 @@ namespace lljubici1_zadaca_2.Composite
         {
             Programi.Add(program);
         }
-        public void DodajPrograme(List<Program> programi)
-        {
-            Programi.AddRange(programi);
-        }
 
         public void DodajElementRasporeda(IRasporedProgramaComponent elementComposite)
         {
-            throw new System.NotImplementedException();
+            RasporedPrograma.Add(elementComposite);
         }
 
         public void IspisiRaspored()
         {
-            throw new System.NotImplementedException();
+            foreach (var program in RasporedPrograma)
+            {
+                program.IspisiRaspored();
+            }
         }
     }
 }

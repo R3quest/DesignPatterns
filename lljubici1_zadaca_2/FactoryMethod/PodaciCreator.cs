@@ -29,7 +29,7 @@ namespace lljubici1_zadaca_2.FactoryMethod
                 return;
             }
 
-            string[] redovi = File.ReadAllLines(putanjaDoDatoteke).Skip(1).Distinct().ToArray();
+            string[] redovi = File.ReadAllLines(putanjaDoDatoteke).Skip(1).ToArray(); //.Distinct()
 
             entiteti = PripremiPodatke(redovi);
         }
