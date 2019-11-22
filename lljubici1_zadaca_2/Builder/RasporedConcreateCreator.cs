@@ -14,6 +14,7 @@ namespace lljubici1_zadaca_2.Builder
             {
                 if (emisijaPrograma.ImaPočetak)
                 {
+                    //todo: zakomentirati ovo i guess
                     if (emisijaPrograma.Pocetak < p.Pocetak ||
                         (emisijaPrograma.Pocetak + emisijaPrograma.Emisija.Trajanje) > p.Kraj)
                     {
@@ -53,6 +54,9 @@ namespace lljubici1_zadaca_2.Builder
                     }
                 }
             }
+            //return emisijeZaDodati;
+            //return emisijeZaDodati.OrderByDescending(a => a.DaniUTjednu.Count).ThenBy(c => c.Emisija.Id).ThenByDescending(b => b.Pocetak).ToList();
+            emisijeZaDodati.Sort((e1, e2) => e1.Pocetak.CompareTo(e2.Pocetak));
             return emisijeZaDodati;
         }
 
@@ -101,6 +105,7 @@ namespace lljubici1_zadaca_2.Builder
                     }
                 }
             }
+            emisijeZaDodati.Sort((e1, e2) => e1.Pocetak.CompareTo(e2.Pocetak));
             return emisijeZaDodati;
         }
 

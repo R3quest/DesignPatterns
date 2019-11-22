@@ -39,7 +39,7 @@ namespace lljubici1_zadaca_2
             var listaPrograma = program.entiteti.Cast<Program>().ToList();
             RasporedEmisija.DodajProgrameSDodanimRasporedomEmisija(listaPrograma, programEmisija, listaEmisija, programBuilder);
             SingletonTvKuca.Instanca.RasporedPrograma = SingletonTvKuca.Instanca.Programi.Cast<IRasporedProgramaComponent>().ToList();
-            KreirajRaspored();
+            //KreirajRaspored();
             IspisiRaspored();
             Konzola.KorisnikovOdabir(osobe, uloge);
 
@@ -48,27 +48,25 @@ namespace lljubici1_zadaca_2
         }
 
 
-        private static void KreirajRaspored()
-        {
-            foreach (var program in SingletonTvKuca.Instanca.RasporedPrograma)
-            {
-                for (int i = 1; i <= 7; i++)
-                {
-                    Dan dan = new Dan(Enum.GetName(typeof(Dani), i));
-                    var emisijePrograma = ((Program)program).EmisijePrograma;
-                    foreach (var emisijaPrograma in emisijePrograma)
-                    {
-                        
-
-                        if (emisijaPrograma.DaniUTjednu.Contains(i))
-                        {
-                            dan.DodajElementRasporeda(emisijaPrograma);
-                        }
-                    }
-                    program.DodajElementRasporeda(dan);
-                }
-            }
-        }
+        //private static void KreirajRaspored()
+        //{
+        //    foreach (var program in SingletonTvKuca.Instanca.RasporedPrograma)
+        //    {
+        //        for (int i = 1; i <= 7; i++)
+        //        {
+        //            Dan dan = new Dan(Enum.GetName(typeof(Dani), i));
+        //            var emisijePrograma = ((Program)program).EmisijePrograma;
+        //            foreach (var emisijaPrograma in emisijePrograma)
+        //            {
+        //                if (emisijaPrograma.DaniUTjednu.Contains(i))
+        //                {
+        //                    dan.DodajElementRasporeda(emisijaPrograma);
+        //                }
+        //            }
+        //            program.DodajElementRasporeda(dan);
+        //        }
+        //    }
+        //}
 
         private static void IspisiRaspored()
         {

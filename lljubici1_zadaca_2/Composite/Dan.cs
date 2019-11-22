@@ -12,7 +12,7 @@ namespace lljubici1_zadaca_2.Composite
             NazivDana = nazivDana;
         }
 
-        public void DodajElementRasporeda(IRasporedProgramaComponent elementComposite)
+        public void DodajElementRasporeda(IRasporedProgramaComponent elementComposite) //DODAJE SE DAN!
         {
             Raspored.Add(elementComposite);
         }
