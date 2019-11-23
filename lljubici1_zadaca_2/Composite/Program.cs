@@ -45,5 +45,12 @@ namespace lljubici1_zadaca_2.Composite
                 dan.IspisiRaspored();
             }
         }
+
+        public void IspisZaDan(int danIndex)
+        {
+            Console.WriteLine(((Dan)RasporedDani[danIndex - 1]).NazivDana);
+            RasporedDani[danIndex - 1].IspisiRaspored();
+        }
+
     }
 }

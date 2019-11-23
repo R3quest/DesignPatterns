@@ -35,7 +35,7 @@ namespace lljubici1_zadaca_2
             var listaEmisija = emisije.entiteti.Cast<Emisija>().ToList();
             var listaPrograma = program.entiteti.Cast<Program>().ToList();
             RasporedEmisija.KreirajRasporedPoDanima(listaPrograma, programEmisija, listaEmisija, programBuilder);
-            IspisiRaspored();
+            //RasporedEmisija.IspisiRaspored();
             //SingletonTvKuca.Instanca.RasporedPrograma = SingletonTvKuca.Instanca.Programi.Cast<IRasporedProgramaComponent>().ToList();
             //KreirajRaspored();
             Konzola.KorisnikovOdabir(osobe, uloge);
@@ -64,15 +64,5 @@ namespace lljubici1_zadaca_2
         //        }
         //    }
         //}
-
-        private static void IspisiRaspored()
-        {
-            foreach (var program in SingletonTvKuca.Instanca.RasporedPrograma)
-            {
-                program.IspisiRaspored();
-                Console.WriteLine();
-            }
-        }
-
     }
 }

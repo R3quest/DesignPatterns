@@ -24,15 +24,19 @@ namespace lljubici1_zadaca_2.KorisnikovaInterakcija
                     Console.WriteLine("Ispis vremenskog plana");
                     IspisiProgrameTvKuce();
                     Console.Write("Unesi program> ");
-                    program = OdabirProvjera(program, 1, SingletonTvKuca.Instanca.Programi.Count);
+                    program = OdabirProvjera(program, 1, SingletonTvKuca.Instanca.RasporedPrograma.Count);
                     Console.Write("Dan u tjednu: od 1 do 7\nUnesi dan u tjednu> ");
                     dan = OdabirProvjera(dan, 1, 7);
-                    Program p = SingletonTvKuca.Instanca.Programi[program - 1];
+                    //Program p = SingletonTvKuca.Instanca.Programi[program - 1];
                     //IspisiEmisijaPrograma(p, dan, osobe, uloge); TODO:vrati
-
-
-
-
+                    try
+                    {
+                        ((Program)SingletonTvKuca.Instanca.RasporedPrograma[program - 1]).IspisZaDan(dan);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
                 }
                 else if (izbor == 2)
                 {

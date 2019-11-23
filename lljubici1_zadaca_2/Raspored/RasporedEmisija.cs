@@ -54,6 +54,17 @@ namespace lljubici1_zadaca_2.Raspored
             }
         }
 
+
+        public static void IspisiRaspored()
+        {
+            foreach (var program in SingletonTvKuca.Instanca.RasporedPrograma)
+            {
+                Console.WriteLine(((Program)program).ToString());
+                program.IspisiRaspored();
+                Console.WriteLine();
+            }
+        }
+
         private static void IzbaciEmisijeKojeSuIzvanProgramskogVremena(Program program)
         {
             var emisijeIzvanVremena = program.EmisijePrograma.Where(e =>
