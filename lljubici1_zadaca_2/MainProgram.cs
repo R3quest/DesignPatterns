@@ -30,9 +30,6 @@ namespace lljubici1_zadaca_2
             PodaciCreator programEmisija = new EmisijeProgramaConcreateCreator("");
             PodaciCreator vrstaEmisije = new VrstaEmisijeConcreateCreator(datoteke["-v"]);
 
-
-
-
             IBuilderProgram programBuilder = new RasporedConcreateCreator();
 
             var listaEmisija = emisije.entiteti.Cast<Emisija>().ToList();
