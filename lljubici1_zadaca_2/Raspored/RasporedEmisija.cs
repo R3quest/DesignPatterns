@@ -11,7 +11,7 @@ namespace lljubici1_zadaca_2.Raspored
 {
     public class RasporedEmisija
     {
-        public static void DodajProgrameSDodanimRasporedomEmisija(List<Program> listaPrograma, PodaciCreator programEmisija,
+        public static void KreirajRasporedPoDanima(List<Program> listaPrograma, PodaciCreator programEmisija,
             List<Emisija> listaEmisija, IBuilderProgram programBuilder)
         {
             //1. dodane sve emisije sa preklapanjima za dati program
@@ -19,11 +19,12 @@ namespace lljubici1_zadaca_2.Raspored
             //2. dodaj sve emisije koje imaju vise dana i vrijeme / bez preklapanja!
             foreach (var program in listaPrograma)
             {
-                List<EmisijePrograma> listaProgramaDana = new List<EmisijePrograma>();
+
                 IzbaciEmisijeKojeSuIzvanProgramskogVremena(program);
                 for (int i = 1; i <= 7; i++)
                 {
                     Dan dan = new Dan(Enum.GetName(typeof(Dani), i));
+                    List<EmisijePrograma> listaProgramaDana = new List<EmisijePrograma>();
 
                     List<EmisijePrograma> emisijeSPocetkomIDanom = program.EmisijePrograma
                         .Where(e => e.DaniUTjednu.Contains(i) && e.ImaPočetak).OrderBy(e => e.Pocetak).ToList();
@@ -48,8 +49,8 @@ namespace lljubici1_zadaca_2.Raspored
                         dan.DodajElementRasporeda(emisijaPrograma);
                     }
                     program.RasporedDani.Add(dan);
-                    SingletonTvKuca.Instanca.RasporedPrograma.Add(program);
                 }
+                SingletonTvKuca.Instanca.RasporedPrograma.Add(program);
             }
         }
 
@@ -132,7 +133,5 @@ namespace lljubici1_zadaca_2.Raspored
         //    p.EmisijePrograma = p.EmisijePrograma.OrderByDescending(a => a.DaniUTjednu.Count).ThenByDescending(b => b.Pocetak)
         //        .ThenBy(c => c.Emisija.Id).ToList();
         //}
-
-
     }
 }

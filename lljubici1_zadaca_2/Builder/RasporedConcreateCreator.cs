@@ -39,18 +39,10 @@ namespace lljubici1_zadaca_2.Builder
                             preklapanje = true;
                             break;
                         }
-
-                        //if (pocetakOneZaDodat > pocetakDodane && pocetakOneZaDodat < krajDodane ||
-                        //    krajOneZaDodat > pocetakDodane && krajOneZaDodat < krajDodane)
-                        //{
-                        //    Console.WriteLine("Pogreška, preklapanje>> " + emisijaPrograma);
-                        //    preklapanje = true;
-                        //    break;
-                        //}
                     }
                     if (!preklapanje)
                     {
-                        emisijeZaDodati.Add(emisijaPrograma); //
+                        emisijeZaDodati.Add(emisijaPrograma);
                     }
                 }
             }
@@ -62,8 +54,8 @@ namespace lljubici1_zadaca_2.Builder
 
         public List<EmisijePrograma> DodajEmisijeSaDanimaBezPocetka(Program p, List<EmisijePrograma> emisijeSaDanimaBezPocetka, List<EmisijePrograma> emisijeZaDodati)
         {
-            if (!emisijeSaDanimaBezPocetka.Any())
-                return new List<EmisijePrograma>();
+            //if (!emisijeSaDanimaBezPocetka.Any())
+            //    return new List<EmisijePrograma>();
 
             emisijeSaDanimaBezPocetka.Sort((e2, e1) => e1.DaniUTjednu.Count.CompareTo(e2.DaniUTjednu.Count));
             foreach (var emisija in emisijeSaDanimaBezPocetka)
@@ -79,7 +71,7 @@ namespace lljubici1_zadaca_2.Builder
                     }
                     if (emisija.Emisija.Trajanje < (krajSlobodnogVremena - početakSlobodnogVremena))
                     {
-                        emisija.ImaPočetak = true;
+                        //emisija.ImaPočetak = true;
                         emisija.Pocetak = početakSlobodnogVremena;
 
                         emisijeZaDodati.Add(emisija);
@@ -97,7 +89,7 @@ namespace lljubici1_zadaca_2.Builder
                     int krajSlobodnogVremena = Math.Min(p.Kraj, emisija.DaniUTjednu.Max() * 3600 * 24);
                     if (emisija.Emisija.Trajanje < (krajSlobodnogVremena - početakSlobodnogVremena))
                     {
-                        emisija.ImaPočetak = true;
+                        //emisija.ImaPočetak = true;
                         emisija.Pocetak = početakSlobodnogVremena;
 
                         emisijeZaDodati.Add(emisija);
