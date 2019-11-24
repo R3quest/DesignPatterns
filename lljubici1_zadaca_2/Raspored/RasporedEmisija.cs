@@ -33,14 +33,12 @@ namespace lljubici1_zadaca_2.Raspored
                 List<EmisijePrograma> emisijeSPocetkomIDanom = program.EmisijePrograma
                     .Where(e => e.DaniUTjednu.Contains(i) && e.ImaPočetak).OrderBy(e => e.Pocetak).ToList();
                 listaProgramaDana =
-                    programBuilder.DodajEmisijeSaDanimaIPocetkom(program, emisijeSPocetkomIDanom,
-                        listaProgramaDana);
+                    programBuilder.DodajEmisijeSaDanimaIPocetkom(program, emisijeSPocetkomIDanom, listaProgramaDana);
 
                 List<EmisijePrograma> emisijeSDanomBezPocetka = program.EmisijePrograma
                     .Where(e => e.DaniUTjednu.Contains(i) && !e.ImaPočetak).OrderBy(e => e.Pocetak).ToList();
                 listaProgramaDana =
-                    programBuilder.DodajEmisijeSaDanimaBezPocetka(program, emisijeSDanomBezPocetka,
-                        listaProgramaDana);
+                    programBuilder.DodajEmisijeSaDanimaBezPocetka(program, emisijeSDanomBezPocetka, listaProgramaDana);
 
                 List<EmisijePrograma> emisijeBezDanaIBezPocetka = program.EmisijePrograma
                     .Where(e => e.DaniUTjednu.Count == 0 && !e.ImaPočetak).ToList();
@@ -97,6 +95,10 @@ namespace lljubici1_zadaca_2.Raspored
                 p.NazivDatoteke);
             p.EmisijePrograma = programEmisija.entiteti.Cast<EmisijePrograma>().ToList();
         }
+
+
+
+
 
         //private static List<EmisijePrograma> VratiEmisijePrograma(PodaciCreator programEmisija, Program p, List<Emisija> listaEmisija, IBuilderProgram programBuilder)
         //{

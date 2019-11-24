@@ -1,4 +1,5 @@
 ﻿using lljubici1_zadaca_2.Composite;
+using System;
 using System.Collections.Generic;
 
 namespace lljubici1_zadaca_2.Podaci
@@ -7,7 +8,6 @@ namespace lljubici1_zadaca_2.Podaci
     {
         private static SingletonTvKuca _instanca = new SingletonTvKuca();
         public static SingletonTvKuca Instanca => _instanca;
-        public List<Program> Programi { get; set; } = new List<Program>();
 
         List<IRasporedProgramaComponent> RasporedPrograma = new List<IRasporedProgramaComponent>();
 
@@ -15,9 +15,13 @@ namespace lljubici1_zadaca_2.Podaci
         {
 
         }
-        public void DodajProgram(Program program)
+
+        public void IspisiProgrameTvKuce()
         {
-            Programi.Add(program);
+            foreach (var rasporedProgramaComponent in RasporedPrograma)
+            {
+                Console.WriteLine(((Program)rasporedProgramaComponent).ToString());
+            }
         }
 
         public void DodajElementRasporeda(IRasporedProgramaComponent elementComposite)
@@ -34,8 +38,6 @@ namespace lljubici1_zadaca_2.Podaci
         {
             return RasporedPrograma.Count;
         }
-
-
 
         //public void IspisiRaspored()
         //{

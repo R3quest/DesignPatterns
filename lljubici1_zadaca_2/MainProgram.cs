@@ -22,25 +22,26 @@ namespace lljubici1_zadaca_2
             }
             Dictionary<string, string> datoteke = UcitavanjeParametara.DohvatiPutanjeDatoteka(args);
 
-
             PodaciCreator program = new ProgramiConcreateCreator(datoteke["-t"]);
             PodaciCreator emisije = new EmisijeConcreteCreator(datoteke["-e"]);
             PodaciCreator osobe = new OsobeConcreateCreator(datoteke["-o"]);
             PodaciCreator uloge = new UlogeConcreateCreator(datoteke["-u"]);
             PodaciCreator programEmisija = new EmisijeProgramaConcreateCreator("");
+
             PodaciCreator vrstaEmisije = new VrstaEmisijeConcreateCreator(datoteke["-v"]);
 
             IBuilderProgram programBuilder = new RasporedConcreateCreator();
 
             var listaEmisija = emisije.entiteti.Cast<Emisija>().ToList();
             var listaPrograma = program.entiteti.Cast<Program>().ToList();
+
+            var listaOsoba = osobe.entiteti.Cast<Osoba>().ToList();
+            var listaUloga = uloge.entiteti.Cast<Uloga>().ToList();
+
+
             RasporedEmisija.KreirajRasporedPoDanima(listaPrograma, programEmisija, listaEmisija, programBuilder);
-            //RasporedEmisija.IspisiRaspored();
-            //SingletonTvKuca.Instanca.RasporedPrograma = SingletonTvKuca.Instanca.Programi.Cast<IRasporedProgramaComponent>().ToList();
-            //KreirajRaspored();
+
             Konzola.KorisnikovOdabir(osobe, uloge);
-
-
             Console.ReadLine();
         }
 
