@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using lljubici1_zadaca_2.Composite;
+﻿using lljubici1_zadaca_2.Composite;
+using System.Collections.Generic;
 
 namespace lljubici1_zadaca_2.Podaci
 {
@@ -9,7 +9,7 @@ namespace lljubici1_zadaca_2.Podaci
         public static SingletonTvKuca Instanca => _instanca;
         public List<Program> Programi { get; set; } = new List<Program>();
 
-        public List<IRasporedProgramaComponent> RasporedPrograma { get; set; } = new List<IRasporedProgramaComponent>();
+        List<IRasporedProgramaComponent> RasporedPrograma = new List<IRasporedProgramaComponent>();
 
         private SingletonTvKuca()
         {
@@ -24,6 +24,18 @@ namespace lljubici1_zadaca_2.Podaci
         {
             RasporedPrograma.Add(elementComposite);
         }
+
+        public void IspisiRasporedZaDan(int program, int dan)
+        {
+            ((Program)RasporedPrograma[program - 1]).IspisZaDan(dan);
+        }
+
+        public int VratiBrojPrograma()
+        {
+            return RasporedPrograma.Count;
+        }
+
+
 
         //public void IspisiRaspored()
         //{

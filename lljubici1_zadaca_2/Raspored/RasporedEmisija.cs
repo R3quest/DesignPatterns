@@ -14,56 +14,48 @@ namespace lljubici1_zadaca_2.Raspored
         public static void KreirajRasporedPoDanima(List<Program> listaPrograma, PodaciCreator programEmisija,
             List<Emisija> listaEmisija, IBuilderProgram programBuilder)
         {
-            //1. dodane sve emisije sa preklapanjima za dati program
             DodajSveEmisijeIzDatotekeZaProgram(listaPrograma, programEmisija, listaEmisija);
-            //2. dodaj sve emisije koje imaju vise dana i vrijeme / bez preklapanja!
             foreach (var program in listaPrograma)
             {
-
                 IzbaciEmisijeKojeSuIzvanProgramskogVremena(program);
-                for (int i = 1; i <= 7; i++)
-                {
-                    Dan dan = new Dan(Enum.GetName(typeof(Dani), i));
-                    List<EmisijePrograma> listaProgramaDana = new List<EmisijePrograma>();
-
-                    List<EmisijePrograma> emisijeSPocetkomIDanom = program.EmisijePrograma
-                        .Where(e => e.DaniUTjednu.Contains(i) && e.ImaPočetak).OrderBy(e => e.Pocetak).ToList();
-                    listaProgramaDana =
-                        programBuilder.DodajEmisijeSaDanimaIPocetkom(program, emisijeSPocetkomIDanom,
-                            listaProgramaDana);
-
-                    List<EmisijePrograma> emisijeSDanomBezPocetka = program.EmisijePrograma
-                        .Where(e => e.DaniUTjednu.Contains(i) && !e.ImaPočetak).OrderBy(e => e.Pocetak).ToList();
-                    listaProgramaDana =
-                        programBuilder.DodajEmisijeSaDanimaBezPocetka(program, emisijeSDanomBezPocetka,
-                            listaProgramaDana);
-
-                    List<EmisijePrograma> emisijeBezDanaIBezPocetka = program.EmisijePrograma
-                        .Where(e => e.DaniUTjednu.Count == 0 && !e.ImaPočetak).ToList();
-                    listaProgramaDana =
-                        programBuilder.DodajEmisijeBezDanaIPocetka(program, emisijeBezDanaIBezPocetka, listaProgramaDana);
-
-                    //TODO: dan.DodajElementRasporeda(emisijaPrograma); to je to i guess
-                    foreach (var emisijaPrograma in listaProgramaDana)
-                    {
-                        dan.DodajElementRasporeda(emisijaPrograma);
-                    }
-                    program.RasporedDani.Add(dan);
-                }
-                SingletonTvKuca.Instanca.RasporedPrograma.Add(program);
+                DodajDaneSEmisijamaProgramu(programBuilder, program);
+                SingletonTvKuca.Instanca.DodajElementRasporeda(program);
             }
         }
 
-
-        public static void IspisiRaspored()
+        private static void DodajDaneSEmisijamaProgramu(IBuilderProgram programBuilder, Program program)
         {
-            foreach (var program in SingletonTvKuca.Instanca.RasporedPrograma)
+            for (int i = 1; i <= 7; i++)
             {
-                Console.WriteLine(((Program)program).ToString());
-                program.IspisiRaspored();
-                Console.WriteLine();
+                Dan dan = new Dan(Enum.GetName(typeof(Dani), i));
+                List<EmisijePrograma> listaProgramaDana = new List<EmisijePrograma>();
+
+                List<EmisijePrograma> emisijeSPocetkomIDanom = program.EmisijePrograma
+                    .Where(e => e.DaniUTjednu.Contains(i) && e.ImaPočetak).OrderBy(e => e.Pocetak).ToList();
+                listaProgramaDana =
+                    programBuilder.DodajEmisijeSaDanimaIPocetkom(program, emisijeSPocetkomIDanom,
+                        listaProgramaDana);
+
+                List<EmisijePrograma> emisijeSDanomBezPocetka = program.EmisijePrograma
+                    .Where(e => e.DaniUTjednu.Contains(i) && !e.ImaPočetak).OrderBy(e => e.Pocetak).ToList();
+                listaProgramaDana =
+                    programBuilder.DodajEmisijeSaDanimaBezPocetka(program, emisijeSDanomBezPocetka,
+                        listaProgramaDana);
+
+                List<EmisijePrograma> emisijeBezDanaIBezPocetka = program.EmisijePrograma
+                    .Where(e => e.DaniUTjednu.Count == 0 && !e.ImaPočetak).ToList();
+                listaProgramaDana =
+                    programBuilder.DodajEmisijeBezDanaIPocetka(program, emisijeBezDanaIBezPocetka, listaProgramaDana);
+
+                foreach (var emisijaPrograma in listaProgramaDana)
+                {
+                    dan.DodajElementRasporeda(emisijaPrograma);
+                }
+
+                program.RasporedDani.Add(dan);
             }
         }
+
 
         private static void IzbaciEmisijeKojeSuIzvanProgramskogVremena(Program program)
         {
