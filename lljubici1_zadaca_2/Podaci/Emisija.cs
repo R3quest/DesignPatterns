@@ -5,7 +5,6 @@ namespace lljubici1_zadaca_2.Podaci
 {
     public class Emisija : Entitet
     {
-
         public int Id { get; set; }
         public string NazivEmisije { get; set; }
         public int VrstaEmisije { get; set; }

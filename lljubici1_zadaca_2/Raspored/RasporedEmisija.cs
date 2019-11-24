@@ -54,7 +54,6 @@ namespace lljubici1_zadaca_2.Raspored
             }
         }
 
-
         private static void IzbaciEmisijeKojeSuIzvanProgramskogVremena(Program program)
         {
             var emisijeIzvanVremena = program.EmisijePrograma.Where(e =>
@@ -95,9 +94,6 @@ namespace lljubici1_zadaca_2.Raspored
                 p.NazivDatoteke);
             p.EmisijePrograma = programEmisija.entiteti.Cast<EmisijePrograma>().ToList();
         }
-
-
-
 
 
         //private static List<EmisijePrograma> VratiEmisijePrograma(PodaciCreator programEmisija, Program p, List<Emisija> listaEmisija, IBuilderProgram programBuilder)

@@ -32,7 +32,7 @@ namespace lljubici1_zadaca_2.Composite
                 $"{nameof(NazivPrograma)}: {NazivPrograma}, {nameof(Pocetak)}: {Konverzija.PretvoriSekundeUVrijeme(Pocetak)}, {nameof(NazivDatoteke)}: {NazivDatoteke}";
         }
 
-        public void DodajElementRasporeda(IRasporedProgramaComponent elementComposite)
+        public void DodajElementRasporeda(IRasporedProgramaComponent elementComposite) //dodaj dan
         {
             RasporedDani.Add(elementComposite);
         }

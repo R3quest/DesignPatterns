@@ -46,17 +46,13 @@ namespace lljubici1_zadaca_2.Builder
                     }
                 }
             }
-            //return emisijeZaDodati;
-            //return emisijeZaDodati.OrderByDescending(a => a.DaniUTjednu.Count).ThenBy(c => c.Emisija.Id).ThenByDescending(b => b.Pocetak).ToList();
             emisijeZaDodati.Sort((e1, e2) => e1.Pocetak.CompareTo(e2.Pocetak));
             return emisijeZaDodati;
         }
 
         public List<EmisijePrograma> DodajEmisijeSaDanimaBezPocetka(Program p, List<EmisijePrograma> emisijeSaDanimaBezPocetka, List<EmisijePrograma> emisijeZaDodati)
         {
-            //if (!emisijeSaDanimaBezPocetka.Any())
-            //    return new List<EmisijePrograma>();
-
+            //if (!emisijeSaDanimaBezPocetka.Any())  //    return new List<EmisijePrograma>();
             emisijeSaDanimaBezPocetka.Sort((e2, e1) => e1.DaniUTjednu.Count.CompareTo(e2.DaniUTjednu.Count));
             foreach (var emisija in emisijeSaDanimaBezPocetka)
             {

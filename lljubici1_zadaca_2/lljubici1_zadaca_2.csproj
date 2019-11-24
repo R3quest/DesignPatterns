@@ -48,6 +48,9 @@
     <Compile Include="Composite\Dan.cs" />
     <Compile Include="Composite\IRasporedProgramaComponent.cs" />
     <Compile Include="FactoryMethod\VrstaEmisijeConcreateCreator.cs" />
+    <Compile Include="Iterator\ConcreateIterator.cs" />
+    <Compile Include="Iterator\IAbstractCollection.cs" />
+    <Compile Include="Iterator\IIterator.cs" />
     <Compile Include="KorisnikovaInterakcija\Konzola.cs" />
     <Compile Include="Podaci\VrstaEmisije.cs" />
     <Compile Include="Pomagala\DaniEnum.cs" />
