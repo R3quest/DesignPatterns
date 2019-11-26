@@ -12,9 +12,12 @@ namespace lljubici1_zadaca_2.Raspored
     public class RasporedEmisija
     {
         public static void KreirajRasporedPoDanima(List<Program> listaPrograma, PodaciCreator programEmisija,
-            List<Emisija> listaEmisija, IBuilderProgram programBuilder)
+            List<Emisija> listaEmisija, IBuilderProgram programBuilder, List<Osoba> listaOsoba, List<Uloga> listaUloga, List<VrstaEmisije> listaVrsteEmisije)
         {
-            DodajSveEmisijeIzDatotekeZaProgram(listaPrograma, programEmisija, listaEmisija);
+            DodajSveEmisijeIzDatotekeZaProgram(listaPrograma, programEmisija, listaEmisija, listaOsoba, listaUloga, listaVrsteEmisije);
+
+
+
             foreach (var program in listaPrograma)
             {
                 IzbaciEmisijeKojeSuIzvanProgramskogVremena(program);
@@ -65,7 +68,7 @@ namespace lljubici1_zadaca_2.Raspored
         }
 
         private static void DodajSveEmisijeIzDatotekeZaProgram(List<Program> listaPrograma, PodaciCreator programEmisija,
-            List<Emisija> listaEmisija)
+            List<Emisija> listaEmisija, List<Osoba> listaOsoba, List<Uloga> listaUloga, List<VrstaEmisije> listaVrsteEmisija)
         {
             foreach (var p in listaPrograma)
             {
@@ -73,6 +76,46 @@ namespace lljubici1_zadaca_2.Raspored
                 //SingletonTvKuca.Instanca.DodajProgram(p);
                 PromjeniPutanjuDatotekePrograma(programEmisija, p);
                 PopuniEmisijeProgramaPodacimaEmisije(p, listaEmisija);
+                PopuniEmisijeProgramaPodacimaOsobaUloga(p, listaOsoba, listaUloga);
+                PopuniEmisijeProgramaPodacimaVrsteEmisije(p, listaVrsteEmisija);
+            }
+        }
+
+        private static void PopuniEmisijeProgramaPodacimaVrsteEmisije(Program program, List<VrstaEmisije> listaVrsteEmisija)
+        {
+            foreach (var emisijaPrograma in program.EmisijePrograma)
+            {
+
+                //try
+                //{
+                int idVrstaEmisije = emisijaPrograma.Emisija.VrstaEmisije.Id;
+                var vrstaEmisije = listaVrsteEmisija.FirstOrDefault(ve => ve.Id == idVrstaEmisije);
+                emisijaPrograma.Emisija.VrstaEmisije = vrstaEmisije;
+                //}
+                //catch { }
+            }
+        }
+
+        private static void PopuniEmisijeProgramaPodacimaOsobaUloga(Program program, List<Osoba> listaOsoba, List<Uloga> listaUloga)
+        {
+            foreach (var emisijaPrograma in program.EmisijePrograma)
+            {
+                List<OsobaUloga> osobeUlogePrograma = emisijaPrograma.OsobeUloge;
+                PopuniOsobuUloguEmisiji(listaOsoba, listaUloga, osobeUlogePrograma);
+                List<OsobaUloga> osobeUlogeEmisije = emisijaPrograma.Emisija.OsobeUloge;
+                PopuniOsobuUloguEmisiji(listaOsoba, listaUloga, osobeUlogeEmisije);
+            }
+        }
+
+        private static void PopuniOsobuUloguEmisiji(List<Osoba> listaOsoba, List<Uloga> listaUloga, List<OsobaUloga> osobeUlogePrograma)
+        {
+            foreach (var osobaUloga in osobeUlogePrograma)
+            {
+                var osoba = listaOsoba.FirstOrDefault(o => o.Id == osobaUloga.Osoba.Id);
+                var uloga = listaUloga.FirstOrDefault(u => u.Id == osobaUloga.Uloga.Id);
+
+                osobaUloga.Osoba = osoba;
+                osobaUloga.Uloga = uloga;
             }
         }
 
@@ -84,6 +127,7 @@ namespace lljubici1_zadaca_2.Raspored
                 emisijaPrograma.Emisija.NazivEmisije = podaciEmisije.NazivEmisije;
                 emisijaPrograma.Emisija.OsobeUloge = podaciEmisije.OsobeUloge;
                 emisijaPrograma.Emisija.Trajanje = podaciEmisije.Trajanje;
+                emisijaPrograma.Emisija.VrstaEmisije = podaciEmisije.VrstaEmisije;
             }
         }
 

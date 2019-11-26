@@ -1,12 +1,11 @@
-﻿using lljubici1_zadaca_2.FactoryMethod;
-using lljubici1_zadaca_2.Podaci;
+﻿using lljubici1_zadaca_2.Podaci;
 using System;
 
 namespace lljubici1_zadaca_2.KorisnikovaInterakcija
 {
     public class Konzola
     {
-        public static void KorisnikovOdabir(PodaciCreator osobe, PodaciCreator uloge)
+        public static void KorisnikovOdabir()
         {
             int izbor = 0;
             while (true)
@@ -51,20 +50,6 @@ namespace lljubici1_zadaca_2.KorisnikovaInterakcija
                 }
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         //private static void IspisiStatistikuSvakogPrograma()
         //{

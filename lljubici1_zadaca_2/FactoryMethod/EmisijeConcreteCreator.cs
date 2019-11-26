@@ -23,7 +23,9 @@ namespace lljubici1_zadaca_2.FactoryMethod
                     polja = Array.ConvertAll(red.Split(base._separator), p => p.Trim());
                     //polja[2] su minute
                     var _vrijeme = TimeSpan.FromMinutes(double.Parse(polja[3]));
-                    emisija = new Emisija(int.Parse(polja[0]), polja[1], int.Parse(polja[2]),
+                    VrstaEmisije vrstaEmisije = new VrstaEmisije();
+                    vrstaEmisije.Id = int.Parse(polja[2]);
+                    emisija = new Emisija(int.Parse(polja[0]), polja[1], vrstaEmisije,
                         Konverzija.PretvoriVrijemeUSekunde(_vrijeme.ToString()), vratiOsobaUloga(polja[4], ','));
                     listaPodataka.Add(emisija);
                 }
@@ -47,8 +49,11 @@ namespace lljubici1_zadaca_2.FactoryMethod
                 if (!string.IsNullOrEmpty(ou))
                 {
                     string[] osobaUlogaBroj = ou.Split('-');
-
-                    OsobaUloga osobaUloga = new OsobaUloga(int.Parse(osobaUlogaBroj[0]), int.Parse(osobaUlogaBroj[1]));
+                    Osoba o = new Osoba();
+                    o.Id = int.Parse(osobaUlogaBroj[0]);
+                    Uloga u = new Uloga();
+                    u.Id = int.Parse(osobaUlogaBroj[1]);
+                    OsobaUloga osobaUloga = new OsobaUloga(o, u);
                     listaOsobeUloge.Add(osobaUloga);
                 }
             }

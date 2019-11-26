@@ -2,18 +2,18 @@
 {
     public class OsobaUloga
     {
-        public int IdOsoba { get; set; }
-        public int IdUloga { get; set; }
+        public Osoba Osoba { get; set; } = new Osoba();
+        public Uloga Uloga { get; set; } = new Uloga();
 
         public OsobaUloga()
         {
 
         }
 
-        public OsobaUloga(int idOsoba, int idUloga)
+        public OsobaUloga(Osoba osoba, Uloga uloga)
         {
-            IdOsoba = idOsoba;
-            IdUloga = idUloga;
+            Osoba = osoba;
+            Uloga = uloga;
         }
 
         public override string ToString()

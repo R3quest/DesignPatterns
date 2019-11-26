@@ -9,6 +9,11 @@ namespace lljubici1_zadaca_2.Podaci
         public bool ImaReklame { get; set; }
         public int TrajanjeReklame { get; set; }
 
+        public VrstaEmisije()
+        {
+
+        }
+
         public VrstaEmisije(int id, string vrsta, int imaReklame, int trajanjeReklame)
         {
             Id = id;

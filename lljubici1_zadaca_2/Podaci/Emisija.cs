@@ -7,7 +7,9 @@ namespace lljubici1_zadaca_2.Podaci
     {
         public int Id { get; set; }
         public string NazivEmisije { get; set; }
-        public int VrstaEmisije { get; set; }
+
+        public VrstaEmisije VrstaEmisije { get; set; }
+        //public int VrstaEmisije { get; set; }
         public int Trajanje { get; set; }
         public List<OsobaUloga> OsobeUloge { get; set; }
 
@@ -16,13 +18,13 @@ namespace lljubici1_zadaca_2.Podaci
 
         }
 
-        public Emisija(int id, string nazivEmisije, int vrstaEmisije, int trajanje, List<OsobaUloga> osobaUloge)
+        public Emisija(int id, string nazivEmisije, VrstaEmisije vrstaEmisije, int trajanje, List<OsobaUloga> osobeUloge)
         {
             Id = id;
             NazivEmisije = nazivEmisije;
             VrstaEmisije = vrstaEmisije;
             Trajanje = trajanje;
-            OsobeUloge = osobaUloge;
+            OsobeUloge = osobeUloge;
         }
 
         public override string ToString()

@@ -99,8 +99,12 @@ namespace lljubici1_zadaca_2.FactoryMethod
                 if (!string.IsNullOrEmpty(ou))
                 {
                     string[] osobaUlogaBroj = ou.Split('-');
+                    Osoba o = new Osoba();
+                    o.Id = int.Parse(osobaUlogaBroj[0]);
+                    Uloga u = new Uloga();
+                    u.Id = int.Parse(osobaUlogaBroj[1]);
 
-                    OsobaUloga osobaUloga = new OsobaUloga(int.Parse(osobaUlogaBroj[0]), int.Parse(osobaUlogaBroj[1]));
+                    OsobaUloga osobaUloga = new OsobaUloga(o, u);
                     listaOsobeUloge.Add(osobaUloga);
                 }
             }

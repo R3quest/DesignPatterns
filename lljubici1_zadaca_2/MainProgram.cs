@@ -37,11 +37,13 @@ namespace lljubici1_zadaca_2
 
             var listaOsoba = osobe.entiteti.Cast<Osoba>().ToList();
             var listaUloga = uloge.entiteti.Cast<Uloga>().ToList();
+            var listaVrstaEmisije = vrstaEmisije.entiteti.Cast<VrstaEmisije>().ToList();
 
 
-            RasporedEmisija.KreirajRasporedPoDanima(listaPrograma, programEmisija, listaEmisija, programBuilder);
+            RasporedEmisija.KreirajRasporedPoDanima(listaPrograma, programEmisija, listaEmisija, programBuilder,
+                listaOsoba, listaUloga, listaVrstaEmisije);
 
-            Konzola.KorisnikovOdabir(osobe, uloge);
+            Konzola.KorisnikovOdabir();
             Console.ReadLine();
         }
 
