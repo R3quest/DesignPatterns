@@ -1,4 +1,5 @@
 ﻿using lljubici1_zadaca_2.FactoryMethod;
+using lljubici1_zadaca_2.Iterator;
 using lljubici1_zadaca_2.Podaci;
 using lljubici1_zadaca_2.Pomagala;
 using System;
@@ -6,7 +7,7 @@ using System.Collections.Generic;
 
 namespace lljubici1_zadaca_2.Composite
 {
-    public class Program : Entitet, IRasporedProgramaComponent
+    public class Program : Entitet, IRasporedProgramaComponent, IAbstractCollection
     {
         public List<IRasporedProgramaComponent> RasporedDani { get; set; } = new List<IRasporedProgramaComponent>();
 
@@ -32,6 +33,8 @@ namespace lljubici1_zadaca_2.Composite
                 $"{nameof(NazivPrograma)}: {NazivPrograma}, {nameof(Pocetak)}: {Konverzija.PretvoriSekundeUVrijeme(Pocetak)}, {nameof(NazivDatoteke)}: {NazivDatoteke}";
         }
 
+
+
         public void DodajElementRasporeda(IRasporedProgramaComponent elementComposite) //dodaj dan
         {
             RasporedDani.Add(elementComposite);
@@ -39,12 +42,26 @@ namespace lljubici1_zadaca_2.Composite
 
         public void IspisiRaspored() //za sve dane
         {
-            foreach (var dan in RasporedDani)
+            //foreach (var dan in RasporedDani)
+            //{
+            //    Console.WriteLine(((Dan)dan).NazivDana);
+            //    dan.IspisiRaspored();
+            //}
+            IIterator iteratorEmisija = CreateIterator();
+
+            for (var item = iteratorEmisija.First(); !iteratorEmisija.IsDone; item = iteratorEmisija.Next())
             {
-                Console.WriteLine(((Dan)dan).NazivDana);
-                dan.IspisiRaspored();
+                ((Dan)item).IspisiRaspored();
             }
+
+
         }
+
+        public IIterator CreateIterator()
+        {
+            return new ConcreateIterator(RasporedDani);
+        }
+
 
         public void IspisZaDan(int danIndex)
         {

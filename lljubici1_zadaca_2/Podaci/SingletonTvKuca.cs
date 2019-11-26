@@ -34,6 +34,15 @@ namespace lljubici1_zadaca_2.Podaci
             ((Program)RasporedPrograma[program - 1]).IspisZaDan(dan);
         }
 
+
+        public void IspisisRasporedZaSveDaneIPrograme()
+        {
+            foreach (var program in RasporedPrograma)
+            {
+                program.IspisiRaspored();
+            }
+        }
+
         public int VratiBrojPrograma()
         {
             return RasporedPrograma.Count;

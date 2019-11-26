@@ -1,10 +1,8 @@
-﻿using lljubici1_zadaca_2.Iterator;
-using lljubici1_zadaca_2.Podaci;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace lljubici1_zadaca_2.Composite
 {
-    public class Dan : IRasporedProgramaComponent, IAbstractCollection
+    public class Dan : IRasporedProgramaComponent
     {
         public string NazivDana { get; set; }
         public List<IRasporedProgramaComponent> RasporedEmisijaDana { get; set; } = new List<IRasporedProgramaComponent>();
@@ -22,17 +20,17 @@ namespace lljubici1_zadaca_2.Composite
         public void IspisiRaspored()
         {
             //Console.WriteLine(NazivDana);
-            IIterator iteratorEmisija = CreateIterator();
+            //IIterator iteratorEmisija = CreateIterator();
 
-            for (var item = iteratorEmisija.First(); !iteratorEmisija.IsDone; item = iteratorEmisija.Next())
-            {
-                ((EmisijePrograma)item).IspisiRaspored();
-            }
-
-            //foreach (var r in RasporedEmisijaDana)
+            //for (var item = iteratorEmisija.First(); !iteratorEmisija.IsDone; item = iteratorEmisija.Next())
             //{
-            //    r.IspisiRaspored();
+            //    ((EmisijePrograma)item).IspisiRaspored();
             //}
+
+            foreach (var r in RasporedEmisijaDana)
+            {
+                r.IspisiRaspored();
+            }
         }
 
         public void IspisiRasporedOdredenogDana()
@@ -40,9 +38,9 @@ namespace lljubici1_zadaca_2.Composite
 
         }
 
-        public IIterator CreateIterator()
-        {
-            return new ConcreateIterator(RasporedEmisijaDana);
-        }
+        //public IIterator CreateIterator()
+        //{
+        //    return new ConcreateIterator(RasporedEmisijaDana);
+        //}
     }
 }
