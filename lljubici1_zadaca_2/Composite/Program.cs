@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace lljubici1_zadaca_2.Composite
 {
-    public class Program : Entitet, IRasporedProgramaComponent, IAbstractCollection
+    public class Program : Entitet, IRasporedProgramaComponent, IAbstractCollectionSveEmisije
     {
         public List<IRasporedProgramaComponent> RasporedDani { get; set; } = new List<IRasporedProgramaComponent>();
 
@@ -47,19 +47,18 @@ namespace lljubici1_zadaca_2.Composite
             //    Console.WriteLine(((Dan)dan).NazivDana);
             //    dan.IspisiRaspored();
             //}
-            IIterator iteratorEmisija = CreateIterator();
+            IIterator iteratorEmisija = KreirajIterator();
 
-            for (var item = iteratorEmisija.First(); !iteratorEmisija.IsDone; item = iteratorEmisija.Next())
+            for (var item = iteratorEmisija.Prvi(); !iteratorEmisija.Gotovo; item = iteratorEmisija.Sljedeci())
             {
-                ((Dan)item).IspisiRaspored();
+                item.IspisiRaspored();
+                //((Dan)item).IspisiRaspored();
             }
-
-
         }
 
-        public IIterator CreateIterator()
+        public IIterator KreirajIterator()
         {
-            return new ConcreateIterator(RasporedDani);
+            return new ConcreateIteratorEmisijaTjednogPlana(RasporedDani);
         }
 
 

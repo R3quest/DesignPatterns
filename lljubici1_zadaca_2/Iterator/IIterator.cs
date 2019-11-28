@@ -4,9 +4,9 @@ namespace lljubici1_zadaca_2.Iterator
 {
     public interface IIterator
     {
-        IRasporedProgramaComponent First();
-        IRasporedProgramaComponent Next();
-        IRasporedProgramaComponent CurrentItem { get; }
-        bool IsDone { get; }
+        IRasporedProgramaComponent Prvi();
+        IRasporedProgramaComponent Sljedeci();
+        IRasporedProgramaComponent Trenutni { get; }
+        bool Gotovo { get; }
     }
 }

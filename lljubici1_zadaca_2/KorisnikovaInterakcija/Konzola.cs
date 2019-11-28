@@ -1,5 +1,8 @@
 ﻿using lljubici1_zadaca_2.Podaci;
+using lljubici1_zadaca_2.Pomagala;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace lljubici1_zadaca_2.KorisnikovaInterakcija
 {
@@ -11,7 +14,7 @@ namespace lljubici1_zadaca_2.KorisnikovaInterakcija
             while (true)
             {
                 IspisGlavniIzbornik();
-                izbor = OdabirProvjera(izbor, 1, 2);
+                izbor = OdabirProvjera(izbor, 1, 4);
                 Console.Clear();
                 if (izbor == 1)
                 {
@@ -20,33 +23,34 @@ namespace lljubici1_zadaca_2.KorisnikovaInterakcija
                     SingletonTvKuca.Instanca.IspisiProgrameTvKuce();
                     Console.Write("Unesi program> ");
                     program = OdabirProvjera(program, 1, SingletonTvKuca.Instanca.VratiBrojPrograma());
-                    Console.Write("Dan u tjednu: od 1 do 7\nUnesi dan u tjednu> ");
+                    Console.Write("Dan u tjednu: od 1 (pon) do 7 (ned)\nUnesi dan u tjednu> ");
                     dan = OdabirProvjera(dan, 1, 7);
                     //Program p = SingletonTvKuca.Instanca.Programi[program - 1];
                     //IspisiEmisijaPrograma(p, dan, osobe, uloge); TODO:vrati
-                    try
-                    {
-                        SingletonTvKuca.Instanca.IspisiRasporedZaDan(program, dan);
-
-                        //((Program)SingletonTvKuca.Instanca.RasporedPrograma[program - 1]).IspisZaDan(dan);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
-                    }
+                    SingletonTvKuca.Instanca.IspisiRasporedZaDan(program, dan);
                 }
                 else if (izbor == 2)
                 {
-                    IspisPodatakaOBrojuEmisija();
-                    izbor = OdabirProvjera(izbor, 1, 2);
-                    if (izbor == 1)
-                    {
-                        //IspisBrojEmisijaUPojedinomProgramuPoPojedinomDanu(); TODO:vrati
-                    }
-                    else if (izbor == 2)
-                    {
-                        //IspisiStatistikuSvakogPrograma(); TODO:vrati
-                    }
+                    //IspisPodatakaOBrojuEmisija();
+                    //izbor = OdabirProvjera(izbor, 1, 2);
+                    //if (izbor == 1)
+                    //{
+                    //    //IspisBrojEmisijaUPojedinomProgramuPoPojedinomDanu(); TODO:vrati
+                    //}
+                    //else if (izbor == 2)
+                    //{
+                    //    //IspisiStatistikuSvakogPrograma(); TODO:vrati
+                    //}
+                }
+                else if (izbor == 3)
+                {
+                    IEnumerable<Enumeracije.VrsteEmisije> vrsteEmisija = Enum.GetValues(typeof(Enumeracije.VrsteEmisije)).Cast<Enumeracije.VrsteEmisije>();
+                    List<string> vrijednostiVrstaEmisija = new List<string>(vrsteEmisija.Select(v => v.ToString().Replace("_", " ")));
+                    foreach (string vrste in vrijednostiVrstaEmisija)
+                        Console.WriteLine(vrijednostiVrstaEmisija.IndexOf(vrste) + 1 + " - " + vrste);
+                    Console.Write("Unesi broj vrste emisije> ");
+                    izbor = OdabirProvjera(izbor, 1, vrijednostiVrstaEmisija.Count);
+                    SingletonTvKuca.Instanca.IspisiTjedniPlanVrsteEmisija(vrijednostiVrstaEmisija[izbor - 1]);
                 }
             }
         }
@@ -175,8 +179,11 @@ namespace lljubici1_zadaca_2.KorisnikovaInterakcija
         private static void IspisGlavniIzbornik()
         {
             Console.WriteLine("1. Unesi program i dan u tjednu - Ispis vremenskog plana");
-            Console.WriteLine("2. Ispis podataka: \n\t- po broju emisija po pojedinom danu u tjednu");
-            Console.WriteLine("\t- % popunjenosti pojedinog programa po pojedinom danu u tjednu");
+            //Console.WriteLine("2. Ispis podataka: \n\t- po broju emisija po pojedinom danu u tjednu");
+            //Console.WriteLine("\t- % popunjenosti pojedinog programa po pojedinom danu u tjednu");
+            Console.WriteLine("2. Unesi program i dan u tjednu za ispis potencijalnih prihoda od reklama (u min)");
+            Console.WriteLine("3. Unesi vrstu emisije za ispis tjednog plana po svim programima, danima i emisijama");
+            Console.WriteLine("4. Unesi osobu, postojecu ulogu osobe i novu ulogu kojom zamjenjuje postojecu u svojim emisijama");
             Console.Write("Odabir> ");
         }
 

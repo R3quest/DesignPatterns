@@ -15,9 +15,6 @@ namespace lljubici1_zadaca_2.Raspored
             List<Emisija> listaEmisija, IBuilderProgram programBuilder, List<Osoba> listaOsoba, List<Uloga> listaUloga, List<VrstaEmisije> listaVrsteEmisije)
         {
             DodajSveEmisijeIzDatotekeZaProgram(listaPrograma, programEmisija, listaEmisija, listaOsoba, listaUloga, listaVrsteEmisije);
-
-
-
             foreach (var program in listaPrograma)
             {
                 IzbaciEmisijeKojeSuIzvanProgramskogVremena(program);
@@ -30,7 +27,7 @@ namespace lljubici1_zadaca_2.Raspored
         {
             for (int i = 1; i <= 7; i++)
             {
-                Dan dan = new Dan(Enum.GetName(typeof(Dani), i));
+                Dan dan = new Dan(Enum.GetName(typeof(Enumeracije.Dani), i));
                 List<EmisijePrograma> listaProgramaDana = new List<EmisijePrograma>();
 
                 List<EmisijePrograma> emisijeSPocetkomIDanom = program.EmisijePrograma

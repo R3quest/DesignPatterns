@@ -109,7 +109,7 @@ namespace lljubici1_zadaca_2.Builder
                     int krajSlobodnogVremena = dodanaEmisija.Pocetak;
                     if (emisija.Emisija.Trajanje < (krajSlobodnogVremena - početakSlobodnogVremena))
                     {
-                        emisija.ImaPočetak = true;
+                        //emisija.ImaPočetak = true;
                         emisija.Pocetak = početakSlobodnogVremena;
 
                         //emisija.DaniUTjednu.AddRange(Enumerable.Range(1, 7));

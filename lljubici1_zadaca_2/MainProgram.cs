@@ -43,7 +43,12 @@ namespace lljubici1_zadaca_2
             RasporedEmisija.KreirajRasporedPoDanima(listaPrograma, programEmisija, listaEmisija, programBuilder,
                 listaOsoba, listaUloga, listaVrstaEmisije);
 
-            SingletonTvKuca.Instanca.IspisisRasporedZaSveDaneIPrograme();
+            //SingletonTvKuca.Instanca.IspisiRaspored();
+
+
+
+
+
 
 
             Konzola.KorisnikovOdabir();
