@@ -72,10 +72,19 @@ namespace lljubici1_zadaca_2.Podaci
 
         public void IspisiTjedniPlanVrsteEmisija(string vrstaEmisije)
         {
-            IIterator iterator = KreirajIterator(vrstaEmisije);
+            ConcreateIteratorEmisijaZeljeneVrste iterator = KreirajIterator(vrstaEmisije) as ConcreateIteratorEmisijaZeljeneVrste;
             while (!iterator.Gotovo)
             {
-                Console.WriteLine(iterator.Sljedeci());
+                if (iterator.NoviProgram)
+                {
+                    Console.WriteLine(iterator.TrenutniProgram());
+                }
+                if (iterator.NoviDan)
+                {
+                    Console.WriteLine(iterator.TrenutniDan());
+                }
+                Console.WriteLine(iterator.Trenutni);
+                iterator.Sljedeci();
             }
         }
 

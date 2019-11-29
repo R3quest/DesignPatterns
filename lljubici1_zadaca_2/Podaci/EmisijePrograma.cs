@@ -15,6 +15,11 @@ namespace lljubici1_zadaca_2.Podaci
 
         public bool ImaPočetak { get; set; } = false;
 
+        public EmisijePrograma()
+        {
+
+        }
+
         public EmisijePrograma(int idEmisije, List<int> daniUTjednu, List<OsobaUloga> osobeUloge, string pocetak)
         {
             DaniUTjednu = daniUTjednu;

@@ -28,29 +28,29 @@ namespace lljubici1_zadaca_2.Raspored
             for (int i = 1; i <= 7; i++)
             {
                 Dan dan = new Dan(Enum.GetName(typeof(Enumeracije.Dani), i));
-                List<EmisijePrograma> listaProgramaDana = new List<EmisijePrograma>();
+                List<EmisijePrograma> listaProgramaOdredenogDana = new List<EmisijePrograma>();
 
                 List<EmisijePrograma> emisijeSPocetkomIDanom = program.EmisijePrograma
                     .Where(e => e.DaniUTjednu.Contains(i) && e.ImaPočetak).OrderBy(e => e.Pocetak).ToList();
-                listaProgramaDana =
-                    programBuilder.DodajEmisijeSaDanimaIPocetkom(program, emisijeSPocetkomIDanom, listaProgramaDana);
+                listaProgramaOdredenogDana =
+                    programBuilder.DodajEmisijeSaDanimaIPocetkom(program, emisijeSPocetkomIDanom, listaProgramaOdredenogDana);
 
                 List<EmisijePrograma> emisijeSDanomBezPocetka = program.EmisijePrograma
                     .Where(e => e.DaniUTjednu.Contains(i) && !e.ImaPočetak).OrderBy(e => e.Pocetak).ToList();
-                listaProgramaDana =
-                    programBuilder.DodajEmisijeSaDanimaBezPocetka(program, emisijeSDanomBezPocetka, listaProgramaDana);
+                listaProgramaOdredenogDana =
+                    programBuilder.DodajEmisijeSaDanimaBezPocetka(program, emisijeSDanomBezPocetka, listaProgramaOdredenogDana);
 
                 List<EmisijePrograma> emisijeBezDanaIBezPocetka = program.EmisijePrograma
                     .Where(e => e.DaniUTjednu.Count == 0 && !e.ImaPočetak).ToList();
-                listaProgramaDana =
-                    programBuilder.DodajEmisijeBezDanaIPocetka(program, emisijeBezDanaIBezPocetka, listaProgramaDana);
+                listaProgramaOdredenogDana =
+                    programBuilder.DodajEmisijeBezDanaIPocetka(program, emisijeBezDanaIBezPocetka, listaProgramaOdredenogDana);
 
-                foreach (var emisijaPrograma in listaProgramaDana)
+                foreach (var emisijaPrograma in listaProgramaOdredenogDana)
                 {
                     dan.DodajElementRasporeda(emisijaPrograma);
                 }
-
-                program.RasporedDani.Add(dan);
+                program.DodajElementRasporeda(dan);
+                //program.RasporedDani.Add(dan);
             }
         }
 
