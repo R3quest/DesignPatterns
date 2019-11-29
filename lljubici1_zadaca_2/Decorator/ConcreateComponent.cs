@@ -6,8 +6,9 @@ namespace lljubici1_zadaca_2.Decorator
     class ConcreateComponent : IComponent
     {
         private const int sirinaStupca = 20;
+        private const int sirinaNazivaEmisije = 40;
 
-        private const int sirinaTablice = 85;
+        private const int sirinaTablice = 105;
         //svi propertiji
         public EmisijePrograma EmisijaPrograma { get; set; }
         public string NazivPrograma { get; set; }
@@ -33,8 +34,13 @@ namespace lljubici1_zadaca_2.Decorator
             }
             if (!string.IsNullOrEmpty(NazivDana))
             {
-                return VratiPodatkeEmisije();
+                return VratiPodatkeEmisijeSaDanom();
             }
+            if (string.IsNullOrEmpty(NazivDana) && string.IsNullOrEmpty(NazivPrograma))
+            {
+                return VratiPodatkeEmisijeBezDana();
+            }
+
             return VratiKraj();
         }
 
@@ -44,7 +50,7 @@ namespace lljubici1_zadaca_2.Decorator
         public string VratiGlavnoZaglavlje()
         {
             string zaglavlje = new string('-', sirinaTablice) + '\n' +
-                $"|{"Program",-sirinaStupca}|{"Dan",-sirinaStupca}|{"Emisija",-sirinaStupca}|{"Pocetak - Kraj",-sirinaStupca}|\n" +
+                $"|{"Program",-sirinaStupca}|{"Dan",-sirinaStupca}|{"Emisija",-sirinaNazivaEmisije}|{"Pocetak - Kraj",-sirinaStupca}|\n" +
                 new string('-', sirinaTablice) + '\n';
             return zaglavlje;
         }
@@ -55,23 +61,41 @@ namespace lljubici1_zadaca_2.Decorator
             string pocetak = Konverzija.PretvoriSekundeUVrijeme(EmisijaPrograma.Pocetak);
             string kraj = Konverzija.PretvoriSekundeUVrijeme(EmisijaPrograma.Pocetak + EmisijaPrograma.Emisija.Trajanje);
 
-            string programDanEmisija = new string('-', sirinaTablice) + '\n' +
-                               $"|{NazivPrograma,-sirinaStupca}|{NazivDana,-sirinaStupca}|{EmisijaPrograma.Emisija.NazivEmisije,-sirinaStupca}|" +
+            //new string('-', sirinaTablice) + '\n' +
+            string programDanEmisija =
+                               $"|{NazivPrograma,-sirinaStupca}|{NazivDana,-sirinaStupca}|{EmisijaPrograma.Emisija.NazivEmisije,-sirinaNazivaEmisije}|" +
                                $"{pocetak + " - " + kraj,-sirinaStupca}|\n" + new string('-', sirinaTablice) + '\n';
             return programDanEmisija;
         }
 
-        public string VratiPodatkeEmisije()
+        public string VratiPodatkeEmisijeSaDanom()
         {
             string pocetak = Konverzija.PretvoriSekundeUVrijeme(EmisijaPrograma.Pocetak);
             string kraj = Konverzija.PretvoriSekundeUVrijeme(EmisijaPrograma.Pocetak + EmisijaPrograma.Emisija.Trajanje);
 
-            string emisija = new string('-', sirinaTablice) + '\n' +
-                             $"|{"",-sirinaStupca}|{"",-sirinaStupca}|{EmisijaPrograma.Emisija.NazivEmisije,-sirinaStupca}|" +
-                             $"{pocetak + " - " + kraj,-sirinaStupca}|\n" + new string('-', sirinaTablice) + '\n';
+            //new string('-', sirinaTablice) + '\n' +
+            //string emisija =
+            //                 $"|{"",-sirinaStupca}|{"",-sirinaStupca}|{EmisijaPrograma.Emisija.NazivEmisije,-sirinaStupca}|" +
+            //                 $"{pocetak + " - " + kraj,-sirinaStupca}|\n" + new string('-', sirinaTablice) + '\n';
+            string emisija =
+                $"|{"",-sirinaStupca}|{NazivDana,-sirinaStupca}|{EmisijaPrograma.Emisija.NazivEmisije,-sirinaNazivaEmisije}|" +
+                $"{pocetak + " - " + kraj,-sirinaStupca}|\n" + new string('-', sirinaTablice) + '\n';
 
             return emisija;
         }
+
+        public string VratiPodatkeEmisijeBezDana()
+        {
+            string pocetak = Konverzija.PretvoriSekundeUVrijeme(EmisijaPrograma.Pocetak);
+            string kraj = Konverzija.PretvoriSekundeUVrijeme(EmisijaPrograma.Pocetak + EmisijaPrograma.Emisija.Trajanje);
+
+            string emisija =
+                $"|{"",-sirinaStupca}|{"",-sirinaStupca}|{EmisijaPrograma.Emisija.NazivEmisije,-sirinaNazivaEmisije}|" +
+                $"{pocetak + " - " + kraj,-sirinaStupca}|\n" + new string('-', sirinaTablice) + '\n';
+
+            return emisija;
+        }
+
         public string VratiKraj()
         {
             return new string('-', sirinaTablice);

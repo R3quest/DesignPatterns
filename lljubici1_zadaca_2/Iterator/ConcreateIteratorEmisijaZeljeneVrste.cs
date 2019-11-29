@@ -43,7 +43,6 @@ namespace lljubici1_zadaca_2.Iterator
                         listaDana.Add(_dan);
                     }
                 }
-
                 if (_kolekcija.Count != 0)
                 {
                     Tuple<string, int> _program = new Tuple<string, int>(program.NazivPrograma, _kolekcija.Count - 1);

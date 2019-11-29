@@ -92,6 +92,27 @@ namespace lljubici1_zadaca_2.Singleton
             //    Console.WriteLine(iterator.Trenutni);
             //    iterator.Sljedeci();
             //}
+            while (!iterator.Gotovo)
+            {
+                var emisijaPrograma = ((EmisijePrograma)iterator.Trenutni);
+                if (iterator.NoviProgram)
+                {
+                    emisijeVrste = new ConcreateComponent(emisijaPrograma, iterator.TrenutniProgram(), iterator.TrenutniDan());
+                    //Console.WriteLine(iterator.TrenutniProgram());
+                }
+                else if (iterator.NoviDan)
+                {
+                    emisijeVrste = new ConcreateComponent(emisijaPrograma, null, iterator.TrenutniDan());
+                    //Console.WriteLine(iterator.TrenutniDan());
+                }
+                else
+                {
+                    emisijeVrste = new ConcreateComponent(emisijaPrograma, null, null);
+                }
+                sveKomponente.Add(emisijeVrste);
+                //Console.WriteLine(iterator.Trenutni);
+                iterator.Sljedeci();
+            }
             Decorator.Decorator dekorator = new Decorator.Decorator(sveKomponente);
             Console.WriteLine(dekorator.Operacija());
         }
