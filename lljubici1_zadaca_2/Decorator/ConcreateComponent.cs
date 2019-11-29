@@ -24,6 +24,7 @@ namespace lljubici1_zadaca_2.Decorator
         public string Operacija()
         {
             //provjeri
+            //if (EmisijaPrograma == null)
             if (EmisijaPrograma == null)
             {
                 return VratiGlavnoZaglavlje();

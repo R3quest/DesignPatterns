@@ -45,10 +45,17 @@ namespace lljubici1_zadaca_2.Singleton
                 var _program = (Program)RasporedPrograma[program - 1];
                 var _dan = (Dan)_program.RasporedDani[dan - 1];
                 List<IComponent> sveKomponente = new List<IComponent>();
-                ConcreateComponent komponenta = new ConcreateComponent(null, _program.NazivPrograma, _dan.NazivDana);
+                ConcreateComponent komponenta = new ConcreateComponent(null, null, null);
                 sveKomponente.Add(komponenta);
-                foreach (EmisijePrograma emisijaPrograma in _dan.RasporedEmisijaDana)
+                for (int i = 0; i < _dan.RasporedEmisijaDana.Count; i++)
                 {
+                    EmisijePrograma emisijaPrograma = (EmisijePrograma)_dan.RasporedEmisijaDana[i];
+                    if (i == 0)
+                    {
+                        komponenta = new ConcreateComponent(emisijaPrograma, _program.NazivPrograma, _dan.NazivDana);
+                        sveKomponente.Add(komponenta);
+                        continue;
+                    }
                     komponenta = new ConcreateComponent(emisijaPrograma, null, null);
                     sveKomponente.Add(komponenta);
                 }
