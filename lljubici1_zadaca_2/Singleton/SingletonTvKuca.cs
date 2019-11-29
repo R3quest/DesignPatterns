@@ -1,7 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using lljubici1_zadaca_2.Composite;
+﻿using lljubici1_zadaca_2.Composite;
+using lljubici1_zadaca_2.Decorator;
 using lljubici1_zadaca_2.Iterator;
+using lljubici1_zadaca_2.Podaci;
+using System;
+using System.Collections.Generic;
 
 namespace lljubici1_zadaca_2.Singleton
 {
@@ -68,24 +70,30 @@ namespace lljubici1_zadaca_2.Singleton
                 program.IspisiRaspored();
             }
         }
-
+        //trenutni < count -1
 
         public void IspisiTjedniPlanVrsteEmisija(string vrstaEmisije)
         {
             ConcreateIteratorEmisijaZeljeneVrste iterator = KreirajIterator(vrstaEmisije) as ConcreateIteratorEmisijaZeljeneVrste;
-            while (!iterator.Gotovo)
-            {
-                if (iterator.NoviProgram)
-                {
-                    Console.WriteLine(iterator.TrenutniProgram());
-                }
-                if (iterator.NoviDan)
-                {
-                    Console.WriteLine(iterator.TrenutniDan());
-                }
-                Console.WriteLine(iterator.Trenutni);
-                iterator.Sljedeci();
-            }
+            var prvi = iterator.Prvi() as EmisijePrograma;
+            List<IComponent> sveKomponente = new List<IComponent>();
+            ConcreateComponent emisijeVrste = new ConcreateComponent(null, null, null);
+            sveKomponente.Add(emisijeVrste);
+            //while (!iterator.Gotovo)
+            //{
+            //    if (iterator.NoviProgram)
+            //    {
+            //        Console.WriteLine(iterator.TrenutniProgram());
+            //    }
+            //    if (iterator.NoviDan)
+            //    {
+            //        Console.WriteLine(iterator.TrenutniDan());
+            //    }
+            //    Console.WriteLine(iterator.Trenutni);
+            //    iterator.Sljedeci();
+            //}
+            Decorator.Decorator dekorator = new Decorator.Decorator(sveKomponente);
+            Console.WriteLine(dekorator.Operacija());
         }
 
 

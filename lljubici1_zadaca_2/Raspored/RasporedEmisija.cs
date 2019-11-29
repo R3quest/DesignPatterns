@@ -3,6 +3,7 @@ using lljubici1_zadaca_2.Composite;
 using lljubici1_zadaca_2.FactoryMethod;
 using lljubici1_zadaca_2.Podaci;
 using lljubici1_zadaca_2.Pomagala;
+using lljubici1_zadaca_2.Singleton;
 using System;
 using System.Collections.Generic;
 using System.Linq;

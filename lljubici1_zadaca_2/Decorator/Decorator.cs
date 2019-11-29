@@ -2,24 +2,26 @@
 
 namespace lljubici1_zadaca_2.Decorator
 {
-    abstract class Decorator : IComponent
+    public /*abstract*/ class Decorator : IComponent
     {
-        protected List<IComponent> components;
+        public string TablicaEmisija { get; set; }
 
-        public void SetComponent(List<IComponent> components)
+        protected List<IComponent> components;
+        public Decorator(List<IComponent> components)
         {
             this.components = components;
         }
+
         public string Operacija()
         {
             if (components != null)
             {
                 foreach (var component in components)
                 {
-                    component.Operacija();
+                    TablicaEmisija += component.Operacija();
                 }
             }
-            return null;
+            return TablicaEmisija;
         }
     }
 }
