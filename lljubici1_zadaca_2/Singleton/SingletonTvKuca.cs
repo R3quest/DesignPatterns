@@ -41,7 +41,19 @@ namespace lljubici1_zadaca_2.Singleton
         {
             try
             {
-                ((Program)RasporedPrograma[program - 1]).IspisZaDan(dan);
+                //((Program)RasporedPrograma[program - 1]).IspisZaDan(dan);
+                var _program = (Program)RasporedPrograma[program - 1];
+                var _dan = (Dan)_program.RasporedDani[dan - 1];
+                List<IComponent> sveKomponente = new List<IComponent>();
+                ConcreateComponent komponenta = new ConcreateComponent(null, _program.NazivPrograma, _dan.NazivDana);
+                sveKomponente.Add(komponenta);
+                foreach (EmisijePrograma emisijaPrograma in _dan.RasporedEmisijaDana)
+                {
+                    komponenta = new ConcreateComponent(emisijaPrograma, null, null);
+                    sveKomponente.Add(komponenta);
+                }
+                Decorator.Decorator dekorator = new Decorator.Decorator(sveKomponente);
+                Console.WriteLine(dekorator.Operacija());
             }
             catch (Exception e)
             {
@@ -72,6 +84,21 @@ namespace lljubici1_zadaca_2.Singleton
         }
         //trenutni < count -1
 
+
+
+        //while (!iterator.Gotovo)
+        //{
+        //    if (iterator.NoviProgram)
+        //    {
+        //        Console.WriteLine(iterator.TrenutniProgram());
+        //    }
+        //    if (iterator.NoviDan)
+        //    {
+        //        Console.WriteLine(iterator.TrenutniDan());
+        //    }
+        //    Console.WriteLine(iterator.Trenutni);
+        //    iterator.Sljedeci();
+        //}
         public void IspisiTjedniPlanVrsteEmisija(string vrstaEmisije)
         {
             ConcreateIteratorEmisijaZeljeneVrste iterator = KreirajIterator(vrstaEmisije) as ConcreateIteratorEmisijaZeljeneVrste;
@@ -79,19 +106,6 @@ namespace lljubici1_zadaca_2.Singleton
             List<IComponent> sveKomponente = new List<IComponent>();
             ConcreateComponent emisijeVrste = new ConcreateComponent(null, null, null);
             sveKomponente.Add(emisijeVrste);
-            //while (!iterator.Gotovo)
-            //{
-            //    if (iterator.NoviProgram)
-            //    {
-            //        Console.WriteLine(iterator.TrenutniProgram());
-            //    }
-            //    if (iterator.NoviDan)
-            //    {
-            //        Console.WriteLine(iterator.TrenutniDan());
-            //    }
-            //    Console.WriteLine(iterator.Trenutni);
-            //    iterator.Sljedeci();
-            //}
             while (!iterator.Gotovo)
             {
                 var emisijaPrograma = ((EmisijePrograma)iterator.Trenutni);
