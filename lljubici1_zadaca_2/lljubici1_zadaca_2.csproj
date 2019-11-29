@@ -47,6 +47,9 @@
     <Compile Include="Builder\RasporedConcreateCreator.cs" />
     <Compile Include="Composite\Dan.cs" />
     <Compile Include="Composite\IRasporedProgramaComponent.cs" />
+    <Compile Include="Decorator\ConcreateComponent.cs" />
+    <Compile Include="Decorator\Decorator.cs" />
+    <Compile Include="Decorator\IComponent.cs" />
     <Compile Include="FactoryMethod\VrstaEmisijeConcreateCreator.cs" />
     <Compile Include="Iterator\ConcreateIteratorEmisijaTjednogPlana.cs" />
     <Compile Include="Iterator\ConcreateIteratorEmisijaZeljeneVrste.cs" />
