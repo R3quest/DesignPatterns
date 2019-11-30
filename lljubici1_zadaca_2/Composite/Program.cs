@@ -1,4 +1,5 @@
-﻿using lljubici1_zadaca_2.FactoryMethod;
+﻿using lljubici1_zadaca_2.Decorator;
+using lljubici1_zadaca_2.FactoryMethod;
 using lljubici1_zadaca_2.Iterator;
 using lljubici1_zadaca_2.Podaci;
 using lljubici1_zadaca_2.Pomagala;
@@ -40,19 +41,20 @@ namespace lljubici1_zadaca_2.Composite
             RasporedDani.Add(elementComposite);
         }
 
+        public List<IComponent> VratiRaspored()
+        {
+            //TODO: druga zadaca
+            throw new NotImplementedException();
+        }
+
         public void IspisiRaspored() //za sve dane
         {
-            //foreach (var dan in RasporedDani)
-            //{
-            //    Console.WriteLine(((Dan)dan).NazivDana);
-            //    dan.IspisiRaspored();
-            //}
+            //TODO: other
             IIterator iteratorEmisija = KreirajIterator();
 
             for (var item = iteratorEmisija.Prvi(); !iteratorEmisija.Gotovo; item = iteratorEmisija.Sljedeci())
             {
-                item.IspisiRaspored();
-                //((Dan)item).IspisiRaspored();
+                item.VratiRaspored();
             }
         }
 
@@ -65,7 +67,7 @@ namespace lljubici1_zadaca_2.Composite
         public void IspisZaDan(int danIndex)
         {
             Console.WriteLine(((Dan)RasporedDani[danIndex - 1]).NazivDana);
-            RasporedDani[danIndex - 1].IspisiRaspored();
+            RasporedDani[danIndex - 1].VratiRaspored();
         }
 
     }

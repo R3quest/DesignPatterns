@@ -32,7 +32,13 @@ namespace lljubici1_zadaca_2.Singleton
             RasporedPrograma.Add(elementComposite);
         }
 
-        //public void IspisiRaspored()
+        public List<IComponent> VratiRaspored()
+        {
+            //TODO: druga zadaca
+            throw new NotImplementedException();
+        }
+
+        //public void VratiRaspored()
         //{
         //    throw new NotImplementedException();
         //}
@@ -73,7 +79,7 @@ namespace lljubici1_zadaca_2.Singleton
         //{
         //    foreach (var program in RasporedPrograma)
         //    {
-        //        program.IspisiRaspored();
+        //        program.VratiRaspored();
         //    }
         //}
 
@@ -86,7 +92,7 @@ namespace lljubici1_zadaca_2.Singleton
         {
             foreach (var program in RasporedPrograma)
             {
-                program.IspisiRaspored();
+                program.VratiRaspored();
             }
         }
         //trenutni < count -1

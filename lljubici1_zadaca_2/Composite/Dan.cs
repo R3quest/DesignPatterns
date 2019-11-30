@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using lljubici1_zadaca_2.Decorator;
+using System.Collections.Generic;
 
 namespace lljubici1_zadaca_2.Composite
 {
@@ -12,35 +13,27 @@ namespace lljubici1_zadaca_2.Composite
             NazivDana = nazivDana;
         }
 
-        public void DodajElementRasporeda(IRasporedProgramaComponent elementComposite) //DODAJE SE EMISIJA
+        public void DodajElementRasporeda(IRasporedProgramaComponent elementComposite)
         {
             RasporedEmisijaDana.Add(elementComposite);
         }
 
-        public void IspisiRaspored()
+        public List<IComponent> VratiRaspored()
         {
             //Console.WriteLine(NazivDana);
             //IIterator iteratorEmisija = KreirajIterator();
 
             //for (var item = iteratorEmisija.Prvi(); !iteratorEmisija.Gotovo; item = iteratorEmisija.Sljedeci())
             //{
-            //    ((EmisijePrograma)item).IspisiRaspored();
+            //    ((EmisijePrograma)item).VratiRaspored();
             //}
-
+            List<IComponent> listaEmisija = new List<IComponent>();
             foreach (var r in RasporedEmisijaDana)
             {
-                r.IspisiRaspored();
+                listaEmisija.AddRange(r.VratiRaspored());
             }
+
+            return listaEmisija;
         }
-
-        //public void IspisiRasporedOdredenogDana()
-        //{
-
-        //}
-
-        //public IIterator KreirajIterator()
-        //{
-        //    return new ConcreateIterator(RasporedEmisijaDana);
-        //}
     }
 }

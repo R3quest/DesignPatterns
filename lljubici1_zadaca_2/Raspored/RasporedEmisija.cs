@@ -51,7 +51,6 @@ namespace lljubici1_zadaca_2.Raspored
                     dan.DodajElementRasporeda(emisijaPrograma);
                 }
                 program.DodajElementRasporeda(dan);
-                //program.RasporedDani.Add(dan);
             }
         }
 

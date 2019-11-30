@@ -1,7 +1,7 @@
 ﻿using lljubici1_zadaca_2.Composite;
+using lljubici1_zadaca_2.Decorator;
 using lljubici1_zadaca_2.FactoryMethod;
 using lljubici1_zadaca_2.Pomagala;
-using System;
 using System.Collections.Generic;
 
 namespace lljubici1_zadaca_2.Podaci
@@ -47,9 +47,13 @@ namespace lljubici1_zadaca_2.Podaci
             ImaPočetak = ((EmisijePrograma)elementComposite).ImaPočetak;
         }
 
-        public void IspisiRaspored()
+        public List<IComponent> VratiRaspored()
         {
-            Console.WriteLine(ToString()); //TODO!: ispis
+            List<IComponent> komponenta = new List<IComponent>();
+            ConcreateComponentProgramDanEmisija concreateKomponenta =
+                new ConcreateComponentProgramDanEmisija(this, null, null);
+            komponenta.Add(concreateKomponenta);
+            return komponenta;
         }
     }
 }
