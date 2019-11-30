@@ -4,6 +4,7 @@ using lljubici1_zadaca_2.Iterator;
 using lljubici1_zadaca_2.Podaci;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace lljubici1_zadaca_2.Singleton
 {
@@ -168,7 +169,7 @@ namespace lljubici1_zadaca_2.Singleton
         }
 
 
-        public void IspisiUlogePojedineOsobe(int osobaId)
+        public List<Uloga> VratiUlogePojedineOsobe(int osobaId)
         {
             List<Uloga> ulogeOsobe = new List<Uloga>();
             foreach (Program program in RasporedPrograma)
@@ -177,15 +178,18 @@ namespace lljubici1_zadaca_2.Singleton
                 while (!iterator.Gotovo)
                 {
                     EmisijePrograma emisijaPrograma = (EmisijePrograma)iterator.Trenutni;
-                    List<Uloga> ulogeEmisije = emisijaPrograma.OsobeUloge.Find(ou => ou.Id == osobaId).Uloge;
-                    if (ulogeEmisije != null)
+                    Osoba osoba = emisijaPrograma.OsobeUloge.Find(ou => ou.Id == osobaId);
+                    if (osoba != null)
                     {
-                        ulogeOsobe.AddRange(ulogeEmisije);
+                        List<Uloga> listaUlogaOsobe = osoba.Uloge;
+                        ulogeOsobe.AddRange(listaUlogaOsobe);
+
                     }
                     iterator.Sljedeci();
                 }
             }
 
+            return ulogeOsobe.Distinct().ToList();
         }
 
 

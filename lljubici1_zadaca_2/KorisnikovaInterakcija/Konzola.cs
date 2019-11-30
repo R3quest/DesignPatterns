@@ -33,16 +33,24 @@ namespace lljubici1_zadaca_2.KorisnikovaInterakcija
                 }
                 else if (izbor == 4)
                 {
-                    int osobaId, ulogaPostojece, ulogaZeljene = 0;
+                    int osobaId = 0, ulogaPostojece = 0, ulogaZeljene = 0;
                     //todo ispisi osobe
                     foreach (var osoba in listaOsoba)
                     {
                         Console.WriteLine(osoba);
                     }
                     Console.Write("Unesi osobu> ");
-                    osobaId = OdabirProvjera(izbor, 1, listaOsoba.Count);
+                    osobaId = OdabirProvjera(osobaId, 1, listaOsoba.Count);
+                    List<Uloga> uloge = SingletonTvKuca.Instanca.VratiUlogePojedineOsobe(osobaId);
+                    if (uloge.Count == 0)
+                    {
+                        Console.WriteLine("Osoba nema ni jednu ulogu!");
+                        continue;
+                    }
                     //todo ispisi uloge
                     Console.Write("Unesi postojecu ulogu osobe> ");
+                    ulogaPostojece = int.Parse(Console.ReadLine())
+
                     //todo ispisi uloge
                     Console.Write("Unesi novu ulogu za zamjenu postojece> ");
                 }

@@ -20,7 +20,7 @@ namespace lljubici1_zadaca_2.Podaci
 
         public override string ToString()
         {
-            return Opis;
+            return Id + ": " + Opis;
         }
     }
 }
