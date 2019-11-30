@@ -58,6 +58,8 @@
     <Compile Include="Iterator\IAbstractCollectionSveEmisije.cs" />
     <Compile Include="Iterator\IIterator.cs" />
     <Compile Include="KorisnikovaInterakcija\Konzola.cs" />
+    <Compile Include="Observer\IObserver.cs" />
+    <Compile Include="Observer\ISubject.cs" />
     <Compile Include="Podaci\VrstaEmisije.cs" />
     <Compile Include="FactoryMethod\EmisijeConcreteCreator.cs" />
     <Compile Include="Pomagala\Enumeracije.cs" />
