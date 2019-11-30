@@ -1,12 +1,13 @@
 ﻿using lljubici1_zadaca_2.Composite;
 using lljubici1_zadaca_2.Decorator;
 using lljubici1_zadaca_2.FactoryMethod;
+using lljubici1_zadaca_2.Observer;
 using lljubici1_zadaca_2.Pomagala;
 using System.Collections.Generic;
 
 namespace lljubici1_zadaca_2.Podaci
 {
-    public class EmisijePrograma : Entitet, IRasporedProgramaComponent
+    public class EmisijePrograma : Entitet, IRasporedProgramaComponent, IObserver
     {
         public Emisija Emisija { get; set; } = new Emisija();
         public List<Osoba> OsobeUloge { get; set; } = new List<Osoba>();
@@ -56,6 +57,13 @@ namespace lljubici1_zadaca_2.Podaci
         {
 
             return $"{Konverzija.PretvoriSekundeUVrijeme(Pocetak)} - {Konverzija.PretvoriSekundeUVrijeme(Pocetak + Emisija.Trajanje)} {Emisija} ";
+        }
+
+        public void Azuriraj(ISubject subject)
+        {
+            Osoba osoba = (Osoba)subject;
+            var indexUloge = this.OsobeUloge.FindIndex(u => u.Id == osoba.Id);
+            if (indexUloge != -1) OsobeUloge[indexUloge] = osoba;
         }
 
         public void DodajElementRasporeda(IRasporedProgramaComponent elementComposite)

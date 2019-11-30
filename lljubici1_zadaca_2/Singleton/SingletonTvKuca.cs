@@ -168,6 +168,28 @@ namespace lljubici1_zadaca_2.Singleton
         }
 
 
+        public void IspisiUlogePojedineOsobe(int osobaId)
+        {
+            List<Uloga> ulogeOsobe = new List<Uloga>();
+            foreach (Program program in RasporedPrograma)
+            {
+                var iterator = program.KreirajIterator();
+                while (!iterator.Gotovo)
+                {
+                    EmisijePrograma emisijaPrograma = (EmisijePrograma)iterator.Trenutni;
+                    List<Uloga> ulogeEmisije = emisijaPrograma.OsobeUloge.Find(ou => ou.Id == osobaId).Uloge;
+                    if (ulogeEmisije != null)
+                    {
+                        ulogeOsobe.AddRange(ulogeEmisije);
+                    }
+                    iterator.Sljedeci();
+                }
+            }
+
+        }
+
+
+
         public IIterator KreirajIterator(string vrstaEmisije)
         {
             return new ConcreateIteratorEmisijaZeljeneVrste(RasporedPrograma, vrstaEmisije);

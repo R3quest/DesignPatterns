@@ -1,4 +1,5 @@
-﻿using lljubici1_zadaca_2.Pomagala;
+﻿using lljubici1_zadaca_2.Podaci;
+using lljubici1_zadaca_2.Pomagala;
 using lljubici1_zadaca_2.Singleton;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ namespace lljubici1_zadaca_2.KorisnikovaInterakcija
 {
     public class Konzola
     {
-        public static void KorisnikovOdabir()
+        public static void KorisnikovOdabir(List<Osoba> listaOsoba)
         {
             int izbor = 0;
             int program = 0, dan = 0;
@@ -30,8 +31,25 @@ namespace lljubici1_zadaca_2.KorisnikovaInterakcija
                 {
                     IspisTjednogPlanaVrste();
                 }
+                else if (izbor == 4)
+                {
+                    int osobaId, ulogaPostojece, ulogaZeljene = 0;
+                    //todo ispisi osobe
+                    foreach (var osoba in listaOsoba)
+                    {
+                        Console.WriteLine(osoba);
+                    }
+                    Console.Write("Unesi osobu> ");
+                    osobaId = OdabirProvjera(izbor, 1, listaOsoba.Count);
+                    //todo ispisi uloge
+                    Console.Write("Unesi postojecu ulogu osobe> ");
+                    //todo ispisi uloge
+                    Console.Write("Unesi novu ulogu za zamjenu postojece> ");
+                }
             }
         }
+
+
 
         private static void IspisTjednogPlanaVrste()
         {

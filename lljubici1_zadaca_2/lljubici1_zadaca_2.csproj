@@ -70,7 +70,6 @@
     <Compile Include="FactoryMethod\PodaciCreator.cs" />
     <Compile Include="MainProgram.cs" />
     <Compile Include="Podaci\Osoba.cs" />
-    <Compile Include="Podaci\OsobaUloga.cs" />
     <Compile Include="Composite\Program.cs" />
     <Compile Include="Podaci\EmisijePrograma.cs" />
     <Compile Include="FactoryMethod\EmisijeProgramaConcreateCreator.cs" />

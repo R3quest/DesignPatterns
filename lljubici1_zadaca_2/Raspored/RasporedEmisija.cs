@@ -120,9 +120,6 @@ namespace lljubici1_zadaca_2.Raspored
 
                 osobaUloga.ImeIPrezime = osoba.ImeIPrezime;
                 //osobaUloga.Uloge = osoba.Uloge;
-
-
-
                 //foreach (var __osoba in osobeUlogePrograma)
                 //{
                 //    foreach (var __uloga in __osoba.Uloge)

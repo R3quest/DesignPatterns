@@ -7,6 +7,6 @@ namespace lljubici1_zadaca_2.Observer
         void Prikaci(IObserver observer);
         void Odvoji(IObserver observer);
         void Obavijesti();
-        void PostaviStanje(OsobaUloga trenutno, OsobaUloga buduce);
+        void PostaviStanje(Uloga trenutna, Uloga buduca);
     }
 }

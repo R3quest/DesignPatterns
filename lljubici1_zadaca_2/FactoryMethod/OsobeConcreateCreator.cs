@@ -18,8 +18,11 @@ namespace lljubici1_zadaca_2.FactoryMethod
                 try
                 {
                     polja = Array.ConvertAll(red.Split(base._separator), p => p.Trim());
-                    var osoba = new Osoba(int.Parse(polja[0]), polja[1]);
-                    listaPodataka.Add(osoba);
+                    if (!string.IsNullOrEmpty(polja[1]))
+                    {
+                        var osoba = new Osoba(int.Parse(polja[0]), polja[1]);
+                        listaPodataka.Add(osoba);
+                    }
                 }
                 catch (Exception e)
                 {
