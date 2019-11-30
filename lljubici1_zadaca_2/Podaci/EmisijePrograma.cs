@@ -1,13 +1,12 @@
 ﻿using lljubici1_zadaca_2.Composite;
 using lljubici1_zadaca_2.Decorator;
 using lljubici1_zadaca_2.FactoryMethod;
-using lljubici1_zadaca_2.Observer;
 using lljubici1_zadaca_2.Pomagala;
 using System.Collections.Generic;
 
 namespace lljubici1_zadaca_2.Podaci
 {
-    public class EmisijePrograma : Entitet, IRasporedProgramaComponent, ISubject
+    public class EmisijePrograma : Entitet, IRasporedProgramaComponent
     {
         public Emisija Emisija { get; set; } = new Emisija();
         public List<OsobaUloga> OsobeUloge { get; set; } = new List<OsobaUloga>();
@@ -58,22 +57,5 @@ namespace lljubici1_zadaca_2.Podaci
             return komponenta;
         }
 
-        public void Prikaci(IObserver observer)
-        {
-            OsobeUloge.Add(observer as OsobaUloga);
-        }
-
-        public void Odvoji(IObserver observer)
-        {
-            OsobeUloge.Remove(observer as OsobaUloga);
-        }
-
-        public void Obavijesti()
-        {
-            foreach (var osobaUloga in OsobeUloge)
-            {
-                osobaUloga.Azuriraj(this);
-            }
-        }
     }
 }

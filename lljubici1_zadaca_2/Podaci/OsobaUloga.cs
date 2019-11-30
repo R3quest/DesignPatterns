@@ -1,10 +1,12 @@
 ﻿using lljubici1_zadaca_2.Observer;
-using System;
+using System.Collections.Generic;
 
 namespace lljubici1_zadaca_2.Podaci
 {
-    public class OsobaUloga : IObserver
+    public class OsobaUloga
     {
+        private List<IObserver> observers = new List<IObserver>();
+
         public Osoba Osoba { get; set; } = new Osoba();
         public Uloga Uloga { get; set; } = new Uloga();
 
@@ -22,12 +24,6 @@ namespace lljubici1_zadaca_2.Podaci
         public override string ToString()
         {
             return base.ToString();
-        }
-
-        public void Azuriraj(ISubject subject)
-        {
-            //TODO: VIDI
-            Console.WriteLine("AZURIRANO");
         }
     }
 }
