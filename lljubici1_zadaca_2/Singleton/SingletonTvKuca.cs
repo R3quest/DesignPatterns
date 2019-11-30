@@ -109,7 +109,6 @@ namespace lljubici1_zadaca_2.Singleton
         public void IspisiTjedniPlanVrsteEmisija(string vrstaEmisije)
         {
             ConcreateIteratorEmisijaZeljeneVrste iterator = KreirajIterator(vrstaEmisije) as ConcreateIteratorEmisijaZeljeneVrste;
-            var prvi = iterator.Prvi() as EmisijePrograma;
             List<IComponent> sveKomponente = new List<IComponent>();
             ConcreateComponent emisijeVrste = new ConcreateComponent(null, null, null);
             sveKomponente.Add(emisijeVrste);
@@ -119,19 +118,16 @@ namespace lljubici1_zadaca_2.Singleton
                 if (iterator.NoviProgram)
                 {
                     emisijeVrste = new ConcreateComponent(emisijaPrograma, iterator.TrenutniProgram(), iterator.TrenutniDan());
-                    //Console.WriteLine(iterator.TrenutniProgram());
                 }
                 else if (iterator.NoviDan)
                 {
                     emisijeVrste = new ConcreateComponent(emisijaPrograma, null, iterator.TrenutniDan());
-                    //Console.WriteLine(iterator.TrenutniDan());
                 }
                 else
                 {
                     emisijeVrste = new ConcreateComponent(emisijaPrograma, null, null);
                 }
                 sveKomponente.Add(emisijeVrste);
-                //Console.WriteLine(iterator.Trenutni);
                 iterator.Sljedeci();
             }
             Decorator.Decorator dekorator = new Decorator.Decorator(sveKomponente);
