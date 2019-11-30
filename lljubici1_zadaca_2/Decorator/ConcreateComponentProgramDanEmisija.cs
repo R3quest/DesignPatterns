@@ -3,7 +3,7 @@ using lljubici1_zadaca_2.Pomagala;
 
 namespace lljubici1_zadaca_2.Decorator
 {
-    class ConcreateComponent : IComponent
+    class ConcreateComponentProgramDanEmisija : IComponent
     {
         private const int sirinaStupca = 20;
         private const int sirinaNazivaEmisije = 40;
@@ -14,7 +14,7 @@ namespace lljubici1_zadaca_2.Decorator
         public string NazivPrograma { get; set; }
         public string NazivDana { get; set; }
 
-        public ConcreateComponent(EmisijePrograma emisijaPrograma, string program, string dan)
+        public ConcreateComponentProgramDanEmisija(EmisijePrograma emisijaPrograma, string program, string dan)
         {
             EmisijaPrograma = emisijaPrograma;
             NazivPrograma = program;
@@ -73,11 +73,6 @@ namespace lljubici1_zadaca_2.Decorator
         {
             string pocetak = Konverzija.PretvoriSekundeUVrijeme(EmisijaPrograma.Pocetak);
             string kraj = Konverzija.PretvoriSekundeUVrijeme(EmisijaPrograma.Pocetak + EmisijaPrograma.Emisija.Trajanje);
-
-            //new string('-', sirinaTablice) + '\n' +
-            //string emisija =
-            //                 $"|{"",-sirinaStupca}|{"",-sirinaStupca}|{EmisijaPrograma.Emisija.NazivEmisije,-sirinaStupca}|" +
-            //                 $"{pocetak + " - " + kraj,-sirinaStupca}|\n" + new string('-', sirinaTablice) + '\n';
             string emisija =
                 $"|{"",-sirinaStupca}|{NazivDana,-sirinaStupca}|{EmisijaPrograma.Emisija.NazivEmisije,-sirinaNazivaEmisije}|" +
                 $"{pocetak + " - " + kraj,-sirinaStupca}|\n" + new string('-', sirinaTablice) + '\n';

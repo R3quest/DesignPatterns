@@ -45,18 +45,18 @@ namespace lljubici1_zadaca_2.Singleton
                 var _program = (Program)RasporedPrograma[program - 1];
                 var _dan = (Dan)_program.RasporedDani[dan - 1];
                 List<IComponent> sveKomponente = new List<IComponent>();
-                ConcreateComponent komponenta = new ConcreateComponent(null, null, null);
+                ConcreateComponentProgramDanEmisija komponenta = new ConcreateComponentProgramDanEmisija(null, null, null);
                 sveKomponente.Add(komponenta);
                 for (int i = 0; i < _dan.RasporedEmisijaDana.Count; i++)
                 {
                     EmisijePrograma emisijaPrograma = (EmisijePrograma)_dan.RasporedEmisijaDana[i];
                     if (i == 0)
                     {
-                        komponenta = new ConcreateComponent(emisijaPrograma, _program.NazivPrograma, _dan.NazivDana);
+                        komponenta = new ConcreateComponentProgramDanEmisija(emisijaPrograma, _program.NazivPrograma, _dan.NazivDana);
                         sveKomponente.Add(komponenta);
                         continue;
                     }
-                    komponenta = new ConcreateComponent(emisijaPrograma, null, null);
+                    komponenta = new ConcreateComponentProgramDanEmisija(emisijaPrograma, null, null);
                     sveKomponente.Add(komponenta);
                 }
                 Decorator.Decorator dekorator = new Decorator.Decorator(sveKomponente);
@@ -110,26 +110,53 @@ namespace lljubici1_zadaca_2.Singleton
         {
             ConcreateIteratorEmisijaZeljeneVrste iterator = KreirajIterator(vrstaEmisije) as ConcreateIteratorEmisijaZeljeneVrste;
             List<IComponent> sveKomponente = new List<IComponent>();
-            ConcreateComponent emisijeVrste = new ConcreateComponent(null, null, null);
+            ConcreateComponentProgramDanEmisija emisijeVrste = new ConcreateComponentProgramDanEmisija(null, null, null);
             sveKomponente.Add(emisijeVrste);
             while (!iterator.Gotovo)
             {
                 var emisijaPrograma = ((EmisijePrograma)iterator.Trenutni);
                 if (iterator.NoviProgram)
                 {
-                    emisijeVrste = new ConcreateComponent(emisijaPrograma, iterator.TrenutniProgram(), iterator.TrenutniDan());
+                    emisijeVrste = new ConcreateComponentProgramDanEmisija(emisijaPrograma, iterator.TrenutniProgram(), iterator.TrenutniDan());
                 }
                 else if (iterator.NoviDan)
                 {
-                    emisijeVrste = new ConcreateComponent(emisijaPrograma, null, iterator.TrenutniDan());
+                    emisijeVrste = new ConcreateComponentProgramDanEmisija(emisijaPrograma, null, iterator.TrenutniDan());
                 }
                 else
                 {
-                    emisijeVrste = new ConcreateComponent(emisijaPrograma, null, null);
+                    emisijeVrste = new ConcreateComponentProgramDanEmisija(emisijaPrograma, null, null);
                 }
                 sveKomponente.Add(emisijeVrste);
                 iterator.Sljedeci();
             }
+            Decorator.Decorator dekorator = new Decorator.Decorator(sveKomponente);
+            Console.WriteLine(dekorator.Operacija());
+        }
+
+        public void IspisiPrihodeOdReklama(int program, int dan)
+        {
+            int prihod = 0;
+            var _program = (Program)RasporedPrograma[program - 1];
+            var _dan = (Dan)_program.RasporedDani[dan - 1];
+            List<IComponent> sveKomponente = new List<IComponent>();
+            ConcreateComponentPrihodiReklama komponenta = new ConcreateComponentPrihodiReklama(null, null, null);
+            sveKomponente.Add(komponenta);
+            for (int i = 0; i < _dan.RasporedEmisijaDana.Count; i++)
+            {
+                EmisijePrograma emisijaPrograma = (EmisijePrograma)_dan.RasporedEmisijaDana[i];
+                prihod += emisijaPrograma.Emisija.VrstaEmisije.TrajanjeReklame;
+                if (i == 0)
+                {
+                    komponenta = new ConcreateComponentPrihodiReklama(emisijaPrograma, _program.NazivPrograma, _dan.NazivDana);
+                    sveKomponente.Add(komponenta);
+                    continue;
+                }
+                komponenta = new ConcreateComponentPrihodiReklama(emisijaPrograma, null, null);
+                sveKomponente.Add(komponenta);
+            }
+            komponenta = new ConcreateComponentPrihodiReklama(null, _program.NazivPrograma, null, prihod);
+            sveKomponente.Add(komponenta);
             Decorator.Decorator dekorator = new Decorator.Decorator(sveKomponente);
             Console.WriteLine(dekorator.Operacija());
         }

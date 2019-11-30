@@ -31,6 +31,14 @@ namespace lljubici1_zadaca_2.KorisnikovaInterakcija
                 }
                 else if (izbor == 2)
                 {
+                    int program = 0, dan = 0;
+                    Console.WriteLine("Ispis prihoda");
+                    SingletonTvKuca.Instanca.IspisiProgrameTvKuce();
+                    Console.Write("Unesi program> ");
+                    program = OdabirProvjera(program, 1, SingletonTvKuca.Instanca.VratiBrojPrograma());
+                    Console.Write("Dan u tjednu: od 1 (pon) do 7 (ned)\nUnesi dan u tjednu> ");
+                    dan = OdabirProvjera(dan, 1, 7);
+                    SingletonTvKuca.Instanca.IspisiPrihodeOdReklama(program, dan);
                     //IspisPodatakaOBrojuEmisija();
                     //izbor = OdabirProvjera(izbor, 1, 2);
                     //if (izbor == 1)
