@@ -97,7 +97,7 @@ namespace lljubici1_zadaca_2.Raspored
         {
             foreach (var emisijaPrograma in program.EmisijePrograma)
             {
-                List<OsobaUloga> osobeUlogePrograma = emisijaPrograma.OsobeUloge;
+                List<Osoba> osobeUlogePrograma = emisijaPrograma.OsobeUloge;
                 PopuniOsobuUloguEmisiji(listaOsoba, listaUloga, osobeUlogePrograma);
                 //TODO: IZMJENI
                 //List<OsobaUloga> osobeUlogeEmisije = emisijaPrograma.Emisija.OsobeUloge;
@@ -105,15 +105,35 @@ namespace lljubici1_zadaca_2.Raspored
             }
         }
 
-        private static void PopuniOsobuUloguEmisiji(List<Osoba> listaOsoba, List<Uloga> listaUloga, List<OsobaUloga> osobeUlogePrograma)
+        private static void PopuniOsobuUloguEmisiji(List<Osoba> listaOsoba, List<Uloga> listaUloga, List<Osoba> osobeUlogePrograma)
         {
             foreach (var osobaUloga in osobeUlogePrograma)
             {
-                var osoba = listaOsoba.FirstOrDefault(o => o.Id == osobaUloga.Osoba.Id);
-                var uloga = listaUloga.FirstOrDefault(u => u.Id == osobaUloga.Uloga.Id);
+                var osoba = listaOsoba.FirstOrDefault(o => o.Id == osobaUloga.Id);
 
-                osobaUloga.Osoba = osoba;
-                osobaUloga.Uloga = uloga;
+                for (int i = 0; i < osobaUloga.Uloge.Count; i++)
+                {
+                    var _uloga = listaUloga.FirstOrDefault(u => osoba != null && u.Id == osobaUloga.Uloge[i].Id);
+                    //if (osoba != null) osoba.Uloge[i] = _uloga;
+                    osobaUloga.Uloge[i] = _uloga;
+                }
+
+                osobaUloga.ImeIPrezime = osoba.ImeIPrezime;
+                //osobaUloga.Uloge = osoba.Uloge;
+
+
+
+                //foreach (var __osoba in osobeUlogePrograma)
+                //{
+                //    foreach (var __uloga in __osoba.Uloge)
+                //    {
+                //        var uloga = listaUloga.FirstOrDefault(u => u.Id == __uloga.Id);
+                //        if (osoba != null) osoba.Uloge.Add(uloga);
+                //    }
+                //}
+
+                //osobaUloga.ImeIPrezime = osoba.ImeIPrezime;
+                //osobaUloga.Uloge = osoba.Uloge;
             }
         }
 
@@ -125,7 +145,11 @@ namespace lljubici1_zadaca_2.Raspored
                 emisijaPrograma.Emisija.NazivEmisije = podaciEmisije.NazivEmisije;
                 //TODO: VIDI
                 emisijaPrograma.Emisija.OsobeUloge = podaciEmisije.OsobeUloge;
+
+
+
                 emisijaPrograma.OsobeUloge.AddRange(podaciEmisije.OsobeUloge);
+
                 emisijaPrograma.Emisija.Trajanje = podaciEmisije.Trajanje;
                 emisijaPrograma.Emisija.VrstaEmisije = podaciEmisije.VrstaEmisije;
             }

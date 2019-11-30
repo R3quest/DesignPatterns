@@ -90,9 +90,9 @@ namespace lljubici1_zadaca_2.FactoryMethod
         }
 
 
-        private List<OsobaUloga> vratiOsobaUloga(string osobeUloge, char separator = ',')
+        private List<Osoba> vratiOsobaUloga(string osobeUloge, char separator = ',')
         {
-            List<OsobaUloga> listaOsobeUloge = new List<OsobaUloga>();
+            List<Osoba> listaOsobeUloge = new List<Osoba>();
             string[] _osobeUloge = Array.ConvertAll(osobeUloge.Split(separator), p => p.Trim());
             foreach (var ou in _osobeUloge)
             {
@@ -104,8 +104,26 @@ namespace lljubici1_zadaca_2.FactoryMethod
                     Uloga u = new Uloga();
                     u.Id = int.Parse(osobaUlogaBroj[1]);
 
-                    OsobaUloga osobaUloga = new OsobaUloga(o, u);
-                    listaOsobeUloge.Add(osobaUloga);
+                    bool tmp = false;
+
+
+                    foreach (var osoba in listaOsobeUloge)
+                    {
+                        if (osoba.Id == o.Id)
+                        {
+                            osoba.Uloge.Add(u);
+                            tmp = true;
+                            break;
+                        }
+                    }
+                    if (tmp)
+                    {
+                        continue;
+                    }
+
+
+                    o.Uloge.Add(u);
+                    listaOsobeUloge.Add(o);
                 }
             }
             return listaOsobeUloge;

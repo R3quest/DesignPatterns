@@ -1,4 +1,5 @@
 ﻿using lljubici1_zadaca_2.FactoryMethod;
+using System.Collections.Generic;
 
 namespace lljubici1_zadaca_2.Podaci
 {
@@ -6,6 +7,8 @@ namespace lljubici1_zadaca_2.Podaci
     {
         public int Id { get; set; }
         public string ImeIPrezime { get; set; }
+
+        public List<Uloga> Uloge { get; set; } = new List<Uloga>();
 
         public Osoba()
         {
@@ -16,6 +19,13 @@ namespace lljubici1_zadaca_2.Podaci
         {
             Id = id;
             ImeIPrezime = imeIPrezime;
+        }
+
+        public Osoba(int id, string imeIPrezime, Uloga uloga)
+        {
+            Id = id;
+            ImeIPrezime = imeIPrezime;
+            Uloge.Add(uloga);
         }
 
         public override string ToString()

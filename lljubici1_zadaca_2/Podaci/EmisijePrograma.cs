@@ -9,7 +9,7 @@ namespace lljubici1_zadaca_2.Podaci
     public class EmisijePrograma : Entitet, IRasporedProgramaComponent
     {
         public Emisija Emisija { get; set; } = new Emisija();
-        public List<OsobaUloga> OsobeUloge { get; set; } = new List<OsobaUloga>();
+        public List<Osoba> OsobeUloge { get; set; } = new List<Osoba>();
         public List<int> DaniUTjednu { get; set; } = new List<int>();
         public int Pocetak { get; set; }
 
@@ -20,10 +20,29 @@ namespace lljubici1_zadaca_2.Podaci
 
         }
 
-        public EmisijePrograma(int idEmisije, List<int> daniUTjednu, List<OsobaUloga> osobeUloge, string pocetak)
+        public EmisijePrograma(int idEmisije, List<int> daniUTjednu, List<Osoba> osobeUloge, string pocetak)
         {
             DaniUTjednu = daniUTjednu;
-            OsobeUloge = osobeUloge;
+            if (osobeUloge != null)
+            {
+                OsobeUloge.AddRange(osobeUloge);
+            }
+            //StringPocetak = pocetak;
+            if (pocetak != "")
+            {
+                Pocetak = Konverzija.PretvoriVrijemeUSekunde(pocetak);
+                ImaPočetak = true;
+            }
+            Emisija.Id = idEmisije;
+        }
+
+        public EmisijePrograma(int idEmisije, List<int> daniUTjednu, Osoba osobeUloge, string pocetak)
+        {
+            DaniUTjednu = daniUTjednu;
+            if (osobeUloge != null)
+            {
+                OsobeUloge.Add(osobeUloge);
+            }
             //StringPocetak = pocetak;
             if (pocetak != "")
             {
