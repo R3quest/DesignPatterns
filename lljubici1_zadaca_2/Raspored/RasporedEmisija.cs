@@ -99,8 +99,9 @@ namespace lljubici1_zadaca_2.Raspored
             {
                 List<OsobaUloga> osobeUlogePrograma = emisijaPrograma.OsobeUloge;
                 PopuniOsobuUloguEmisiji(listaOsoba, listaUloga, osobeUlogePrograma);
-                List<OsobaUloga> osobeUlogeEmisije = emisijaPrograma.Emisija.OsobeUloge;
-                PopuniOsobuUloguEmisiji(listaOsoba, listaUloga, osobeUlogeEmisije);
+                //TODO: IZMJENI
+                //List<OsobaUloga> osobeUlogeEmisije = emisijaPrograma.Emisija.OsobeUloge;
+                //PopuniOsobuUloguEmisiji(listaOsoba, listaUloga, osobeUlogeEmisije);
             }
         }
 
@@ -122,7 +123,9 @@ namespace lljubici1_zadaca_2.Raspored
             {
                 var podaciEmisije = listaEmisija.Single(s => s.Id == emisijaPrograma.Emisija.Id);
                 emisijaPrograma.Emisija.NazivEmisije = podaciEmisije.NazivEmisije;
+                //TODO: VIDI
                 emisijaPrograma.Emisija.OsobeUloge = podaciEmisije.OsobeUloge;
+                emisijaPrograma.OsobeUloge.AddRange(podaciEmisije.OsobeUloge);
                 emisijaPrograma.Emisija.Trajanje = podaciEmisije.Trajanje;
                 emisijaPrograma.Emisija.VrstaEmisije = podaciEmisije.VrstaEmisije;
             }

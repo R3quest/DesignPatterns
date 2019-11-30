@@ -12,6 +12,11 @@ namespace lljubici1_zadaca_2.Decorator
             this.components = components;
         }
 
+        public Decorator(IComponent component)
+        {
+            components.Add(component);
+        }
+
         public string Operacija()
         {
             if (components != null)

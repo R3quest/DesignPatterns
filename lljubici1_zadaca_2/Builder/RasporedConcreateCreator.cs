@@ -62,6 +62,7 @@ namespace lljubici1_zadaca_2.Builder
             EmisijePrograma ep = new EmisijePrograma();
             ep.Pocetak = emisijaPrograma.Pocetak;
             ep.ImaPočetak = emisijaPrograma.ImaPočetak;
+            ep.OsobeUloge = emisijaPrograma.OsobeUloge;
 
             Emisija em = new Emisija();
             em = emisijaPrograma.Emisija;
