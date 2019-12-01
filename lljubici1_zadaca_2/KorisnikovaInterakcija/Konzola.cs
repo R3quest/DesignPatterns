@@ -42,12 +42,12 @@ namespace lljubici1_zadaca_2.KorisnikovaInterakcija
                         Console.WriteLine("Osoba nema ni jednu ulogu!");
                         continue;
                     }
-                    ZamjenaPostojeceUlogeNovom(listaUloga, uloge, ulogaPostojece, ulogaZeljene);
+                    ZamjenaPostojeceUlogeNovom(listaUloga, uloge, ulogaPostojece, ulogaZeljene, osobaId);
                 }
             }
         }
 
-        private static void ZamjenaPostojeceUlogeNovom(List<Uloga> listaUloga, List<Uloga> uloge, int ulogaPostojece, int ulogaZeljene)
+        private static void ZamjenaPostojeceUlogeNovom(List<Uloga> listaUloga, List<Uloga> uloge, int ulogaPostojece, int ulogaZeljene, int idOsobe)
         {
             IspisiUloge(uloge);
             Console.Write("Unesi postojecu ulogu osobe> ");
@@ -63,6 +63,10 @@ namespace lljubici1_zadaca_2.KorisnikovaInterakcija
                 //nova
                 string opisNove = listaUloga.FirstOrDefault(o => o.Id == ulogaZeljene).Opis;
                 Uloga novaUloga = new Uloga(ulogaZeljene, opisNove);
+
+                Osoba osoba = new Osoba();
+                osoba = SingletonTvKuca.Instanca.VratiOsobu(idOsobe);
+
 
 
             }

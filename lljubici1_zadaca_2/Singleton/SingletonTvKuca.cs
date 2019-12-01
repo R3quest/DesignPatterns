@@ -168,7 +168,24 @@ namespace lljubici1_zadaca_2.Singleton
             Console.WriteLine(dekorator.Operacija());
         }
 
-
+        public Osoba VratiOsobu(int osobaId)
+        {
+            foreach (Program program in RasporedPrograma)
+            {
+                var iterator = program.KreirajIterator();
+                while (!iterator.Gotovo)
+                {
+                    EmisijePrograma emisijaPrograma = (EmisijePrograma)iterator.Trenutni;
+                    Osoba _osoba = emisijaPrograma.OsobeUloge.Find(ou => ou.Id == osobaId);
+                    if (_osoba != null)
+                    {
+                        return _osoba;
+                    }
+                    iterator.Sljedeci();
+                }
+            }
+            return new Osoba();
+        }
         public List<Uloga> VratiUlogePojedineOsobe(int osobaId)
         {
             List<Uloga> ulogeOsobe = new List<Uloga>();
@@ -191,9 +208,6 @@ namespace lljubici1_zadaca_2.Singleton
 
             return ulogeOsobe.Distinct().ToList();
         }
-
-
-
         public IIterator KreirajIterator(string vrstaEmisije)
         {
             return new ConcreateIteratorEmisijaZeljeneVrste(RasporedPrograma, vrstaEmisije);

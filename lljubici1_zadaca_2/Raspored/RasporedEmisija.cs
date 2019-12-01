@@ -48,6 +48,7 @@ namespace lljubici1_zadaca_2.Raspored
 
                 foreach (var emisijaPrograma in listaProgramaOdredenogDana)
                 {
+                    emisijaPrograma.DodajElementRasporeda(emisijaPrograma);
                     dan.DodajElementRasporeda(emisijaPrograma);
                 }
                 program.DodajElementRasporeda(dan);

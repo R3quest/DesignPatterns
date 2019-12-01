@@ -73,6 +73,13 @@ namespace lljubici1_zadaca_2.Podaci
             DaniUTjednu = ((EmisijePrograma)elementComposite).DaniUTjednu;
             Pocetak = ((EmisijePrograma)elementComposite).Pocetak;
             ImaPočetak = ((EmisijePrograma)elementComposite).ImaPočetak;
+
+            //observer prikvaci
+            foreach (var o in OsobeUloge)
+            {
+                o.Prikaci(this);
+            }
+
         }
 
         public List<IComponent> VratiRaspored()
