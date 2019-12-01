@@ -1,5 +1,4 @@
 ﻿using lljubici1_zadaca_2.Podaci;
-using lljubici1_zadaca_2.Pomagala;
 using lljubici1_zadaca_2.Singleton;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ namespace lljubici1_zadaca_2.KorisnikovaInterakcija
 {
     public class Konzola
     {
-        public static void KorisnikovOdabir(List<Osoba> listaOsoba, List<Uloga> listaUloga)
+        public static void KorisnikovOdabir(List<Osoba> listaOsoba, List<Uloga> listaUloga, List<VrstaEmisije> listaVrsti)
         {
             int izbor = 0, program = 0, dan = 0;
             while (true)
@@ -27,7 +26,7 @@ namespace lljubici1_zadaca_2.KorisnikovaInterakcija
                 }
                 else if (izbor == 3)
                 {
-                    IspisTjednogPlanaVrste();
+                    IspisTjednogPlanaVrste(listaVrsti);
                 }
                 else if (izbor == 4)
                 {
@@ -59,14 +58,14 @@ namespace lljubici1_zadaca_2.KorisnikovaInterakcija
             try
             {
                 string opisStare = listaUloga.FirstOrDefault(o => o.Id == ulogaPostojece).Opis;
-                Uloga staraUloga = new Uloga(ulogaZeljene, opisStare);
+                Uloga staraUloga = new Uloga(ulogaPostojece, opisStare);
                 //nova
                 string opisNove = listaUloga.FirstOrDefault(o => o.Id == ulogaZeljene).Opis;
                 Uloga novaUloga = new Uloga(ulogaZeljene, opisNove);
 
                 Osoba osoba = new Osoba();
                 osoba = SingletonTvKuca.Instanca.VratiOsobu(idOsobe);
-
+                osoba.PostaviStanje(staraUloga, novaUloga);
 
 
             }
@@ -121,17 +120,22 @@ namespace lljubici1_zadaca_2.KorisnikovaInterakcija
             return ulogaPostojece;
         }
 
-        private static void IspisTjednogPlanaVrste()
+        private static void IspisTjednogPlanaVrste(List<VrstaEmisije> vrsteEmisije)
         {
             int izbor = 0;
-            IEnumerable<Enumeracije.VrsteEmisije> vrsteEmisija =
-                Enum.GetValues(typeof(Enumeracije.VrsteEmisije)).Cast<Enumeracije.VrsteEmisije>();
-            List<string> vrijednostiVrstaEmisija = new List<string>(vrsteEmisija.Select(v => v.ToString().Replace("_", " ")));
-            foreach (string vrste in vrijednostiVrstaEmisija)
-                Console.WriteLine(vrijednostiVrstaEmisija.IndexOf(vrste) + 1 + " - " + vrste);
+            //IEnumerable<Enumeracije.VrsteEmisije> vrsteEmisija =
+            //    Enum.GetValues(typeof(Enumeracije.VrsteEmisije)).Cast<Enumeracije.VrsteEmisije>();
+            //List<string> vrijednostiVrstaEmisija = new List<string>(vrsteEmisija.Select(v => v.ToString().Replace("_", " ")));
+            //foreach (string vrste in vrijednostiVrstaEmisija)
+            //    Console.WriteLine(vrijednostiVrstaEmisija.IndexOf(vrste) + 1 + " - " + vrste);
+            foreach (var vrstaEmisije in vrsteEmisije)
+            {
+                Console.WriteLine(vrstaEmisije);
+            }
+
             Console.Write("Unesi broj vrste emisije> ");
-            izbor = OdabirProvjera(izbor, 1, vrijednostiVrstaEmisija.Count);
-            SingletonTvKuca.Instanca.IspisiTjedniPlanVrsteEmisija(vrijednostiVrstaEmisija[izbor - 1]);
+            izbor = OdabirProvjera(izbor, 1, vrsteEmisije.Count);
+            SingletonTvKuca.Instanca.IspisiTjedniPlanVrsteEmisija(vrsteEmisije[izbor - 1].Vrsta);
         }
 
         private static void IspisPrihoda(int program, int dan)

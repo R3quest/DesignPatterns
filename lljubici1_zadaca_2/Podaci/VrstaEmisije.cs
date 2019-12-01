@@ -14,6 +14,11 @@ namespace lljubici1_zadaca_2.Podaci
 
         }
 
+        public override string ToString()
+        {
+            return Id + " - " + Vrsta;
+        }
+
         public VrstaEmisije(int id, string vrsta, int imaReklame, int trajanjeReklame)
         {
             Id = id;

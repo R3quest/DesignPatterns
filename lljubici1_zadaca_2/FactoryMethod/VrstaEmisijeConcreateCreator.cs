@@ -22,7 +22,7 @@ namespace lljubici1_zadaca_2.FactoryMethod
                 {
                     polja = Array.ConvertAll(red.Split(base._separator), p => p.Trim());
 
-                    vrstaEmisije = new VrstaEmisije(int.Parse(polja[0]), polja[1], int.Parse(polja[2]),
+                    vrstaEmisije = new VrstaEmisije(int.Parse(polja[0]), polja[1].ToLower(), int.Parse(polja[2]),
                         int.Parse(polja[3]));
                     listaPodataka.Add(vrstaEmisije);
                 }
