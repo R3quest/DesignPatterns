@@ -10,20 +10,17 @@ namespace lljubici1_zadaca_2.Builder
     {
         public List<EmisijePrograma> DodajEmisijeSaDanimaIPocetkom(Program p, List<EmisijePrograma> emisijeKojeImajuDaneUTjednuIPocetak, List<EmisijePrograma> emisijeZaDodati)
         {
-            foreach (var emisijaPrograma in emisijeKojeImajuDaneUTjednuIPocetak) //dodavanje prvo u emisije koje imamo (sve)
+            foreach (var emisijaPrograma in emisijeKojeImajuDaneUTjednuIPocetak)
             {
                 if (emisijaPrograma.ImaPočetak)
                 {
-                    //todo: zakomentirati ovo i guess
                     if (emisijaPrograma.Pocetak < p.Pocetak ||
                         (emisijaPrograma.Pocetak + emisijaPrograma.Emisija.Trajanje) > p.Kraj)
                     {
                         Console.WriteLine("Ne mogu dodati! Program tada ne radi! " + emisijaPrograma);
                         continue;
                     }
-
                     bool preklapanje = false;
-
                     foreach (var dodanaEmisija in emisijeZaDodati.ToList())
                     {
                         int pocetakDodane = dodanaEmisija.Pocetak;
@@ -42,36 +39,12 @@ namespace lljubici1_zadaca_2.Builder
                     }
                     if (!preklapanje)
                     {
-                        //EmisijePrograma ep = new EmisijePrograma();
-                        //Emisija em = new Emisija();
-                        //em = emisijaPrograma.Emisija;
-                        //ep.Emisija = em;
-                        //ep.DaniUTjednu = emisijaPrograma.DaniUTjednu;
-                        //ep.OsobeUloge = emisijaPrograma.OsobeUloge;
                         emisijeZaDodati.Add(VratiNovuEmisijuPrograma(emisijaPrograma));
-                        ////emisijeZaDodati.Add(emisijaPrograma);
                     }
                 }
             }
             emisijeZaDodati.Sort((e1, e2) => e1.Pocetak.CompareTo(e2.Pocetak));
             return emisijeZaDodati;
-        }
-
-        private EmisijePrograma VratiNovuEmisijuPrograma(EmisijePrograma emisijaPrograma)
-        {
-            EmisijePrograma ep = new EmisijePrograma();
-            ep.Pocetak = emisijaPrograma.Pocetak;
-            ep.ImaPočetak = emisijaPrograma.ImaPočetak;
-            ep.OsobeUloge = emisijaPrograma.OsobeUloge;
-
-            Emisija em = new Emisija();
-            em = emisijaPrograma.Emisija;
-
-            ep.Emisija = em;
-            ep.DaniUTjednu = emisijaPrograma.DaniUTjednu;
-            ep.OsobeUloge = emisijaPrograma.OsobeUloge;
-
-            return ep;
         }
 
         public List<EmisijePrograma> DodajEmisijeSaDanimaBezPocetka(Program p, List<EmisijePrograma> emisijeSaDanimaBezPocetka, List<EmisijePrograma> emisijeZaDodati)
@@ -90,17 +63,13 @@ namespace lljubici1_zadaca_2.Builder
                     }
                     if (emisija.Emisija.Trajanje < (krajSlobodnogVremena - početakSlobodnogVremena))
                     {
-                        //emisija.ImaPočetak = true;
                         emisija.Pocetak = početakSlobodnogVremena;
-
                         emisijeZaDodati.Add(VratiNovuEmisijuPrograma(emisija));
-                        ////emisijeZaDodati.Add(emisija);
                         emisijeZaDodati.Sort((e1, e2) => e1.Pocetak.CompareTo(e2.Pocetak));
                         dodano = true;
                         break;
                     }
-                    početakSlobodnogVremena =
-                        dodanaEmisija.Pocetak + dodanaEmisija.Emisija.Trajanje;
+                    početakSlobodnogVremena = dodanaEmisija.Pocetak + dodanaEmisija.Emisija.Trajanje;
                 }
                 if (!dodano)
                 {
@@ -150,6 +119,23 @@ namespace lljubici1_zadaca_2.Builder
                 }
             }
             return emisijeZaDodati;
+        }
+
+        private EmisijePrograma VratiNovuEmisijuPrograma(EmisijePrograma emisijaPrograma)
+        {
+            EmisijePrograma ep = new EmisijePrograma();
+            ep.Pocetak = emisijaPrograma.Pocetak;
+            ep.ImaPočetak = emisijaPrograma.ImaPočetak;
+            ep.OsobeUloge = emisijaPrograma.OsobeUloge;
+
+            Emisija em = new Emisija();
+            em = emisijaPrograma.Emisija;
+
+            ep.Emisija = em;
+            ep.DaniUTjednu = emisijaPrograma.DaniUTjednu;
+            ep.OsobeUloge = emisijaPrograma.OsobeUloge;
+
+            return ep;
         }
     }
 }
