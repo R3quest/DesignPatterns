@@ -46,7 +46,7 @@ namespace lljubici1_zadaca_2
             //SingletonTvKuca.Instanca.VratiRaspored();
 
 
-            Konzola.KorisnikovOdabir(listaOsoba);
+            Konzola.KorisnikovOdabir(listaOsoba, listaUloga);
             Console.ReadLine();
         }
 

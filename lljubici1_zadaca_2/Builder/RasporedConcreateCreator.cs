@@ -76,7 +76,6 @@ namespace lljubici1_zadaca_2.Builder
 
         public List<EmisijePrograma> DodajEmisijeSaDanimaBezPocetka(Program p, List<EmisijePrograma> emisijeSaDanimaBezPocetka, List<EmisijePrograma> emisijeZaDodati)
         {
-            //if (!emisijeSaDanimaBezPocetka.Any())  //    return new List<EmisijePrograma>();
             emisijeSaDanimaBezPocetka.Sort((e2, e1) => e1.DaniUTjednu.Count.CompareTo(e2.DaniUTjednu.Count));
             foreach (var emisija in emisijeSaDanimaBezPocetka)
             {
@@ -100,21 +99,16 @@ namespace lljubici1_zadaca_2.Builder
                         dodano = true;
                         break;
                     }
-
                     početakSlobodnogVremena =
                         dodanaEmisija.Pocetak + dodanaEmisija.Emisija.Trajanje;
                 }
-
                 if (!dodano)
                 {
                     int krajSlobodnogVremena = Math.Min(p.Kraj, emisija.DaniUTjednu.Max() * 3600 * 24);
                     if (emisija.Emisija.Trajanje < (krajSlobodnogVremena - početakSlobodnogVremena))
                     {
-                        //emisija.ImaPočetak = true;
                         emisija.Pocetak = početakSlobodnogVremena;
-
                         emisijeZaDodati.Add(VratiNovuEmisijuPrograma(emisija));
-                        ////emisijeZaDodati.Add(emisija);
                         emisijeZaDodati.Sort((e1, e2) => e1.Pocetak.CompareTo(e2.Pocetak));
                     }
                 }
@@ -135,35 +129,22 @@ namespace lljubici1_zadaca_2.Builder
                     int krajSlobodnogVremena = dodanaEmisija.Pocetak;
                     if (emisija.Emisija.Trajanje < (krajSlobodnogVremena - početakSlobodnogVremena))
                     {
-                        //emisija.ImaPočetak = true;
                         emisija.Pocetak = početakSlobodnogVremena;
-
-                        //emisija.DaniUTjednu.AddRange(Enumerable.Range(1, 7));
-
                         emisijeZaDodati.Add(VratiNovuEmisijuPrograma(emisija));
-                        ////emisijeZaDodati.Add(emisija);
                         emisijeZaDodati.Sort((e1, e2) => e1.Pocetak.CompareTo(e2.Pocetak));
                         dodano = true;
                         break;
                     }
-
                     početakSlobodnogVremena =
                         dodanaEmisija.Pocetak + dodanaEmisija.Emisija.Trajanje;
                 }
-
                 if (!dodano)
                 {
                     int krajSlobodnogVremena = p.Kraj;
                     if (emisija.Emisija.Trajanje < (krajSlobodnogVremena - početakSlobodnogVremena))
                     {
-                        //TODO:????
-                        //emisija.ImaPočetak = true;
                         emisija.Pocetak = početakSlobodnogVremena;
-
-                        //emisija.DaniUTjednu.AddRange(Enumerable.Range(1, 7));
-
                         emisijeZaDodati.Add(VratiNovuEmisijuPrograma(emisija));
-                        ////emisijeZaDodati.Add(emisija);
                         emisijeZaDodati.Sort((e1, e2) => e1.Pocetak.CompareTo(e2.Pocetak));
                     }
                 }

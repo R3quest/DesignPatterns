@@ -13,6 +13,7 @@
             Nedjelja = 7
         }
 
+        //TODO: MJENJAJ
         public enum VrsteEmisije
         {
             informativna = 1,
