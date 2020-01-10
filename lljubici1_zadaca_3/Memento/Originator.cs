@@ -2,18 +2,22 @@
 using lljubici1_zadaca_3.Podaci;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace lljubici1_zadaca_3.Memento
 {
     public class Originator
     {
         private static int redniBroj = 1;
-        private List<IRasporedProgramaComponent> _stanje;
+        private List<IRasporedProgramaComponent> _stanje = new List<IRasporedProgramaComponent>();
 
         public Originator(List<IRasporedProgramaComponent> stanje)
         {
-            this._stanje = stanje;
+            foreach (Program rasporedProgramaComponent in stanje)
+            {
+                _stanje.AddRange(rasporedProgramaComponent.VratiRasporedEmisija());
+            }
+
+            //this._stanje = stanje;
             Console.WriteLine("Originator: Inicijalno stanje: " + stanje);
         }
 
@@ -28,34 +32,45 @@ namespace lljubici1_zadaca_3.Memento
             //Console.WriteLine($"Originator: and my stanje has changed to: {_stanje}");
 
             //////
-            List<Program> listaPrograma = new List<Program>();
-            foreach (Program rasporedProgramaComponent in _stanje)
-            {
-                var a = rasporedProgramaComponent.VratiRaspored();
-            }
+            //List<Program> listaPrograma = new List<Program>();
+            //foreach (Program rasporedProgramaComponent in _stanje)
+            //{
+            //    var a = rasporedProgramaComponent.VratiRasporedEmisija()();
+            //}
 
             //////
-            foreach (Program program in _stanje)
+            //foreach (Program program in _stanje)
+            //{
+            //    foreach (Dan dan in program.RasporedDani)
+            //    {
+            //        var obrisiElement =
+            //            dan.RasporedEmisijaDana.SingleOrDefault(o => ((EmisijePrograma)o).RedniBroj == redniBroj);
+            //        if (obrisiElement != null)
+            //        {
+            //            dan.RasporedEmisijaDana.Remove(obrisiElement);
+            //            return;
+            //        }
+            //    }
+            //}
+
+            foreach (EmisijePrograma emisijaProgram in _stanje)
             {
-                foreach (Dan dan in program.RasporedDani)
+                if (emisijaProgram.RedniBroj == redniBroj)
                 {
-                    var obrisiElement =
-                        dan.RasporedEmisijaDana.SingleOrDefault(o => ((EmisijePrograma)o).RedniBroj == redniBroj);
-                    if (obrisiElement != null)
-                    {
-                        dan.RasporedEmisijaDana.Remove(obrisiElement);
-                        return;
-                    }
-                    Console.WriteLine("Neispravan broj!");
+                    _stanje.Remove(emisijaProgram);
+                    return;
                 }
             }
+
+            Console.WriteLine("Neispravan broj!");
 
         }
 
         // Saves the current stanje inside a memento.
         public IMemento Save()
         {
-            ConcreteMemento cm = new ConcreteMemento(this._stanje);
+            //ConcreteMemento cm = new ConcreteMemento(this._stanje);
+            ConcreteMemento cm = new ConcreteMemento(_stanje);
             cm.RedniBrojPohrane = redniBroj++;
             return cm;
         }

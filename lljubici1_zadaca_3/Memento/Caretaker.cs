@@ -27,7 +27,7 @@ namespace lljubici1_zadaca_3.Memento
                 return;
             }
             //TODO: pazi na index
-            var memento = this._mementos[stanje];
+            var memento = this._mementos[stanje - 1];
             //this._mementos.Remove(memento);
             Console.WriteLine("Caretaker: Restoring state to: " + memento.GetName());
 

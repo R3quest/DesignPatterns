@@ -1,9 +1,10 @@
 ﻿using lljubici1_zadaca_3.FactoryMethod;
+using lljubici1_zadaca_3.Prototype;
 using System.Collections.Generic;
 
 namespace lljubici1_zadaca_3.Podaci
 {
-    public class Emisija : Entitet
+    public class Emisija : Entitet, Kloniraj
     {
         public int Id { get; set; }
         public string NazivEmisije { get; set; }
@@ -48,5 +49,19 @@ namespace lljubici1_zadaca_3.Podaci
             return $"{NazivEmisije}";
         }
 
+        public Kloniraj Kloniraj()
+        {
+            Emisija e = new Emisija();
+            e.VrstaEmisije = (VrstaEmisije)VrstaEmisije.Kloniraj();
+            e.Id = Id;
+            e.NazivEmisije = NazivEmisije;
+            foreach (var osoba in OsobeUloge)
+            {
+                e.OsobeUloge.Add((Osoba)osoba.Kloniraj());
+            }
+
+            e.Trajanje = Trajanje;
+            return e;
+        }
     }
 }

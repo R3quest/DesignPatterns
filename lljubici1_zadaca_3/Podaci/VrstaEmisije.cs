@@ -1,9 +1,10 @@
 ﻿using lljubici1_zadaca_3.FactoryMethod;
+using lljubici1_zadaca_3.Prototype;
 using lljubici1_zadaca_3.Visitor;
 
 namespace lljubici1_zadaca_3.Podaci
 {
-    public class VrstaEmisije : Entitet, Visitable
+    public class VrstaEmisije : Entitet, Visitable, Kloniraj
     {
         public int Id { get; set; }
         public string Vrsta { get; set; }
@@ -20,6 +21,17 @@ namespace lljubici1_zadaca_3.Podaci
             return Id + " - " + Vrsta;
         }
 
+        public Kloniraj Kloniraj()
+        {
+            VrstaEmisije ve = new VrstaEmisije();
+            ve.Id = Id;
+            ve.ImaReklame = ImaReklame;
+            ve.TrajanjeReklame = TrajanjeReklame;
+            ve.Vrsta = Vrsta;
+            return ve;
+        }
+
+
         public void Accept(Visitor.Visitor visitor)
         {
             visitor.Visit(this);
@@ -29,7 +41,6 @@ namespace lljubici1_zadaca_3.Podaci
         {
             Id = id;
             Vrsta = vrsta;
-            //TODO: vidi
             if (imaReklame == 0)
             {
                 ImaReklame = false;

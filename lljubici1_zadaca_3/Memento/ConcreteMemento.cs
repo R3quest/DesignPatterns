@@ -1,4 +1,5 @@
 ﻿using lljubici1_zadaca_3.Composite;
+using lljubici1_zadaca_3.Podaci;
 using System;
 using System.Collections.Generic;
 
@@ -6,7 +7,7 @@ namespace lljubici1_zadaca_3.Memento
 {
     public class ConcreteMemento : IMemento
     {
-        private List<IRasporedProgramaComponent> _stanje;
+        private List<IRasporedProgramaComponent> _stanje = new List<IRasporedProgramaComponent>();
         private DateTime _vrijemeDatum;
         public int RedniBrojPohrane { get; set; }
 
@@ -14,7 +15,13 @@ namespace lljubici1_zadaca_3.Memento
         public ConcreteMemento(List<IRasporedProgramaComponent> raspored)
         {
             //KLONIRAJ
-            _stanje = raspored;
+            foreach (EmisijePrograma emisijePrograma in raspored)
+            {
+                _stanje.Add((EmisijePrograma)emisijePrograma.Kloniraj());
+            }
+
+
+            //_stanje = raspored;
             _vrijemeDatum = DateTime.Now;
         }
 

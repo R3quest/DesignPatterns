@@ -2,11 +2,12 @@
 using lljubici1_zadaca_3.FactoryMethod;
 using lljubici1_zadaca_3.Observer;
 using lljubici1_zadaca_3.Pomagala;
+using lljubici1_zadaca_3.Prototype;
 using System.Collections.Generic;
 
 namespace lljubici1_zadaca_3.Podaci
 {
-    public class EmisijePrograma : Entitet, IRasporedProgramaComponent, IObserver
+    public class EmisijePrograma : Entitet, IRasporedProgramaComponent, IObserver, Kloniraj
     {
         public int RedniBroj { get; set; }
         public Emisija Emisija { get; set; } = new Emisija();
@@ -59,6 +60,22 @@ namespace lljubici1_zadaca_3.Podaci
             return $"{Konverzija.PretvoriSekundeUVrijeme(Pocetak)} - {Konverzija.PretvoriSekundeUVrijeme(Pocetak + Emisija.Trajanje)} {Emisija} ";
         }
 
+        public Kloniraj Kloniraj()
+        {
+            EmisijePrograma ep = new EmisijePrograma();
+            ep.RedniBroj = RedniBroj;
+            ep.DaniUTjednu = DaniUTjednu;
+            ep.Emisija = (Emisija)Emisija.Kloniraj();
+            ep.ImaPočetak = ImaPočetak;
+            ep.Pocetak = Pocetak;
+            foreach (var osoba in OsobeUloge)
+            {
+                ep.OsobeUloge.Add((Osoba)osoba.Kloniraj());
+            }
+
+            return ep;
+        }
+
         public void Azuriraj(ISubject subject)
         {
             Osoba osoba = (Osoba)subject;
@@ -92,7 +109,7 @@ namespace lljubici1_zadaca_3.Podaci
             //komponenta.Add(concreateKomponenta);
             //return komponenta;
             List<IRasporedProgramaComponent> emisija = new List<IRasporedProgramaComponent>();
-            emisija.Add(this);
+            emisija.Add((EmisijePrograma)this.Kloniraj());
             return emisija;
         }
 

@@ -41,5 +41,6 @@ namespace lljubici1_zadaca_3.Composite
         {
             return this.RasporedEmisijaDana;
         }
+
     }
 }

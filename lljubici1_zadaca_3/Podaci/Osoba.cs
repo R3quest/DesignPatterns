@@ -1,10 +1,11 @@
 ﻿using lljubici1_zadaca_3.FactoryMethod;
 using lljubici1_zadaca_3.Observer;
+using lljubici1_zadaca_3.Prototype;
 using System.Collections.Generic;
 
 namespace lljubici1_zadaca_3.Podaci
 {
-    public class Osoba : Entitet, ISubject
+    public class Osoba : Entitet, ISubject, Kloniraj
     {
         private List<IObserver> observers = new List<IObserver>();
         public int Id { get; set; }
@@ -34,6 +35,22 @@ namespace lljubici1_zadaca_3.Podaci
         {
             return Id + ": " + ImeIPrezime;
         }
+
+        public Kloniraj Kloniraj()
+        {
+            Osoba osoba = new Osoba();
+            osoba.observers = observers;
+            osoba.Id = Id;
+            osoba.ImeIPrezime = ImeIPrezime;
+
+            foreach (var uloga in Uloge)
+            {
+                osoba.Uloge.Add((Uloga)uloga.Kloniraj());
+            }
+
+            return osoba;
+        }
+
 
         public void Prikaci(IObserver observer)
         {

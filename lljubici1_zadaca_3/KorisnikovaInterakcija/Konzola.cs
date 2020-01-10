@@ -57,7 +57,7 @@ namespace lljubici1_zadaca_3.KorisnikovaInterakcija
                     //TODO: provjera dal ima te emisije!!!!!!!!!!!!!
                     jednoznacniBroj = OdabirProvjera(jednoznacniBroj, 1, 99);
                     caretaker.Backup();
-                    SingletonTvKuca.Instanca.ObrisiEmisijuNaTemeljuJednoznacnogRednogBroja(jednoznacniBroj);
+                    SingletonTvKuca.Instanca.ObrisiEmisijuNaTemeljuJednoznacnogRednogBroja(jednoznacniBroj, originator);
                 }
                 else if (izbor == 6)
                 {
@@ -66,6 +66,9 @@ namespace lljubici1_zadaca_3.KorisnikovaInterakcija
                 else if (izbor == 7)
                 {
                     caretaker.ShowHistoryDates();
+                    Console.Write("Unesi zeljeno stanje> ");
+                    caretaker.Restore(int.Parse(Console.ReadLine()));
+
                 }
             }
         }

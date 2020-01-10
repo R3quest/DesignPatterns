@@ -156,31 +156,37 @@ namespace lljubici1_zadaca_3.Singleton
         //TODO: vidi
         public void IspisiTjednogPlana(List<IRasporedProgramaComponent> listaPrograma)
         {
-            ConcreateIteratorEmisijaTjednogPlana iterator = new ConcreateIteratorEmisijaTjednogPlana(this.RasporedPrograma);
-            //ConcreateIteratorEmisijaZeljeneVrste iterator = KreirajIterator(vrstaEmisije) as ConcreateIteratorEmisijaZeljeneVrste;
-            List<IComponent> sveKomponente = new List<IComponent>();
-            ConcreateComponentProgramDanEmisija emisijeVrste = new ConcreateComponentProgramDanEmisija(null, null, null);
-            sveKomponente.Add(emisijeVrste);
-            while (!iterator.Gotovo)
+            //ConcreateIteratorEmisijaTjednogPlana iterator = new ConcreateIteratorEmisijaTjednogPlana(listaPrograma);
+            ////ConcreateIteratorEmisijaZeljeneVrste iterator = KreirajIterator(vrstaEmisije) as ConcreateIteratorEmisijaZeljeneVrste;
+            //List<IComponent> sveKomponente = new List<IComponent>();
+            //ConcreateComponentProgramDanEmisija emisijeVrste = new ConcreateComponentProgramDanEmisija(null, null, null);
+            //sveKomponente.Add(emisijeVrste);
+            //while (!iterator.Gotovo)
+            //{
+            //    var emisijaPrograma = ((EmisijePrograma)iterator.Trenutni);
+            //    if (iterator.NoviProgram)
+            //    {
+            //        emisijeVrste = new ConcreateComponentProgramDanEmisija(emisijaPrograma, iterator.TrenutniProgram(), iterator.TrenutniDan());
+            //    }
+            //    else if (iterator.NoviDan)
+            //    {
+            //        emisijeVrste = new ConcreateComponentProgramDanEmisija(emisijaPrograma, null, iterator.TrenutniDan());
+            //    }
+            //    else
+            //    {
+            //        emisijeVrste = new ConcreateComponentProgramDanEmisija(emisijaPrograma, null, null);
+            //    }
+            //    sveKomponente.Add(emisijeVrste);
+            //    iterator.Sljedeci();
+            //}
+            //Decorator.Decorator dekorator = new Decorator.Decorator(sveKomponente);
+            //Console.WriteLine(dekorator.Operacija());
+
+            foreach (EmisijePrograma rasporedProgramaComponent in listaPrograma)
             {
-                var emisijaPrograma = ((EmisijePrograma)iterator.Trenutni);
-                if (iterator.NoviProgram)
-                {
-                    emisijeVrste = new ConcreateComponentProgramDanEmisija(emisijaPrograma, iterator.TrenutniProgram(), iterator.TrenutniDan());
-                }
-                else if (iterator.NoviDan)
-                {
-                    emisijeVrste = new ConcreateComponentProgramDanEmisija(emisijaPrograma, null, iterator.TrenutniDan());
-                }
-                else
-                {
-                    emisijeVrste = new ConcreateComponentProgramDanEmisija(emisijaPrograma, null, null);
-                }
-                sveKomponente.Add(emisijeVrste);
-                iterator.Sljedeci();
+                Console.WriteLine(rasporedProgramaComponent.ToString());
             }
-            Decorator.Decorator dekorator = new Decorator.Decorator(sveKomponente);
-            Console.WriteLine(dekorator.Operacija());
+
         }
 
 
@@ -266,9 +272,8 @@ namespace lljubici1_zadaca_3.Singleton
         }
 
 
-        public void ObrisiEmisijuNaTemeljuJednoznacnogRednogBroja(int obrisiID)
+        public void ObrisiEmisijuNaTemeljuJednoznacnogRednogBroja(int obrisiID, Originator o)
         {
-            Originator o = new Originator(RasporedPrograma);
             o.ObrisiEmisiju(obrisiID);
         }
     }
