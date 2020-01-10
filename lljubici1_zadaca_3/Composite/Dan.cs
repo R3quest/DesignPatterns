@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using lljubici1_zadaca_3.Podaci;
+using lljubici1_zadaca_3.Prototype;
+using System.Collections.Generic;
 
 namespace lljubici1_zadaca_3.Composite
 {
-    public class Dan : IRasporedProgramaComponent
+    public class Dan : IRasporedProgramaComponent, Kloniraj
     {
         public string NazivDana { get; set; }
         public List<IRasporedProgramaComponent> RasporedEmisijaDana { get; set; } = new List<IRasporedProgramaComponent>();
@@ -42,5 +44,16 @@ namespace lljubici1_zadaca_3.Composite
             return this.RasporedEmisijaDana;
         }
 
+        public Kloniraj Kloniraj()
+        {
+            Dan d = new Dan(this.NazivDana);
+
+            foreach (EmisijePrograma emisijeDana in RasporedEmisijaDana)
+            {
+                d.RasporedEmisijaDana.Add((EmisijePrograma)emisijeDana.Kloniraj());
+            }
+
+            return d;
+        }
     }
 }

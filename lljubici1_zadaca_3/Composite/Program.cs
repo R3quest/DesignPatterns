@@ -2,11 +2,12 @@
 using lljubici1_zadaca_3.Iterator;
 using lljubici1_zadaca_3.Podaci;
 using lljubici1_zadaca_3.Pomagala;
+using lljubici1_zadaca_3.Prototype;
 using System.Collections.Generic;
 
 namespace lljubici1_zadaca_3.Composite
 {
-    public class Program : Entitet, IRasporedProgramaComponent, IAbstractCollectionSveEmisije
+    public class Program : Entitet, IRasporedProgramaComponent, IAbstractCollectionSveEmisije, Kloniraj
     {
         public List<IRasporedProgramaComponent> RasporedDani { get; set; } = new List<IRasporedProgramaComponent>();
 
@@ -32,6 +33,22 @@ namespace lljubici1_zadaca_3.Composite
                 $"{nameof(NazivPrograma)}: {NazivPrograma}, {nameof(Pocetak)}: {Konverzija.PretvoriSekundeUVrijeme(Pocetak)}, {nameof(NazivDatoteke)}: {NazivDatoteke}";
         }
 
+        public Kloniraj Kloniraj()
+        {
+            Program p = new Program(this.Id, this.NazivPrograma, this.Pocetak, this.Kraj, this.NazivDatoteke);
+            foreach (var emisijePrograma in EmisijePrograma)
+            {
+                p.EmisijePrograma.Add((EmisijePrograma)emisijePrograma.Kloniraj());
+            }
+            //p.RasporedDani = RasporedDani;
+
+            foreach (var dan in RasporedDani)
+            {
+                p.RasporedDani.Add((Dan)((Dan)dan).Kloniraj());
+            }
+
+            return p;
+        }
 
 
         public void DodajElementRasporeda(IRasporedProgramaComponent elementComposite) //dodaj dan

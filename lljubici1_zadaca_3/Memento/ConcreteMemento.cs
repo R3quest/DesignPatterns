@@ -1,5 +1,4 @@
 ﻿using lljubici1_zadaca_3.Composite;
-using lljubici1_zadaca_3.Podaci;
 using System;
 using System.Collections.Generic;
 
@@ -15,9 +14,9 @@ namespace lljubici1_zadaca_3.Memento
         public ConcreteMemento(List<IRasporedProgramaComponent> raspored)
         {
             //KLONIRAJ
-            foreach (EmisijePrograma emisijePrograma in raspored)
+            foreach (Program program in raspored)
             {
-                _stanje.Add((EmisijePrograma)emisijePrograma.Kloniraj());
+                _stanje.Add((Program)program.Kloniraj());
             }
 
 

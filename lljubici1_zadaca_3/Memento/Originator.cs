@@ -1,7 +1,9 @@
 ﻿using lljubici1_zadaca_3.Composite;
 using lljubici1_zadaca_3.Podaci;
+using lljubici1_zadaca_3.Singleton;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace lljubici1_zadaca_3.Memento
 {
@@ -12,12 +14,12 @@ namespace lljubici1_zadaca_3.Memento
 
         public Originator(List<IRasporedProgramaComponent> stanje)
         {
-            foreach (Program rasporedProgramaComponent in stanje)
-            {
-                _stanje.AddRange(rasporedProgramaComponent.VratiRasporedEmisija());
-            }
+            //foreach (Program program in stanje)
+            //{
+            //    _stanje.Add((Program)program.Kloniraj());
+            //}
 
-            //this._stanje = stanje;
+            this._stanje = stanje;
             Console.WriteLine("Originator: Inicijalno stanje: " + stanje);
         }
 
@@ -39,28 +41,28 @@ namespace lljubici1_zadaca_3.Memento
             //}
 
             //////
-            //foreach (Program program in _stanje)
-            //{
-            //    foreach (Dan dan in program.RasporedDani)
-            //    {
-            //        var obrisiElement =
-            //            dan.RasporedEmisijaDana.SingleOrDefault(o => ((EmisijePrograma)o).RedniBroj == redniBroj);
-            //        if (obrisiElement != null)
-            //        {
-            //            dan.RasporedEmisijaDana.Remove(obrisiElement);
-            //            return;
-            //        }
-            //    }
-            //}
-
-            foreach (EmisijePrograma emisijaProgram in _stanje)
+            foreach (Program program in _stanje)
             {
-                if (emisijaProgram.RedniBroj == redniBroj)
+                foreach (Dan dan in program.RasporedDani)
                 {
-                    _stanje.Remove(emisijaProgram);
-                    return;
+                    var obrisiElement =
+                        dan.RasporedEmisijaDana.SingleOrDefault(o => ((EmisijePrograma)o).RedniBroj == redniBroj);
+                    if (obrisiElement != null)
+                    {
+                        dan.RasporedEmisijaDana.Remove(obrisiElement);
+                        return;
+                    }
                 }
             }
+
+            //foreach (EmisijePrograma emisijaProgram in _stanje)
+            //{
+            //    if (emisijaProgram.RedniBroj == redniBroj)
+            //    {
+            //        _stanje.Remove(emisijaProgram);
+            //        return;
+            //    }
+            //}
 
             Console.WriteLine("Neispravan broj!");
 
@@ -84,6 +86,7 @@ namespace lljubici1_zadaca_3.Memento
             }
 
             this._stanje = memento.GetState();
+            SingletonTvKuca.Instanca.SetRasporedPrograma(this._stanje);
             Console.Write($"Originator: My stanje has changed to: {_stanje}");
         }
 

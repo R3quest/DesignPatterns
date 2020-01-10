@@ -22,6 +22,11 @@ namespace lljubici1_zadaca_3.Singleton
             return RasporedPrograma;
         }
 
+        public void SetRasporedPrograma(List<IRasporedProgramaComponent> programi)
+        {
+            RasporedPrograma = programi;
+        }
+
         private SingletonTvKuca()
         {
 
@@ -156,36 +161,36 @@ namespace lljubici1_zadaca_3.Singleton
         //TODO: vidi
         public void IspisiTjednogPlana(List<IRasporedProgramaComponent> listaPrograma)
         {
-            //ConcreateIteratorEmisijaTjednogPlana iterator = new ConcreateIteratorEmisijaTjednogPlana(listaPrograma);
-            ////ConcreateIteratorEmisijaZeljeneVrste iterator = KreirajIterator(vrstaEmisije) as ConcreateIteratorEmisijaZeljeneVrste;
-            //List<IComponent> sveKomponente = new List<IComponent>();
-            //ConcreateComponentProgramDanEmisija emisijeVrste = new ConcreateComponentProgramDanEmisija(null, null, null);
-            //sveKomponente.Add(emisijeVrste);
-            //while (!iterator.Gotovo)
-            //{
-            //    var emisijaPrograma = ((EmisijePrograma)iterator.Trenutni);
-            //    if (iterator.NoviProgram)
-            //    {
-            //        emisijeVrste = new ConcreateComponentProgramDanEmisija(emisijaPrograma, iterator.TrenutniProgram(), iterator.TrenutniDan());
-            //    }
-            //    else if (iterator.NoviDan)
-            //    {
-            //        emisijeVrste = new ConcreateComponentProgramDanEmisija(emisijaPrograma, null, iterator.TrenutniDan());
-            //    }
-            //    else
-            //    {
-            //        emisijeVrste = new ConcreateComponentProgramDanEmisija(emisijaPrograma, null, null);
-            //    }
-            //    sveKomponente.Add(emisijeVrste);
-            //    iterator.Sljedeci();
-            //}
-            //Decorator.Decorator dekorator = new Decorator.Decorator(sveKomponente);
-            //Console.WriteLine(dekorator.Operacija());
-
-            foreach (EmisijePrograma rasporedProgramaComponent in listaPrograma)
+            ConcreateIteratorEmisijaTjednogPlana iterator = new ConcreateIteratorEmisijaTjednogPlana(listaPrograma);
+            //ConcreateIteratorEmisijaZeljeneVrste iterator = KreirajIterator(vrstaEmisije) as ConcreateIteratorEmisijaZeljeneVrste;
+            List<IComponent> sveKomponente = new List<IComponent>();
+            ConcreateComponentProgramDanEmisija emisijeVrste = new ConcreateComponentProgramDanEmisija(null, null, null);
+            sveKomponente.Add(emisijeVrste);
+            while (!iterator.Gotovo)
             {
-                Console.WriteLine(rasporedProgramaComponent.ToString());
+                var emisijaPrograma = ((EmisijePrograma)iterator.Trenutni);
+                if (iterator.NoviProgram)
+                {
+                    emisijeVrste = new ConcreateComponentProgramDanEmisija(emisijaPrograma, iterator.TrenutniProgram(), iterator.TrenutniDan());
+                }
+                else if (iterator.NoviDan)
+                {
+                    emisijeVrste = new ConcreateComponentProgramDanEmisija(emisijaPrograma, null, iterator.TrenutniDan());
+                }
+                else
+                {
+                    emisijeVrste = new ConcreateComponentProgramDanEmisija(emisijaPrograma, null, null);
+                }
+                sveKomponente.Add(emisijeVrste);
+                iterator.Sljedeci();
             }
+            Decorator.Decorator dekorator = new Decorator.Decorator(sveKomponente);
+            Console.WriteLine(dekorator.Operacija());
+
+            //foreach (EmisijePrograma rasporedProgramaComponent in listaPrograma)
+            //{
+            //    Console.WriteLine(rasporedProgramaComponent.ToString());
+            //}
 
         }
 
