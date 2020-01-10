@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace lljubici1_zadaca_3.Memento
 {
@@ -21,36 +20,50 @@ namespace lljubici1_zadaca_3.Memento
             this._mementos.Add(this._originator.Save());
         }
 
-        public void Undo()
+        public void Restore(int stanje)
         {
             if (this._mementos.Count == 0)
             {
                 return;
             }
-
-            var memento = this._mementos.Last();
-            this._mementos.Remove(memento);
-
+            //TODO: pazi na index
+            var memento = this._mementos[stanje];
+            //this._mementos.Remove(memento);
             Console.WriteLine("Caretaker: Restoring state to: " + memento.GetName());
 
-            //try
-            //{
-            //    this._originator.Restore(memento);
-            //}
-            //catch (Exception)
-            //{
-            //    this.Undo();
-            //}
+            try
+            {
+                this._originator.Restore(memento);
+            }
+            catch (Exception)
+            {
+                this.Restore(stanje);
+            }
         }
 
         public void ShowHistory()
         {
-            Console.WriteLine("Lista mementa:");
-
+            if (_mementos.Count != 0)
+            {
+                Console.WriteLine("Lista mementa:");
+            }
             foreach (var memento in this._mementos)
             {
                 Console.Write(memento.GetName());
                 memento.PrintState();
+            }
+        }
+
+        public void ShowHistoryDates()
+        {
+            if (_mementos.Count != 0)
+            {
+                Console.WriteLine("Lista mementa:");
+            }
+
+            foreach (var memento in this._mementos)
+            {
+                Console.Write(memento.GetDate());
             }
         }
 

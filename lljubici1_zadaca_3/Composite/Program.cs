@@ -1,9 +1,7 @@
-﻿using lljubici1_zadaca_3.Decorator;
-using lljubici1_zadaca_3.FactoryMethod;
+﻿using lljubici1_zadaca_3.FactoryMethod;
 using lljubici1_zadaca_3.Iterator;
 using lljubici1_zadaca_3.Podaci;
 using lljubici1_zadaca_3.Pomagala;
-using System;
 using System.Collections.Generic;
 
 namespace lljubici1_zadaca_3.Composite
@@ -43,16 +41,26 @@ namespace lljubici1_zadaca_3.Composite
 
 
 
-        public List<IComponent> VratiRaspored()
+        public List<IRasporedProgramaComponent> VratiRasporedEmisija()
         {
             //TODO: druga zadaca
-            List<IComponent> listaDana = new List<IComponent>();
+            List<IRasporedProgramaComponent> listaDana = new List<IRasporedProgramaComponent>();
             foreach (var r in RasporedDani)
             {
-                listaDana.AddRange(r.VratiRaspored());
+                listaDana.AddRange(r.VratiRasporedEmisija());
             }
 
             return listaDana;
+        }
+
+        public List<IRasporedProgramaComponent> VratiRaspored()
+        {
+            return this.RasporedDani;
+        }
+
+        public List<IRasporedProgramaComponent> VratiDaneSaEmisijama()
+        {
+            return RasporedDani;
         }
 
         public void IspisiRaspored() //za sve dane
@@ -62,7 +70,7 @@ namespace lljubici1_zadaca_3.Composite
 
             for (var item = iteratorEmisija.Prvi(); !iteratorEmisija.Gotovo; item = iteratorEmisija.Sljedeci())
             {
-                item.VratiRaspored();
+                item.VratiRasporedEmisija();
             }
         }
 
@@ -72,11 +80,11 @@ namespace lljubici1_zadaca_3.Composite
         }
 
 
-        public void IspisZaDan(int danIndex)
-        {
-            Console.WriteLine(((Dan)RasporedDani[danIndex - 1]).NazivDana);
-            RasporedDani[danIndex - 1].VratiRaspored();
-        }
+        //public void IspisZaDan(int danIndex)
+        //{
+        //    Console.WriteLine(((Dan)RasporedDani[danIndex - 1]).NazivDana);
+        //    RasporedDani[danIndex - 1].VratiRasporedEmisija();
+        //}
 
     }
 }

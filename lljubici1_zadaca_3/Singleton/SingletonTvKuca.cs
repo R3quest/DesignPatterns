@@ -40,13 +40,18 @@ namespace lljubici1_zadaca_3.Singleton
             RasporedPrograma.Add(elementComposite);
         }
 
-        public List<IComponent> VratiRaspored()
+        public List<IRasporedProgramaComponent> VratiRasporedEmisija()
         {
             //TODO: druga zadaca
-            throw new NotImplementedException();
+            return this.RasporedPrograma;
         }
 
-        //public void VratiRaspored()
+        public List<IRasporedProgramaComponent> VratiRaspored()
+        {
+            return this.RasporedPrograma;
+        }
+
+        //public void VratiRasporedEmisija()
         //{
         //    throw new NotImplementedException();
         //}
@@ -87,7 +92,7 @@ namespace lljubici1_zadaca_3.Singleton
         //{
         //    foreach (var program in RasporedPrograma)
         //    {
-        //        program.VratiRaspored();
+        //        program.VratiRasporedEmisija();
         //    }
         //}
 
@@ -96,13 +101,13 @@ namespace lljubici1_zadaca_3.Singleton
             return RasporedPrograma.Count;
         }
 
-        public void IspisiRaspored()
-        {
-            foreach (var program in RasporedPrograma)
-            {
-                program.VratiRaspored();
-            }
-        }
+        //public void IspisiRaspored()
+        //{
+        //    foreach (var program in RasporedPrograma)
+        //    {
+        //        program.VratiRasporedEmisija();
+        //    }
+        //}
         //trenutni < count -1
 
 

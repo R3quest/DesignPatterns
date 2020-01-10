@@ -17,7 +17,7 @@ namespace lljubici1_zadaca_3.KorisnikovaInterakcija
             while (true)
             {
                 IspisGlavniIzbornik();
-                izbor = OdabirProvjera(izbor, 1, 6);
+                izbor = OdabirProvjera(izbor, 1, 7);
                 Console.Clear();
 
 
@@ -62,6 +62,10 @@ namespace lljubici1_zadaca_3.KorisnikovaInterakcija
                 else if (izbor == 6)
                 {
                     caretaker.ShowHistory();
+                }
+                else if (izbor == 7)
+                {
+                    caretaker.ShowHistoryDates();
                 }
             }
         }
@@ -191,6 +195,7 @@ namespace lljubici1_zadaca_3.KorisnikovaInterakcija
             Console.WriteLine("4. Unesi osobu, postojecu ulogu osobe i novu ulogu kojom zamjenjuje postojecu u svojim emisijama");
             Console.WriteLine("5. Brisanje emisije");
             Console.WriteLine("6. Prikaz povjesti pohrane");
+            Console.WriteLine("7. Vrati raspored na zeljeno stanje");
             Console.Write("Odabir> ");
         }
 

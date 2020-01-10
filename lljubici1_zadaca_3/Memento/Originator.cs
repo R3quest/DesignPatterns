@@ -27,6 +27,14 @@ namespace lljubici1_zadaca_3.Memento
             //this._stanje = this.GenerateRandomString(30);
             //Console.WriteLine($"Originator: and my stanje has changed to: {_stanje}");
 
+            //////
+            List<Program> listaPrograma = new List<Program>();
+            foreach (Program rasporedProgramaComponent in _stanje)
+            {
+                var a = rasporedProgramaComponent.VratiRaspored();
+            }
+
+            //////
             foreach (Program program in _stanje)
             {
                 foreach (Dan dan in program.RasporedDani)
@@ -52,17 +60,17 @@ namespace lljubici1_zadaca_3.Memento
             return cm;
         }
 
-        // Restores the Originator's stanje from a memento object.
-        //public void Restore(IMemento memento)
-        //{
-        //    if (!(memento is ConcreteMemento))
-        //    {
-        //        throw new Exception("Unknown memento class " + memento.ToString());
-        //    }
+        //Restores the Originator's stanje from a memento object.
+        public void Restore(IMemento memento)
+        {
+            if (!(memento is ConcreteMemento))
+            {
+                throw new Exception("Unknown memento class " + memento.ToString());
+            }
 
-        //    this._stanje = memento.GetState();
-        //    Console.Write($"Originator: My stanje has changed to: {_stanje}");
-        //}
+            this._stanje = memento.GetState();
+            Console.Write($"Originator: My stanje has changed to: {_stanje}");
+        }
 
     }
 }

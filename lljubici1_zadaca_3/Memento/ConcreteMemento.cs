@@ -20,8 +20,8 @@ namespace lljubici1_zadaca_3.Memento
 
         public string GetName()
         {
-            //TODO ISPISI CIJELI RASPORED
-            return _vrijemeDatum.ToString("dd.MM.yyyy. HH:mm:ss") + "\nPohrana: " + RedniBrojPohrane + "\nPodaci::\n";
+
+            return _vrijemeDatum.ToString("dd.MM.yyyy. HH:mm:ss") + "\nPohrana (stanje): " + RedniBrojPohrane + "\n";
         }
 
         public List<IRasporedProgramaComponent> GetState()
@@ -31,6 +31,7 @@ namespace lljubici1_zadaca_3.Memento
 
         public void PrintState()
         {
+            Console.WriteLine("Podaci::");
             Singleton.SingletonTvKuca.Instanca.IspisiTjednogPlana(_stanje);
         }
 

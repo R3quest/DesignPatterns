@@ -1,5 +1,4 @@
 ﻿using lljubici1_zadaca_3.Composite;
-using lljubici1_zadaca_3.Decorator;
 using lljubici1_zadaca_3.FactoryMethod;
 using lljubici1_zadaca_3.Observer;
 using lljubici1_zadaca_3.Pomagala;
@@ -85,14 +84,21 @@ namespace lljubici1_zadaca_3.Podaci
 
 
 
-        public List<IComponent> VratiRaspored()
+        public List<IRasporedProgramaComponent> VratiRasporedEmisija()
         {
-            List<IComponent> komponenta = new List<IComponent>();
-            ConcreateComponentProgramDanEmisija concreateKomponenta =
-                new ConcreateComponentProgramDanEmisija(this, null, null);
-            komponenta.Add(concreateKomponenta);
-            return komponenta;
+            //List<IComponent> komponenta = new List<IComponent>();
+            //ConcreateComponentProgramDanEmisija concreateKomponenta =
+            //    new ConcreateComponentProgramDanEmisija(this, null, null);
+            //komponenta.Add(concreateKomponenta);
+            //return komponenta;
+            List<IRasporedProgramaComponent> emisija = new List<IRasporedProgramaComponent>();
+            emisija.Add(this);
+            return emisija;
         }
 
+        public List<IRasporedProgramaComponent> VratiRaspored()
+        {
+            return VratiRasporedEmisija();
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using lljubici1_zadaca_3.Decorator;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace lljubici1_zadaca_3.Composite
 {
@@ -20,22 +19,27 @@ namespace lljubici1_zadaca_3.Composite
 
 
 
-        public List<IComponent> VratiRaspored()
+        public List<IRasporedProgramaComponent> VratiRasporedEmisija()
         {
             //Console.WriteLine(NazivDana);
             //IIterator iteratorEmisija = KreirajIterator();
 
             //for (var item = iteratorEmisija.Prvi(); !iteratorEmisija.Gotovo; item = iteratorEmisija.Sljedeci())
             //{
-            //    ((EmisijePrograma)item).VratiRaspored();
+            //    ((EmisijePrograma)item).VratiRasporedEmisija();
             //}
-            List<IComponent> listaEmisija = new List<IComponent>();
+            List<IRasporedProgramaComponent> listaEmisija = new List<IRasporedProgramaComponent>();
             foreach (var r in RasporedEmisijaDana)
             {
-                listaEmisija.AddRange(r.VratiRaspored());
+                listaEmisija.AddRange(r.VratiRasporedEmisija());
             }
 
             return listaEmisija;
+        }
+
+        public List<IRasporedProgramaComponent> VratiRaspored()
+        {
+            return this.RasporedEmisijaDana;
         }
     }
 }
