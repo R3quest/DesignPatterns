@@ -19,9 +19,6 @@ namespace lljubici1_zadaca_3.KorisnikovaInterakcija
                 IspisGlavniIzbornik();
                 izbor = OdabirProvjera(izbor, 1, 7);
                 Console.Clear();
-
-
-
                 if (izbor == 1)
                 {
                     IspisVremenskogPlana(program, dan);
@@ -53,7 +50,7 @@ namespace lljubici1_zadaca_3.KorisnikovaInterakcija
                 {
                     int jednoznacniBroj = -1;
                     //TODO ISPIS SVIH EMISIJA
-                    Console.WriteLine("Unesi jednoznacni redni broj emisije za brisanje> ");
+                    Console.Write("Unesi jednoznacni redni broj emisije za brisanje> ");
                     //TODO: provjera dal ima te emisije!!!!!!!!!!!!!
                     jednoznacniBroj = OdabirProvjera(jednoznacniBroj, 1, 99);
                     caretaker.Backup();
@@ -66,9 +63,15 @@ namespace lljubici1_zadaca_3.KorisnikovaInterakcija
                 else if (izbor == 7)
                 {
                     caretaker.ShowHistoryDates();
-                    Console.Write("Unesi zeljeno stanje> ");
-                    caretaker.Restore(int.Parse(Console.ReadLine()));
-
+                    if (caretaker.GetListCount() != 0)
+                    {
+                        Console.Write("Unesi zeljeno stanje> ");
+                        caretaker.Restore(int.Parse(Console.ReadLine()));
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nema spremljenih stanja!");
+                    }
                 }
             }
         }

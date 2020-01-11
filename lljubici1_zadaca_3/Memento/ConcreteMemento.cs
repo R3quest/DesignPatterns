@@ -26,8 +26,7 @@ namespace lljubici1_zadaca_3.Memento
 
         public string GetName()
         {
-
-            return _vrijemeDatum.ToString("dd.MM.yyyy. HH:mm:ss") + "\nPohrana (stanje): " + RedniBrojPohrane + "\n";
+            return _vrijemeDatum.ToString("dd.MM.yyyy. HH:mm:ss") + ",\tPohrana (stanje): " + RedniBrojPohrane;
         }
 
         public List<IRasporedProgramaComponent> GetState()

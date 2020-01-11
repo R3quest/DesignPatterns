@@ -63,10 +63,14 @@ namespace lljubici1_zadaca_3.Memento
 
             foreach (var memento in this._mementos)
             {
-                Console.Write(memento.GetDate());
+                Console.WriteLine(memento.GetName());
             }
         }
 
+        public int GetListCount()
+        {
+            return _mementos.Count;
+        }
 
     }
 }
