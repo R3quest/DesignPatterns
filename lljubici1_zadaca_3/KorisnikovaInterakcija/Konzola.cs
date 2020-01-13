@@ -1,4 +1,5 @@
-﻿using lljubici1_zadaca_3.Memento;
+﻿using lljubici1_zadaca_3.ChainOfResponsibility;
+using lljubici1_zadaca_3.Memento;
 using lljubici1_zadaca_3.Podaci;
 using lljubici1_zadaca_3.Singleton;
 using System;
@@ -17,7 +18,7 @@ namespace lljubici1_zadaca_3.KorisnikovaInterakcija
             while (true)
             {
                 IspisGlavniIzbornik();
-                izbor = OdabirProvjera(izbor, 1, 7);
+                izbor = OdabirProvjera(izbor, 1, 8);
                 Console.Clear();
                 if (izbor == 1)
                 {
@@ -49,7 +50,7 @@ namespace lljubici1_zadaca_3.KorisnikovaInterakcija
                 else if (izbor == 5)
                 {
                     int jednoznacniBroj = -1;
-                    //TODO ISPIS SVIH EMISIJA
+                    //TODO: ISPIS SVIH EMISIJA
                     Console.Write("Unesi jednoznacni redni broj emisije za brisanje> ");
                     //TODO: provjera dal ima te emisije!!!!!!!!!!!!!
                     jednoznacniBroj = OdabirProvjera(jednoznacniBroj, 1, 99);
@@ -58,25 +59,60 @@ namespace lljubici1_zadaca_3.KorisnikovaInterakcija
                 }
                 else if (izbor == 6)
                 {
-                    caretaker.ShowHistory();
+                    DohvatiPovjestRasporedaPrijasnjihStanja(caretaker);
                 }
                 else if (izbor == 7)
                 {
-                    caretaker.ShowHistoryDates();
-                    if (caretaker.GetListCount() != 0)
+                    VratiRasporedNaPrijasnjeStanje(caretaker);
+                }
+                else if (izbor == 8)
+                {
+                    if (!PromjenaBojeKonzoleDodatnaFunkcionalnost())
                     {
-                        Console.Write("Unesi zeljeno stanje> ");
-                        caretaker.Restore(int.Parse(Console.ReadLine()));
-                    }
-                    else
-                    {
-                        Console.WriteLine("Nema spremljenih stanja!");
+                        Console.ResetColor();
                     }
                 }
             }
         }
 
+        private static bool PromjenaBojeKonzoleDodatnaFunkcionalnost()
+        {
+            Console.Write("Unesite željenu boju (plava, zelena, crvena)> ");
+            string boja = Console.ReadLine();
 
+            var plava = new BlueHandler();
+            var zelena = new GreenHandler();
+            var crvena = new RedHandler();
+
+            plava.SetNext(zelena).SetNext(crvena);
+            return plava.Handle(boja);
+        }
+
+        private static void VratiRasporedNaPrijasnjeStanje(Caretaker caretaker)
+        {
+            caretaker.ShowHistoryDates();
+            if (caretaker.GetListCount() != 0)
+            {
+                Console.Write("Unesi zeljeno stanje> ");
+                caretaker.Restore(int.Parse(Console.ReadLine()));
+            }
+            else
+            {
+                Console.WriteLine("Nema spremljenih stanja!");
+            }
+        }
+
+        private static void DohvatiPovjestRasporedaPrijasnjihStanja(Caretaker caretaker)
+        {
+            if (caretaker.GetListCount() != 0)
+            {
+                caretaker.ShowHistory();
+            }
+            else
+            {
+                Console.WriteLine("Nema spremljenih stanja!");
+            }
+        }
 
 
         private static void ZamjenaPostojeceUlogeNovom(List<Uloga> listaUloga, List<Uloga> uloge, int ulogaPostojece, int ulogaZeljene, int idOsobe)
@@ -96,11 +132,13 @@ namespace lljubici1_zadaca_3.KorisnikovaInterakcija
                 string opisNove = listaUloga.FirstOrDefault(o => o.Id == ulogaZeljene).Opis;
                 Uloga novaUloga = new Uloga(ulogaZeljene, opisNove);
 
-                Osoba osoba = new Osoba();
-                osoba = SingletonTvKuca.Instanca.VratiOsobu(idOsobe);
-                osoba.PostaviStanje(staraUloga, novaUloga);
+                List<Osoba> listaOsoba = new List<Osoba>();
+                listaOsoba = SingletonTvKuca.Instanca.VratiOsobu(idOsobe);
 
-
+                foreach (var osoba in listaOsoba)
+                {
+                    osoba.PostaviStanje(staraUloga, novaUloga);
+                }
             }
             catch (Exception e)
             {
@@ -202,6 +240,7 @@ namespace lljubici1_zadaca_3.KorisnikovaInterakcija
             Console.WriteLine("5. Brisanje emisije");
             Console.WriteLine("6. Prikaz povjesti pohrane");
             Console.WriteLine("7. Vrati raspored na zeljeno stanje");
+            Console.WriteLine("8. Dodatna funkcionalnost: promjena boje konzole");
             Console.Write("Odabir> ");
         }
 

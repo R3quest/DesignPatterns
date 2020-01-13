@@ -13,13 +13,10 @@ namespace lljubici1_zadaca_3.Memento
 
         public ConcreteMemento(List<IRasporedProgramaComponent> raspored)
         {
-            //KLONIRAJ
             foreach (Program program in raspored)
             {
                 _stanje.Add((Program)program.Kloniraj());
             }
-
-
             //_stanje = raspored;
             _vrijemeDatum = DateTime.Now;
         }

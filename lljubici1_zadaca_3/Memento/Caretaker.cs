@@ -16,7 +16,7 @@ namespace lljubici1_zadaca_3.Memento
 
         public void Backup()
         {
-            Console.WriteLine("\nCaretaker: Saving Originator's state...");
+            Console.WriteLine("Caretaker: Spremanje stanja originatora...");
             this._mementos.Add(this._originator.Save());
         }
 
@@ -29,7 +29,7 @@ namespace lljubici1_zadaca_3.Memento
             //TODO: pazi na index
             var memento = this._mementos[stanje - 1];
             //this._mementos.Remove(memento);
-            Console.WriteLine("Caretaker: Restoring state to: " + memento.GetName());
+            Console.WriteLine("Caretaker: Vračanje stanja na: " + memento.GetName());
 
             try
             {

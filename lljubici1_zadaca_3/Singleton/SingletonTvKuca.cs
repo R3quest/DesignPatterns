@@ -194,11 +194,6 @@ namespace lljubici1_zadaca_3.Singleton
 
         }
 
-
-
-
-
-
         public void IspisiPrihodeOdReklama(int program, int dan)
         {
             KalkulirajPrihodVisitor kalkulirajVisitor = new KalkulirajPrihodVisitor();
@@ -213,8 +208,6 @@ namespace lljubici1_zadaca_3.Singleton
                 EmisijePrograma emisijaPrograma = (EmisijePrograma)_dan.RasporedEmisijaDana[i];
 
                 kalkulirajVisitor.Visit(emisijaPrograma.Emisija.VrstaEmisije);
-
-                //prihod += emisijaPrograma.Emisija.VrstaEmisije.TrajanjeReklame;
                 if (i == 0)
                 {
                     komponenta = new ConcreateComponentPrihodiReklama(emisijaPrograma, _program.NazivPrograma, _dan.NazivDana);
@@ -224,49 +217,43 @@ namespace lljubici1_zadaca_3.Singleton
                 komponenta = new ConcreateComponentPrihodiReklama(emisijaPrograma, null, null);
                 sveKomponente.Add(komponenta);
             }
-            //komponenta = new ConcreateComponentPrihodiReklama(null, _program.NazivPrograma, null, prihod);
             komponenta = new ConcreateComponentPrihodiReklama(null, _program.NazivPrograma, null, kalkulirajVisitor.UkupanPrihod);
             sveKomponente.Add(komponenta);
             Decorator.Decorator dekorator = new Decorator.Decorator(sveKomponente);
             Console.WriteLine(dekorator.Operacija());
         }
 
-        public Osoba VratiOsobu(int osobaId)
+        public List<Osoba> VratiOsobu(int osobaId)
         {
-            foreach (Program program in RasporedPrograma)
+            List<Osoba> osobe = new List<Osoba>();
+            var iterator = new ConcreateIteratorEmisijaTjednogPlana(RasporedPrograma);
+            while (!iterator.Gotovo)
             {
-                var iterator = program.KreirajIterator();
-                while (!iterator.Gotovo)
+                EmisijePrograma emisijaPrograma = (EmisijePrograma)iterator.Trenutni;
+                Osoba _osoba = emisijaPrograma.OsobeUloge.Find(ou => ou.Id == osobaId);
+                if (_osoba != null)
                 {
-                    EmisijePrograma emisijaPrograma = (EmisijePrograma)iterator.Trenutni;
-                    Osoba _osoba = emisijaPrograma.OsobeUloge.Find(ou => ou.Id == osobaId);
-                    if (_osoba != null)
-                    {
-                        return _osoba;
-                    }
-                    iterator.Sljedeci();
+                    osobe.Add(_osoba);
                 }
+                iterator.Sljedeci();
             }
-            return new Osoba();
+            return osobe;
         }
         public List<Uloga> VratiUlogePojedineOsobe(int osobaId)
         {
             List<Uloga> ulogeOsobe = new List<Uloga>();
-            foreach (Program program in RasporedPrograma)
+            var iterator = new ConcreateIteratorEmisijaTjednogPlana(RasporedPrograma);
+            while (!iterator.Gotovo)
             {
-                var iterator = program.KreirajIterator();
-                while (!iterator.Gotovo)
+                EmisijePrograma emisijaPrograma = (EmisijePrograma)iterator.Trenutni;
+                Osoba osoba = emisijaPrograma.OsobeUloge.Find(ou => ou.Id == osobaId);
+                if (osoba != null)
                 {
-                    EmisijePrograma emisijaPrograma = (EmisijePrograma)iterator.Trenutni;
-                    Osoba osoba = emisijaPrograma.OsobeUloge.Find(ou => ou.Id == osobaId);
-                    if (osoba != null)
-                    {
-                        List<Uloga> listaUlogaOsobe = osoba.Uloge;
-                        ulogeOsobe.AddRange(listaUlogaOsobe);
+                    List<Uloga> listaUlogaOsobe = osoba.Uloge;
+                    ulogeOsobe.AddRange(listaUlogaOsobe);
 
-                    }
-                    iterator.Sljedeci();
                 }
+                iterator.Sljedeci();
             }
 
             return ulogeOsobe.Distinct().ToList();
@@ -281,5 +268,6 @@ namespace lljubici1_zadaca_3.Singleton
         {
             o.ObrisiEmisiju(obrisiID);
         }
+
     }
 }

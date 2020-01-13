@@ -45,6 +45,11 @@
   <ItemGroup>
     <Compile Include="Builder\IBuilderProgram.cs" />
     <Compile Include="Builder\RasporedConcreateCreator.cs" />
+    <Compile Include="ChainOfResponsibility\AbstractHandler.cs" />
+    <Compile Include="ChainOfResponsibility\BlueHandler.cs" />
+    <Compile Include="ChainOfResponsibility\GreenHandler.cs" />
+    <Compile Include="ChainOfResponsibility\IHandler.cs" />
+    <Compile Include="ChainOfResponsibility\RedHandler.cs" />
     <Compile Include="Composite\Dan.cs" />
     <Compile Include="Composite\IRasporedProgramaComponent.cs" />
     <Compile Include="Decorator\ConcreateComponentPrihodiReklama.cs" />

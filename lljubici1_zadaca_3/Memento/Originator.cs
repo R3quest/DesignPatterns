@@ -18,20 +18,25 @@ namespace lljubici1_zadaca_3.Memento
             //{
             //    _stanje.Add((Program)program.Kloniraj());
             //}
-
             this._stanje = stanje;
-            Console.WriteLine("Originator: Inicijalno stanje: " + stanje);
         }
 
         // The Originator's business logic may affect its internal stanje.
         // Therefore, the client should backup the stanje before launching
         // methods of the business logic via the save() method.
+
+
+        //foreach (EmisijePrograma emisijaProgram in _stanje)
+        //{
+        //    if (emisijaProgram.RedniBroj == redniBroj)
+        //    {
+        //        _stanje.Remove(emisijaProgram);
+        //        return;
+        //    }
+        //}
+
         public void ObrisiEmisiju(int redniBroj)
         {
-            //TODO: izbrisi
-            //Console.WriteLine("Originator: I'm doing something important.");
-            //this._stanje = this.GenerateRandomString(30);
-            //Console.WriteLine($"Originator: and my stanje has changed to: {_stanje}");
 
             //////
             //List<Program> listaPrograma = new List<Program>();
@@ -39,7 +44,6 @@ namespace lljubici1_zadaca_3.Memento
             //{
             //    var a = rasporedProgramaComponent.VratiRasporedEmisija()();
             //}
-
             //////
             foreach (Program program in _stanje)
             {
@@ -54,18 +58,7 @@ namespace lljubici1_zadaca_3.Memento
                     }
                 }
             }
-
-            //foreach (EmisijePrograma emisijaProgram in _stanje)
-            //{
-            //    if (emisijaProgram.RedniBroj == redniBroj)
-            //    {
-            //        _stanje.Remove(emisijaProgram);
-            //        return;
-            //    }
-            //}
-
             Console.WriteLine("Neispravan broj!");
-
         }
 
         // Saves the current stanje inside a memento.

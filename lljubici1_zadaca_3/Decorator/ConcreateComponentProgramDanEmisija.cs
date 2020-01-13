@@ -8,7 +8,7 @@ namespace lljubici1_zadaca_3.Decorator
         private const int sirinaStupca = 20;
         private const int sirinaNazivaEmisije = 40;
 
-        private const int sirinaTablice = 105;
+        private const int sirinaTablice = 126;
         //svi propertiji
         public EmisijePrograma EmisijaPrograma { get; set; }
         public string NazivPrograma { get; set; }
@@ -51,7 +51,7 @@ namespace lljubici1_zadaca_3.Decorator
         public string VratiGlavnoZaglavlje()
         {
             string zaglavlje = new string('-', sirinaTablice) + '\n' +
-                $"|{"Program",-sirinaStupca}|{"Dan",-sirinaStupca}|{"Emisija",-sirinaNazivaEmisije}|{"Pocetak - Kraj",-sirinaStupca}|\n" +
+                $"|{"Program",-sirinaStupca}|{"Dan",-sirinaStupca}|{"Emisija",-sirinaNazivaEmisije}|{"Pocetak - Kraj",-sirinaStupca}|{"Jedinstveni broj",-sirinaStupca}|\n" +
                 new string('-', sirinaTablice) + '\n';
             return zaglavlje;
         }
@@ -64,8 +64,9 @@ namespace lljubici1_zadaca_3.Decorator
 
             //new string('-', sirinaTablice) + '\n' +
             string programDanEmisija =
-                               $"|{NazivPrograma,-sirinaStupca}|{NazivDana,-sirinaStupca}|{EmisijaPrograma.Emisija.NazivEmisije,-sirinaNazivaEmisije}|" +
-                               $"{pocetak + " - " + kraj,-sirinaStupca}|" + EmisijaPrograma.RedniBroj + "\n" + new string('-', sirinaTablice) + '\n';
+                $"|{NazivPrograma,-sirinaStupca}|{NazivDana,-sirinaStupca}|{EmisijaPrograma.Emisija.NazivEmisije,-sirinaNazivaEmisije}|" +
+                $"{pocetak + " - " + kraj,-sirinaStupca}|" + $"{EmisijaPrograma.RedniBroj,sirinaStupca}" + "|\n" +
+                new string('-', sirinaTablice) + '\n';
             return programDanEmisija;
         }
 
@@ -75,7 +76,8 @@ namespace lljubici1_zadaca_3.Decorator
             string kraj = Konverzija.PretvoriSekundeUVrijeme(EmisijaPrograma.Pocetak + EmisijaPrograma.Emisija.Trajanje);
             string emisija =
                 $"|{"",-sirinaStupca}|{NazivDana,-sirinaStupca}|{EmisijaPrograma.Emisija.NazivEmisije,-sirinaNazivaEmisije}|" +
-                $"{pocetak + " - " + kraj,-sirinaStupca}|" + EmisijaPrograma.RedniBroj + "\n" + new string('-', sirinaTablice) + '\n';
+                $"{pocetak + " - " + kraj,-sirinaStupca}|" + $"{EmisijaPrograma.RedniBroj,sirinaStupca}" + "|\n" +
+                new string('-', sirinaTablice) + '\n';
 
             return emisija;
         }
@@ -87,7 +89,8 @@ namespace lljubici1_zadaca_3.Decorator
 
             string emisija =
                 $"|{"",-sirinaStupca}|{"",-sirinaStupca}|{EmisijaPrograma.Emisija.NazivEmisije,-sirinaNazivaEmisije}|" +
-                $"{pocetak + " - " + kraj,-sirinaStupca}|" + EmisijaPrograma.RedniBroj + "\n" + new string('-', sirinaTablice) + '\n';
+                $"{pocetak + " - " + kraj,-sirinaStupca}|" + $"{EmisijaPrograma.RedniBroj,sirinaStupca}" + "|\n" +
+                new string('-', sirinaTablice) + '\n';
 
             return emisija;
         }
