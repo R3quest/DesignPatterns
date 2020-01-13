@@ -159,7 +159,7 @@ namespace lljubici1_zadaca_3.KorisnikovaInterakcija
                 Uloga novaUloga = new Uloga(ulogaZeljene, opisNove);
 
                 List<Osoba> listaOsoba = new List<Osoba>();
-                listaOsoba = SingletonTvKuca.Instanca.VratiOsobu(idOsobe);
+                listaOsoba = SingletonTvKuca.Instanca.VratiOsobe(idOsobe);
 
                 foreach (var osoba in listaOsoba)
                 {

@@ -169,24 +169,24 @@ namespace lljubici1_zadaca_3.Singleton
             ConcreateIteratorEmisijaTjednogPlana iterator = new ConcreateIteratorEmisijaTjednogPlana(listaPrograma);
             //ConcreateIteratorEmisijaZeljeneVrste iterator = KreirajIterator(vrstaEmisije) as ConcreateIteratorEmisijaZeljeneVrste;
             List<IComponent> sveKomponente = new List<IComponent>();
-            ConcreateComponentProgramDanEmisija emisijeVrste = new ConcreateComponentProgramDanEmisija(null, null, null);
-            sveKomponente.Add(emisijeVrste);
+            ConcreateComponentProgramDanEmisija emisija = new ConcreateComponentProgramDanEmisija(null, null, null);
+            sveKomponente.Add(emisija);
             while (!iterator.Gotovo)
             {
                 var emisijaPrograma = ((EmisijePrograma)iterator.Trenutni);
                 if (iterator.NoviProgram)
                 {
-                    emisijeVrste = new ConcreateComponentProgramDanEmisija(emisijaPrograma, iterator.TrenutniProgram(), iterator.TrenutniDan());
+                    emisija = new ConcreateComponentProgramDanEmisija(emisijaPrograma, iterator.TrenutniProgram(), iterator.TrenutniDan());
                 }
                 else if (iterator.NoviDan)
                 {
-                    emisijeVrste = new ConcreateComponentProgramDanEmisija(emisijaPrograma, null, iterator.TrenutniDan());
+                    emisija = new ConcreateComponentProgramDanEmisija(emisijaPrograma, null, iterator.TrenutniDan());
                 }
                 else
                 {
-                    emisijeVrste = new ConcreateComponentProgramDanEmisija(emisijaPrograma, null, null);
+                    emisija = new ConcreateComponentProgramDanEmisija(emisijaPrograma, null, null);
                 }
-                sveKomponente.Add(emisijeVrste);
+                sveKomponente.Add(emisija);
                 iterator.Sljedeci();
             }
             Decorator.Decorator dekorator = new Decorator.Decorator(sveKomponente);
@@ -228,7 +228,7 @@ namespace lljubici1_zadaca_3.Singleton
             Console.WriteLine(dekorator.Operacija());
         }
 
-        public List<Osoba> VratiOsobu(int osobaId)
+        public List<Osoba> VratiOsobe(int osobaId)
         {
             List<Osoba> osobe = new List<Osoba>();
             var iterator = new ConcreateIteratorEmisijaTjednogPlana(RasporedPrograma);

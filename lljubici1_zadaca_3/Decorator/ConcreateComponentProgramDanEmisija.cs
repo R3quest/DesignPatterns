@@ -1,5 +1,7 @@
 ﻿using lljubici1_zadaca_3.Podaci;
 using lljubici1_zadaca_3.Pomagala;
+using System.Linq;
+using System.Text;
 
 namespace lljubici1_zadaca_3.Decorator
 {
@@ -8,7 +10,7 @@ namespace lljubici1_zadaca_3.Decorator
         private const int sirinaStupca = 20;
         private const int sirinaNazivaEmisije = 40;
 
-        private const int sirinaTablice = 126;
+        private const int sirinaTablice = 166;
         //svi propertiji
         public EmisijePrograma EmisijaPrograma { get; set; }
         public string NazivPrograma { get; set; }
@@ -45,14 +47,43 @@ namespace lljubici1_zadaca_3.Decorator
             return VratiKraj();
         }
 
+        private string VratiOsobeUloge()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var osoba in EmisijaPrograma.OsobeUloge)
+            {
+                foreach (var uloga in osoba.Uloge)
+                {
+                    if (EmisijaPrograma.OsobeUloge.First() == osoba)
+                    {
+                        sb.Append($"{osoba.ImeIPrezime + " - " + uloga,-sirinaNazivaEmisije}|\n");
+                    }
+                    else
+                    {
+                        sb.Append(
+                            $"|{"",-sirinaStupca}|{"",-sirinaStupca}|{"",-sirinaNazivaEmisije}|{"",-sirinaStupca}|{"",-sirinaStupca}|" +
+                            $"{osoba.ImeIPrezime + " - " + uloga,-sirinaNazivaEmisije}|\n");
+                    }
+                }
+            }
 
-        //
+            if (sb.Length > 0)
+            {
+                sb.Remove(sb.Length - 1, 1);
+            }
+            else
+            {
+                sb.Append($"{"|",sirinaNazivaEmisije + 1}");
+            }
+            return sb.ToString();
+        }
 
         public string VratiGlavnoZaglavlje()
         {
             string zaglavlje = new string('-', sirinaTablice) + '\n' +
-                $"|{"Program",-sirinaStupca}|{"Dan",-sirinaStupca}|{"Emisija",-sirinaNazivaEmisije}|{"Pocetak - Kraj",-sirinaStupca}|{"Jedinstveni broj",-sirinaStupca}|\n" +
-                new string('-', sirinaTablice) + '\n';
+                               $"|{"Program",-sirinaStupca}|{"Dan",-sirinaStupca}|{"Emisija",-sirinaNazivaEmisije}|" +
+                               $"{"Pocetak - Kraj",-sirinaStupca}|{"Jedinstveni broj",-sirinaStupca}|{"Osoba - Uloga",-sirinaNazivaEmisije}|\n" +
+                               new string('-', sirinaTablice) + '\n';
             return zaglavlje;
         }
 
@@ -65,7 +96,7 @@ namespace lljubici1_zadaca_3.Decorator
             //new string('-', sirinaTablice) + '\n' +
             string programDanEmisija =
                 $"|{NazivPrograma,-sirinaStupca}|{NazivDana,-sirinaStupca}|{EmisijaPrograma.Emisija.NazivEmisije,-sirinaNazivaEmisije}|" +
-                $"{pocetak + " - " + kraj,-sirinaStupca}|" + $"{EmisijaPrograma.RedniBroj,sirinaStupca}" + "|\n" +
+                $"{pocetak + " - " + kraj,-sirinaStupca}|" + $"{EmisijaPrograma.RedniBroj,sirinaStupca}" + '|' + VratiOsobeUloge() + '\n' +
                 new string('-', sirinaTablice) + '\n';
             return programDanEmisija;
         }
@@ -76,7 +107,7 @@ namespace lljubici1_zadaca_3.Decorator
             string kraj = Konverzija.PretvoriSekundeUVrijeme(EmisijaPrograma.Pocetak + EmisijaPrograma.Emisija.Trajanje);
             string emisija =
                 $"|{"",-sirinaStupca}|{NazivDana,-sirinaStupca}|{EmisijaPrograma.Emisija.NazivEmisije,-sirinaNazivaEmisije}|" +
-                $"{pocetak + " - " + kraj,-sirinaStupca}|" + $"{EmisijaPrograma.RedniBroj,sirinaStupca}" + "|\n" +
+                $"{pocetak + " - " + kraj,-sirinaStupca}|" + $"{EmisijaPrograma.RedniBroj,sirinaStupca}" + '|' + VratiOsobeUloge() + '\n' +
                 new string('-', sirinaTablice) + '\n';
 
             return emisija;
@@ -89,7 +120,7 @@ namespace lljubici1_zadaca_3.Decorator
 
             string emisija =
                 $"|{"",-sirinaStupca}|{"",-sirinaStupca}|{EmisijaPrograma.Emisija.NazivEmisije,-sirinaNazivaEmisije}|" +
-                $"{pocetak + " - " + kraj,-sirinaStupca}|" + $"{EmisijaPrograma.RedniBroj,sirinaStupca}" + "|\n" +
+                $"{pocetak + " - " + kraj,-sirinaStupca}|" + $"{EmisijaPrograma.RedniBroj,sirinaStupca}" + '|' + VratiOsobeUloge() + '\n' +
                 new string('-', sirinaTablice) + '\n';
 
             return emisija;
@@ -99,5 +130,7 @@ namespace lljubici1_zadaca_3.Decorator
         {
             return new string('-', sirinaTablice);
         }
+
+
     }
 }
