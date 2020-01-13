@@ -47,8 +47,13 @@ namespace lljubici1_zadaca_3.Singleton
 
         public List<IRasporedProgramaComponent> VratiRasporedEmisija()
         {
-            //TODO: druga zadaca
-            return this.RasporedPrograma;
+            List<IRasporedProgramaComponent> listaEmisijaPrograma = new List<IRasporedProgramaComponent>();
+            foreach (Program program in RasporedPrograma)
+            {
+                listaEmisijaPrograma.AddRange(program.VratiRasporedEmisija());
+            }
+
+            return listaEmisijaPrograma;
         }
 
         public List<IRasporedProgramaComponent> VratiRaspored()

@@ -37,14 +37,6 @@ namespace lljubici1_zadaca_3.Memento
 
         public void ObrisiEmisiju(int redniBroj)
         {
-
-            //////
-            //List<Program> listaPrograma = new List<Program>();
-            //foreach (Program rasporedProgramaComponent in _stanje)
-            //{
-            //    var a = rasporedProgramaComponent.VratiRasporedEmisija()();
-            //}
-            //////
             foreach (Program program in _stanje)
             {
                 foreach (Dan dan in program.RasporedDani)

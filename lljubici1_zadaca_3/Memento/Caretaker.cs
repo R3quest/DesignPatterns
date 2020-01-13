@@ -35,9 +35,10 @@ namespace lljubici1_zadaca_3.Memento
             {
                 this._originator.Restore(memento);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 this.Restore(stanje);
+                Console.WriteLine(e.Message);
             }
         }
 

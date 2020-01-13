@@ -49,13 +49,7 @@ namespace lljubici1_zadaca_3.KorisnikovaInterakcija
                 }
                 else if (izbor == 5)
                 {
-                    int jednoznacniBroj = -1;
-                    //TODO: ISPIS SVIH EMISIJA
-                    Console.Write("Unesi jednoznacni redni broj emisije za brisanje> ");
-                    //TODO: provjera dal ima te emisije!!!!!!!!!!!!!
-                    jednoznacniBroj = OdabirProvjera(jednoznacniBroj, 1, 99);
-                    caretaker.Backup();
-                    SingletonTvKuca.Instanca.ObrisiEmisijuNaTemeljuJednoznacnogRednogBroja(jednoznacniBroj, originator);
+                    ObrisiEmisijuRasporeda(caretaker, originator);
                 }
                 else if (izbor == 6)
                 {
@@ -75,6 +69,8 @@ namespace lljubici1_zadaca_3.KorisnikovaInterakcija
             }
         }
 
+
+
         private static bool PromjenaBojeKonzoleDodatnaFunkcionalnost()
         {
             Console.Write("Unesite željenu boju (plava, zelena, crvena)> ");
@@ -88,12 +84,43 @@ namespace lljubici1_zadaca_3.KorisnikovaInterakcija
             return plava.Handle(boja);
         }
 
+        private static void ObrisiEmisijuRasporeda(Caretaker caretaker, Originator originator)
+        {
+            int jednoznacniBroj = -1;
+            //TODO: ISPIS SVIH EMISIJA
+            Console.Write("Unesi jednoznacni redni broj emisije za brisanje> ");
+            if (OdabirEmisijeZaBrisanjeProvjera(ref jednoznacniBroj))
+            {
+                caretaker.Backup();
+                SingletonTvKuca.Instanca.ObrisiEmisijuNaTemeljuJednoznacnogRednogBroja(jednoznacniBroj, originator);
+            }
+            else
+            {
+                Console.WriteLine("Ne postoji emisija s tim jednoznacnim brojem");
+            }
+        }
+
+        private static bool OdabirEmisijeZaBrisanjeProvjera(ref int idEmisijeZaBrisanje)
+        {
+            List<EmisijePrograma> listaEmisijaPrograma =
+                SingletonTvKuca.Instanca.VratiRasporedEmisija().Cast<EmisijePrograma>().ToList();
+
+            idEmisijeZaBrisanje = int.TryParse(Console.ReadLine(), out idEmisijeZaBrisanje) ? idEmisijeZaBrisanje : -1;
+            int idEmisije = idEmisijeZaBrisanje;
+            if (listaEmisijaPrograma.Exists(x => x.RedniBroj == idEmisije))
+            {
+                return true;
+            }
+            return false;
+        }
+
         private static void VratiRasporedNaPrijasnjeStanje(Caretaker caretaker)
         {
             caretaker.ShowHistoryDates();
             if (caretaker.GetListCount() != 0)
             {
                 Console.Write("Unesi zeljeno stanje> ");
+                //TODO: provjeri jel postoji stanje
                 caretaker.Restore(int.Parse(Console.ReadLine()));
             }
             else
@@ -145,6 +172,8 @@ namespace lljubici1_zadaca_3.KorisnikovaInterakcija
                 Console.WriteLine(e);
             }
         }
+
+
 
         private static void IspisiOsobe(List<Osoba> listaOsoba)
         {

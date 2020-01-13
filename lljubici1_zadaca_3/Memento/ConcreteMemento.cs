@@ -33,7 +33,7 @@ namespace lljubici1_zadaca_3.Memento
 
         public void PrintState()
         {
-            Console.WriteLine("Podaci::");
+            Console.WriteLine("\nPodaci::");
             Singleton.SingletonTvKuca.Instanca.IspisiTjednogPlana(_stanje);
         }
 
