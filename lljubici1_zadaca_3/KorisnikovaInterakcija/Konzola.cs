@@ -87,7 +87,6 @@ namespace lljubici1_zadaca_3.KorisnikovaInterakcija
         private static void ObrisiEmisijuRasporeda(Caretaker caretaker, Originator originator)
         {
             int jednoznacniBroj = -1;
-            //TODO: ISPIS SVIH EMISIJA
             Console.Write("Unesi jednoznacni redni broj emisije za brisanje> ");
             if (OdabirEmisijeZaBrisanjeProvjera(ref jednoznacniBroj))
             {
