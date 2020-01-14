@@ -57,13 +57,12 @@ namespace lljubici1_zadaca_3.Decorator
                     if (EmisijaPrograma.OsobeUloge.First() == osoba)
                     {
                         sb.Append($"{osoba.ImeIPrezime + " - " + uloga,-sirinaNazivaEmisije}|\n");
+                        continue;
                     }
-                    else
-                    {
-                        sb.Append(
-                            $"|{"",-sirinaStupca}|{"",-sirinaStupca}|{"",-sirinaNazivaEmisije}|{"",-sirinaStupca}|{"",-sirinaStupca}|" +
-                            $"{osoba.ImeIPrezime + " - " + uloga,-sirinaNazivaEmisije}|\n");
-                    }
+                    sb.Append(
+                        $"|{"",-sirinaStupca}|{"",-sirinaStupca}|{"",-sirinaStupca}|{"",-sirinaNazivaEmisije}|{"",-sirinaStupca}|" +
+                        $"{osoba.ImeIPrezime + " - " + uloga,-sirinaNazivaEmisije}|\n");
+
                 }
             }
 
@@ -81,8 +80,8 @@ namespace lljubici1_zadaca_3.Decorator
         public string VratiGlavnoZaglavlje()
         {
             string zaglavlje = new string('-', sirinaTablice) + '\n' +
-                               $"|{"Program",-sirinaStupca}|{"Dan",-sirinaStupca}|{"Emisija",-sirinaNazivaEmisije}|" +
-                               $"{"Pocetak - Kraj",-sirinaStupca}|{"Jedinstveni broj",-sirinaStupca}|{"Osoba - Uloga",-sirinaNazivaEmisije}|\n" +
+                               $"|{"Jedinstveni broj",-sirinaStupca}|{"Program",-sirinaStupca}|{"Dan",-sirinaStupca}|{"Emisija",-sirinaNazivaEmisije}|" +
+                               $"{"Pocetak - Kraj",-sirinaStupca}|{"Osoba - Uloga",-sirinaNazivaEmisije}|\n" +
                                new string('-', sirinaTablice) + '\n';
             return zaglavlje;
         }
@@ -94,9 +93,9 @@ namespace lljubici1_zadaca_3.Decorator
             string kraj = Konverzija.PretvoriSekundeUVrijeme(EmisijaPrograma.Pocetak + EmisijaPrograma.Emisija.Trajanje);
 
             //new string('-', sirinaTablice) + '\n' +
-            string programDanEmisija =
+            string programDanEmisija = $"|{EmisijaPrograma.RedniBroj,sirinaStupca}" +
                 $"|{NazivPrograma,-sirinaStupca}|{NazivDana,-sirinaStupca}|{EmisijaPrograma.Emisija.NazivEmisije,-sirinaNazivaEmisije}|" +
-                $"{pocetak + " - " + kraj,-sirinaStupca}|" + $"{EmisijaPrograma.RedniBroj,sirinaStupca}" + '|' + VratiOsobeUloge() + '\n' +
+                $"{pocetak + " - " + kraj,-sirinaStupca}|" + VratiOsobeUloge() + '\n' +
                 new string('-', sirinaTablice) + '\n';
             return programDanEmisija;
         }
@@ -105,9 +104,9 @@ namespace lljubici1_zadaca_3.Decorator
         {
             string pocetak = Konverzija.PretvoriSekundeUVrijeme(EmisijaPrograma.Pocetak);
             string kraj = Konverzija.PretvoriSekundeUVrijeme(EmisijaPrograma.Pocetak + EmisijaPrograma.Emisija.Trajanje);
-            string emisija =
+            string emisija = $"|{EmisijaPrograma.RedniBroj,sirinaStupca}" +
                 $"|{"",-sirinaStupca}|{NazivDana,-sirinaStupca}|{EmisijaPrograma.Emisija.NazivEmisije,-sirinaNazivaEmisije}|" +
-                $"{pocetak + " - " + kraj,-sirinaStupca}|" + $"{EmisijaPrograma.RedniBroj,sirinaStupca}" + '|' + VratiOsobeUloge() + '\n' +
+                $"{pocetak + " - " + kraj,-sirinaStupca}|" + VratiOsobeUloge() + '\n' +
                 new string('-', sirinaTablice) + '\n';
 
             return emisija;
@@ -118,9 +117,9 @@ namespace lljubici1_zadaca_3.Decorator
             string pocetak = Konverzija.PretvoriSekundeUVrijeme(EmisijaPrograma.Pocetak);
             string kraj = Konverzija.PretvoriSekundeUVrijeme(EmisijaPrograma.Pocetak + EmisijaPrograma.Emisija.Trajanje);
 
-            string emisija =
+            string emisija = $"|{EmisijaPrograma.RedniBroj,sirinaStupca}" +
                 $"|{"",-sirinaStupca}|{"",-sirinaStupca}|{EmisijaPrograma.Emisija.NazivEmisije,-sirinaNazivaEmisije}|" +
-                $"{pocetak + " - " + kraj,-sirinaStupca}|" + $"{EmisijaPrograma.RedniBroj,sirinaStupca}" + '|' + VratiOsobeUloge() + '\n' +
+                $"{pocetak + " - " + kraj,-sirinaStupca}|" + VratiOsobeUloge() + '\n' +
                 new string('-', sirinaTablice) + '\n';
 
             return emisija;
