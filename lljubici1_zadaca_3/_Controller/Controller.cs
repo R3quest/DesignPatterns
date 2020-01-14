@@ -22,77 +22,45 @@ namespace lljubici1_zadaca_3._Controller
             this.view = view;
         }
 
+        private void ChangeView()
+        {
+            if (view.GetType() == typeof(View1))
+            {
+                view = new View2();
+            }
+            else
+            {
+                view = new View1();
+            }
+        }
+
         public void KorisnikovUnos()
         {
             int izbor = 0, program = 0, dan = 0;
             while (true)
             {
                 view.IspisGlavniIzbornik();
-                izbor = OdabirProvjera(izbor, 1, 8);
+                izbor = OdabirProvjera(izbor, 1, 9);
                 Console.Clear();
                 if (izbor == 1)
                 {
-
-                    view._IspisVremenskogPlana();
-                    view.IspisiProgrameTvKuce(model.DohvatiProgrameTvKuce());
-                    view._UnesiProgram();
-                    program = OdabirProvjera(program, 1, model.VratiBrojPrograma());
-                    view._UnesiDanUTjednu();
-                    dan = OdabirProvjera(dan, 1, 7);
-
-                    view.Ispisi(model.VratiRasporedZaDan(program, dan, model.DohvatiProgrameTvKuce()));
-                    //view.IspisiRasporedZaDan(program, dan, model.DohvatiProgrameTvKuce());
+                    program = OpcijaIspisVremenskogPlana(program, ref dan);
                 }
                 else if (izbor == 2)
                 {
-                    view._IspisPrihoda();
-                    view._UnesiProgram();
-                    program = OdabirProvjera(program, 1, model.VratiBrojPrograma());
-                    view._UnesiDanUTjednu();
-                    dan = OdabirProvjera(dan, 1, 7);
-                    view.Ispisi(model.IspisiPrihodeOdReklama(program, dan, model.DohvatiProgrameTvKuce()));
+                    program = OpcijaIspisPrihoda(program, ref dan);
                 }
                 else if (izbor == 3)
                 {
-                    view.IspisiVrsteEmisija(model.VratiVrsteEmisija());
-                    //TODO: FIX
-                    view._UnesiBrojVrsteEmisije();
-                    izbor = OdabirProvjera(izbor, 1, model.VratiBrojVrstaEmisija());
-                    view.Ispisi(model.IspisiTjedniPlanVrsteEmisija(model.VratiVrsteEmisija()[izbor - 1].Vrsta));
+                    izbor = OpcijaIspisVrste(izbor);
                 }
                 else if (izbor == 4)
                 {
-                    int osobaId = -1, ulogaPostojece = -1, ulogaZeljene = -1;
-                    view.IspisiOsobe(model.VratiOsobe());
-                    view._UnesiOsobu();
-                    osobaId = OdabirOsobeProvjera(osobaId, model.VratiOsobe());
-                    if (model.VratiUlogePojedineOsobe(osobaId).Count == 0)
-                    {
-                        view._OsobaNemaNiJednuUlogu();
-                        continue;
-                    }
-                    view.IspisiUloge(model.VratiUlogePojedineOsobe(osobaId));
-
-                    view._UnesiPostojecuUloguOsobe();
-                    ulogaPostojece = OdabirUlogeProvjera(ulogaPostojece, model.VratiUlogePojedineOsobe(osobaId));
-                    view.IspisiUloge(model.VratiUloge());
-                    //ispisaneSve
-                    view._UnesiNovuUloguZaZamjenuPostojece();
-                    ulogaZeljene = OdabirUlogeProvjera(ulogaPostojece, model.VratiUloge());
-                    model.ZamjenaPostojeceUlogeNovom(model.VratiUlogePojedineOsobe(osobaId), ulogaPostojece, ulogaZeljene, osobaId);
+                    OpcijaZamjenaUloge();
                 }
                 else if (izbor == 5)
                 {
-                    int jednoznacniBroj = -1;
-                    view._ObrisiEmisijuRasporeda();
-                    if (model.OdabirEmisijeZaBrisanjeProvjera(ref jednoznacniBroj))
-                    {
-                        model.SpremiIObrisiStanje(jednoznacniBroj);
-                    }
-                    else
-                    {
-                        view._NePostojiEmisijaSJednoznacnimBrojem();
-                    }
+                    OpcijaObrisiEmisijuRasporeda();
                 }
                 else if (izbor == 6)
                 {
@@ -104,16 +72,95 @@ namespace lljubici1_zadaca_3._Controller
                 }
                 else if (izbor == 8)
                 {
-                    view._UnesiZeljenuBoju();
-                    if (!model.PromjenaBojeKonzoleDodatnaFunkcionalnost(Console.ReadLine()))
-                    {
-                        Console.ResetColor();
-                    }
+                    OpcijaDodatnaFunkcionalnost();
+                }
+                else if (izbor == 9)
+                {
+                    ChangeView();
                 }
             }
         }
 
+        private void OpcijaDodatnaFunkcionalnost()
+        {
+            view._UnesiZeljenuBoju();
+            if (!model.PromjenaBojeKonzoleDodatnaFunkcionalnost(Console.ReadLine()))
+            {
+                Console.ResetColor();
+            }
+        }
 
+        private void OpcijaObrisiEmisijuRasporeda()
+        {
+            int jednoznacniBroj = -1;
+            view._ObrisiEmisijuRasporeda();
+            if (model.OdabirEmisijeZaBrisanjeProvjera(ref jednoznacniBroj))
+            {
+                model.SpremiIObrisiStanje(jednoznacniBroj);
+            }
+            else
+            {
+                view._NePostojiEmisijaSJednoznacnimBrojem();
+            }
+        }
+
+        private void OpcijaZamjenaUloge()
+        {
+            int osobaId = -1, ulogaPostojece = -1, ulogaZeljene = -1;
+            view.IspisiOsobe(model.VratiOsobe());
+            view._UnesiOsobu();
+            osobaId = OdabirOsobeProvjera(osobaId, model.VratiOsobe());
+            if (model.VratiUlogePojedineOsobe(osobaId).Count == 0)
+            {
+                view._OsobaNemaNiJednuUlogu();
+                return;
+            }
+
+            view.IspisiUloge(model.VratiUlogePojedineOsobe(osobaId));
+
+            view._UnesiPostojecuUloguOsobe();
+            ulogaPostojece = OdabirUlogeProvjera(ulogaPostojece, model.VratiUlogePojedineOsobe(osobaId));
+            view.IspisiUloge(model.VratiUloge());
+            //ispisaneSve
+            view._UnesiNovuUloguZaZamjenuPostojece();
+            ulogaZeljene = OdabirUlogeProvjera(ulogaPostojece, model.VratiUloge());
+            model.ZamjenaPostojeceUlogeNovom(model.VratiUlogePojedineOsobe(osobaId), ulogaPostojece, ulogaZeljene, osobaId);
+        }
+
+        private int OpcijaIspisVrste(int izbor)
+        {
+            view.IspisiVrsteEmisija(model.VratiVrsteEmisija());
+            //TODO: FIX
+            view._UnesiBrojVrsteEmisije();
+            izbor = OdabirProvjera(izbor, 1, model.VratiBrojVrstaEmisija());
+            view.Ispisi(model.IspisiTjedniPlanVrsteEmisija(model.VratiVrsteEmisija()[izbor - 1].Vrsta));
+            return izbor;
+        }
+
+        private int OpcijaIspisPrihoda(int program, ref int dan)
+        {
+            view._IspisPrihoda();
+            view._UnesiProgram();
+            program = OdabirProvjera(program, 1, model.VratiBrojPrograma());
+            view._UnesiDanUTjednu();
+            dan = OdabirProvjera(dan, 1, 7);
+            view.Ispisi(model.IspisiPrihodeOdReklama(program, dan, model.DohvatiProgrameTvKuce()));
+            return program;
+        }
+
+        private int OpcijaIspisVremenskogPlana(int program, ref int dan)
+        {
+            view._IspisVremenskogPlana();
+            view.IspisiProgrameTvKuce(model.DohvatiProgrameTvKuce());
+            view._UnesiProgram();
+            program = OdabirProvjera(program, 1, model.VratiBrojPrograma());
+            view._UnesiDanUTjednu();
+            dan = OdabirProvjera(dan, 1, 7);
+
+            view.Ispisi(model.VratiRasporedZaDan(program, dan, model.DohvatiProgrameTvKuce()));
+            //view.IspisiRasporedZaDan(program, dan, model.DohvatiProgrameTvKuce());
+            return program;
+        }
 
         public void DohvatiPovjestRasporedaPrijasnjihStanja()
         {
@@ -141,11 +188,6 @@ namespace lljubici1_zadaca_3._Controller
             }
         }
 
-
-
-
-
-
         private int OdabirProvjera(int izbor, int najmanjiBroj, int najveciBroj)
         {
             while (true)
@@ -159,58 +201,6 @@ namespace lljubici1_zadaca_3._Controller
             }
             return izbor;
         }
-
-        //private static void ObserverZamjeniUlogu(List<Osoba> listaOsoba, List<Uloga> listaUloga)
-        //{
-        //    int osobaId = -1, ulogaPostojece = -1, ulogaZeljene = -1;
-        //    //IspisiOsobe(listaOsoba);
-        //    //Console.Write("Unesi osobu> ");
-        //    //osobaId = OdabirOsobeProvjera(osobaId, listaOsoba);
-        //    //List<Uloga> uloge = SingletonTvKuca.Instanca.VratiUlogePojedineOsobe(osobaId);
-        //    if (uloge.Count == 0)
-        //    {
-        //        Console.WriteLine("Osoba nema ni jednu ulogu!");
-        //        return;
-        //    }
-
-        //    ZamjenaPostojeceUlogeNovom(listaUloga, uloge, ulogaPostojece, ulogaZeljene, osobaId);
-        //}
-
-        //uloge to su uloge osobe
-        //lista uloga sve uloge
-
-        //private static void ZamjenaPostojeceUlogeNovom(List<Uloga> listaUloga, List<Uloga> uloge, int ulogaPostojece, int ulogaZeljene, int idOsobe)
-        //{
-        //    //IspisiUloge(uloge);
-        //    //Console.Write("Unesi postojecu ulogu osobe> ");
-        //    //ulogaPostojece = OdabirUlogeProvjera(ulogaPostojece, uloge);
-        //    //IspisiUloge(listaUloga);
-        //    //Console.Write("Unesi novu ulogu za zamjenu postojece> ");
-        //    //ulogaZeljene = OdabirUlogeProvjera(ulogaZeljene, listaUloga);
-        //    //stara
-        //    try
-        //    {
-        //        string opisStare = listaUloga.FirstOrDefault(o => o.Id == ulogaPostojece).Opis;
-        //        Uloga staraUloga = new Uloga(ulogaPostojece, opisStare);
-        //        //nova
-        //        string opisNove = listaUloga.FirstOrDefault(o => o.Id == ulogaZeljene).Opis;
-        //        Uloga novaUloga = new Uloga(ulogaZeljene, opisNove);
-
-        //        List<Osoba> listaOsoba = new List<Osoba>();
-        //        listaOsoba = SingletonTvKuca.Instanca.VratiOsobe(idOsobe);
-
-        //        foreach (var osoba in listaOsoba)
-        //        {
-        //            osoba.PostaviStanje(staraUloga, novaUloga);
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //    }
-        //}
-
-
 
         private static int OdabirOsobeProvjera(int osobaId, List<Osoba> osobe)
         {
@@ -237,7 +227,6 @@ namespace lljubici1_zadaca_3._Controller
                 }
                 Console.Write($"Neispravan odabir!\nUnesi postojecu ulogu osobe> ");
             }
-
             return ulogaPostojece;
         }
 

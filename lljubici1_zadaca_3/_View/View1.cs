@@ -89,6 +89,7 @@ namespace lljubici1_zadaca_3._View
             Console.WriteLine("6. Prikaz povjesti pohrane");
             Console.WriteLine("7. Vrati raspored na zeljeno stanje");
             Console.WriteLine("8. Dodatna funkcionalnost: promjena boje konzole");
+            Console.WriteLine("9. Promjeni pogled");
             Console.Write("Odabir> ");
         }
 

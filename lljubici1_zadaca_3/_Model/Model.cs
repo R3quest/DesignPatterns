@@ -277,7 +277,7 @@ namespace lljubici1_zadaca_3._Model
             komponenta = new ConcreateComponentPrihodiReklama(null, _program.NazivPrograma, null, kalkulirajVisitor.UkupanPrihod);
             sveKomponente.Add(komponenta);
             Decorator.Decorator dekorator = new Decorator.Decorator(sveKomponente);
-            return dekorator.Operacija();
+            return "\n" + dekorator.Operacija();
         }
 
         public List<Osoba> VratiOsobe()
@@ -320,7 +320,7 @@ namespace lljubici1_zadaca_3._Model
                 iterator.Sljedeci();
             }
             Decorator.Decorator dekorator = new Decorator.Decorator(sveKomponente);
-            return dekorator.Operacija();
+            return "\n" + dekorator.Operacija();
         }
 
         public IIterator KreirajIterator(string vrstaEmisije)
@@ -437,7 +437,7 @@ namespace lljubici1_zadaca_3._Model
                     sveKomponente.Add(komponenta);
                 }
                 _Model.Decorator.Decorator dekorator = new _Model.Decorator.Decorator(sveKomponente);
-                return dekorator.Operacija();
+                return "\n" + dekorator.Operacija();
             }
             catch (Exception e)
             {
