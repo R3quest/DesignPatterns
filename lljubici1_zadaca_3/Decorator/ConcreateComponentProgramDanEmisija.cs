@@ -8,9 +8,9 @@ namespace lljubici1_zadaca_3.Decorator
     class ConcreateComponentProgramDanEmisija : IComponent
     {
         private const int sirinaStupca = 20;
-        private const int sirinaNazivaEmisije = 40;
+        private const int sirinaNazivaEmisije = 42;
 
-        private const int sirinaTablice = 166;
+        private const int sirinaTablice = 171;
         //svi propertiji
         public EmisijePrograma EmisijaPrograma { get; set; }
         public string NazivPrograma { get; set; }
