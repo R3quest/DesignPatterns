@@ -63,7 +63,6 @@
     <Compile Include="_Model\Iterator\IAbstractCollectionEmisijeOdredeneVrste.cs" />
     <Compile Include="_Model\Iterator\IAbstractCollectionSveEmisije.cs" />
     <Compile Include="_Model\Iterator\IIterator.cs" />
-    <Compile Include="KorisnikovaInterakcija\Konzola.cs" />
     <Compile Include="_Model\Memento\Caretaker.cs" />
     <Compile Include="_Model\Memento\ConcreteMemento.cs" />
     <Compile Include="_Model\Memento\IMemento.cs" />
